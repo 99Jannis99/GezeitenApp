@@ -56,6 +56,12 @@
     "cloudy": "wolkig",
     "partly-cloudy-day": "leicht bewölkt",
     "partly-cloudy-night": "leicht bewölkt",
-    "wholeDay":"ganzer Tag"
+    "wholeDay":"ganzer Tag",
+
+    "language":"Sprache",
+    "locationView":"Ansichtseinstellungen",
+    "3Days":"3-Tage Ansicht",
+    "5Days":"5-Tage Ansicht",
+    "7Days":"7-Tage Ansicht"
   }
 }

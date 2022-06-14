@@ -56,6 +56,12 @@
     "cloudy": "cloudy",
     "partly-cloudy-day": "partly cloudy",
     "partly-cloudy-night": "partly cloudy",
-    "wholeDay":"whole Day"
+    "wholeDay":"whole Day",
+
+    "language":"Language",
+    "locationView":"Location View",
+    "3Days":"3-days per Location",
+    "5Days":"5-days per Location",
+    "7Days":"7-days per Location"
   }
 }

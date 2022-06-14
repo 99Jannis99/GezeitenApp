@@ -17,11 +17,12 @@ import { Translation } from "react-i18next";
 import { LineChart } from "react-native-chart-kit";
 import { useIsFocused } from "@react-navigation/native";
 import _UpdateApiData from "../functions/updateApiData";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 class WeatherOrte extends Component {
   state = {
     LocationsWithChosed: {},
-    useableDays: [1, 2, 3, 4],
+    useableDays: [1, 2, 3],
     pressedDay: 0,
     firstFocus: true,
     countLoadedComponents: 0,
@@ -40,13 +41,30 @@ class WeatherOrte extends Component {
         this.updateApiData(route.params.LocationsWithChosed, date, true);
         this.setState({ firstFocus: false });
       }
+      this.getData();
     });
     if (isFocused) {
       this.updateApiData(route.params.LocationsWithChosed, date);
-      this.setState({ firstFocus: false });
+      this.getData();
+      this.setState({
+        firstFocus: false,
+      });
     }
     this.setState({ LocationsWithChosed: route.params.LocationsWithChosed });
   }
+
+  getData = async () => {
+    try {
+      let asyncLocationView = await AsyncStorage.getItem("locationView");
+      if (asyncLocationView !== null) {
+        this.setState({
+          useableDays: JSON.parse("[" + asyncLocationView + "]"),
+        });
+      }
+    } catch (err) {
+      console.log("Error get Data :" + err);
+    }
+  };
 
   async updateApiData(object, date, focusedRightNow) {
     focusedRightNow ? null : this.state.WeatherIconAnimation.setValue(0);
@@ -251,8 +269,12 @@ class WeatherOrte extends Component {
                           style={myStyle.WeatherOrte.WeatherIcon}
                           source={this.state.WeatherIcon}
                         />
-                        <View style={myStyle.WeatherOrte.WeatherTemperatureView}>
-                          <Text style={myStyle.WeatherOrte.WeatherTemperatureText}>
+                        <View
+                          style={myStyle.WeatherOrte.WeatherTemperatureView}
+                        >
+                          <Text
+                            style={myStyle.WeatherOrte.WeatherTemperatureText}
+                          >
                             {this.state.WeatherNowDescription
                               ? (this.state.WeatherNowDescription.temperature
                                   ? this.state.WeatherNowDescription.temperature
@@ -263,7 +285,9 @@ class WeatherOrte extends Component {
                                   .slice(0, 2) + " °C"
                               : null}
                           </Text>
-                          <Text style={myStyle.WeatherOrte.WeatherDiscriptionText}>
+                          <Text
+                            style={myStyle.WeatherOrte.WeatherDiscriptionText}
+                          >
                             {this.state.WeatherNowDescription
                               ? t(this.state.WeatherNowDescription.icon)
                               : null}

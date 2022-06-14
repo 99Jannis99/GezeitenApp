@@ -88,7 +88,12 @@ const styles = {
   */
   Tutorial: {
     View: { flex: 1 },
-    Headline: { fontSize: 35, top: StatusBar.currentHeight + 20 },
+    Headline: {
+      fontSize: 35,
+      alignSelf: "center",
+      color: "#BBDEFB",
+      top: StatusBar.currentHeight + 20,
+    },
     Description: {
       marginTop: StatusBar.currentHeight + 40,
       fontSize: 15,
@@ -250,9 +255,9 @@ const styles = {
   Orte: {
     Header: {
       fontSize: 35,
-      marginTop: 60,
       alignSelf: "center",
       color: "#BBDEFB",
+      padding: 20,
     },
     TouchableOpacity: {
       backgroundColor: "#64B5F6",
@@ -351,7 +356,7 @@ const styles = {
   WeatherOrte: {
     Header: {
       fontSize: 35,
-      marginTop: 60,
+      padding: 20,
       alignSelf: "center",
       color: "#BBDEFB",
     },
@@ -443,6 +448,31 @@ const styles = {
       fontSize: 16,
       alignSelf: "center",
       color: "rgba(0, 0, 0,0.9)",
+    },
+  },
+  /**
+  |--------------------------------------------------
+  | Settings Component
+  |--------------------------------------------------
+  */
+  Settings: {
+    ButtonGroupContainer: { marginTop: StatusBar.currentHeight, height: 50 },
+    ButtonGroupButton: { backgroundColor: "#BBDEFB" },
+    ButtonGroupButtonView: {
+      flexDirection: "row",
+      justifyContent: "space-evenly",
+      width: "100%",
+      alignItems: "center",
+    },
+    ButtonGroupButtonText: { color: "#3f444d", fontSize: 15 },
+    ButtonGroupButtonSelected: { backgroundColor: "#42A5F5" },
+    Header: {
+      top: StatusBar.currentHeight,
+      fontWeight: "bold",
+      color: "#3f444d",
+      fontSize: 20,
+      padding: 20,
+      alignSelf: "center",
     },
   },
 };
