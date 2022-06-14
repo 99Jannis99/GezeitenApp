@@ -1,5 +1,11 @@
 import { StatusBar } from "expo-status-bar";
-import { Text, View, TouchableOpacity, Alert } from "react-native";
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  Alert,
+  ImageBackground,
+} from "react-native";
 import React, { Component } from "react";
 import myStyle from "../assets/styles";
 import DeIcon from "../assets/svg/deIcon";
@@ -22,20 +28,15 @@ class Hinweis extends Component {
       console.log("Error onSubmit :" + err);
     }
   };
-  // getData = async () => {
-  //   try {
-  //     const asyncLanguage = await AsyncStorage.getItem("language");
-  //     if (asyncLanguage !== null) {
-  //       i18n.changeLanguage(asyncLanguage);
-  //     }
-  //   } catch (err) {
-  //     console.log("Error get Data :" + err);
-  //   }
-  // };
+
   render() {
     const { t } = this.props;
     return (
-      <View style={myStyle.HinweisView}>
+      <ImageBackground
+        source={require("../assets/pictures/default_background-dashboard.jpg")}
+        resizeMode="cover"
+        style={myStyle.Hinweis.View}
+      >
         <StatusBar style="auto" />
 
         {/*
@@ -44,28 +45,14 @@ class Hinweis extends Component {
         |------------------------------------------------------------------------------------------------------------------------------------------------------
         */}
 
-        <Text style={[{ fontSize: 35, top: 40 }, myStyle.HinweisText]}>
-          {t("headline")}
-        </Text>
-        <Text style={[{ fontSize: 25, marginTop: 60 }, myStyle.HinweisText]}>
+        <Text style={myStyle.Hinweis.HeadlineText}>{t("headline")}</Text>
+        <Text style={myStyle.Hinweis.SecondHeadlineText}>
           {t("secondHeadline")}
         </Text>
-        <View style={myStyle.HinweisInfoText}>
-          <Text
-            style={[
-              { marginLeft: 20, marginRight: 20, fontSize: 15, marginTop: 30 },
-              myStyle.HinweisText,
-            ]}
-          >
-            {t("info")}
-          </Text>
+        <View style={myStyle.Hinweis.InfoView}>
+          <Text style={myStyle.Hinweis.InfoText}>{t("info")}</Text>
         </View>
-        <Text
-          style={[
-            { fontSize: 21, marginTop: 55, marginBottom: 10 },
-            myStyle.HinweisText,
-          ]}
-        >
+        <Text style={myStyle.Hinweis.LanguageChoice}>
           {t("languageChoice")}
         </Text>
 
@@ -76,20 +63,20 @@ class Hinweis extends Component {
         */}
 
         <TouchableOpacity
-          style={myStyle.HinweisTouchableOpacity}
+          style={myStyle.Hinweis.TouchableOpacity}
           onPress={() => this.saveData("de")}
         >
           <DeIcon />
-          <View style={myStyle.HinweisIconSpaceView}></View>
-          <Text style={myStyle.HinweisSpracheText}>Deutsch</Text>
+          <View style={myStyle.Hinweis.IconSpaceView}></View>
+          <Text style={myStyle.Hinweis.SpracheText}>Deutsch</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={myStyle.HinweisTouchableOpacity}
+          style={myStyle.Hinweis.TouchableOpacity}
           onPress={() => this.saveData("en")}
         >
           <EnIcon />
-          <View style={myStyle.HinweisIconSpaceView}></View>
-          <Text style={myStyle.HinweisSpracheText}>English</Text>
+          <View style={myStyle.Hinweis.IconSpaceView}></View>
+          <Text style={myStyle.Hinweis.SpracheText}>English</Text>
         </TouchableOpacity>
 
         {/**
@@ -100,9 +87,9 @@ class Hinweis extends Component {
 
         <TouchableOpacity
           onPress={this.props.startTutorial}
-          style={[{ backgroundColor: "#BBDEFB" }, myStyle.HinweisButtonBottom]}
+          style={myStyle.Hinweis.ButtonBottomLeft}
         >
-          <Text style={myStyle.HinweisSpracheText}>{t("buttonAgree")}</Text>
+          <Text style={myStyle.Hinweis.SpracheText}>{t("buttonAgree")}</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
@@ -121,14 +108,11 @@ class Hinweis extends Component {
               }
             );
           }}
-          style={[
-            { right: 0, backgroundColor: "#1976D2" },
-            myStyle.HinweisButtonBottom,
-          ]}
+          style={myStyle.Hinweis.ButtonBottomRight}
         >
-          <Text style={myStyle.HinweisSpracheText}>{t("buttonDecline")}</Text>
+          <Text style={myStyle.Hinweis.SpracheText}>{t("buttonDecline")}</Text>
         </TouchableOpacity>
-      </View>
+      </ImageBackground>
     );
   }
 }

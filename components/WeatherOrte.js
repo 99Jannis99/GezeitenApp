@@ -71,17 +71,25 @@ class WeatherOrte extends Component {
       <Translation>
         {(t) => (
           <View>
-            {/* OrtsÜberschrift ################################################################################################################################################################################################################################################################################################################################## */}
-            <Text style={myStyle.OrteHeader}>
+            {/**
+            |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
+            | OrtsÜberschrift
+            |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
+            */}
+            <Text style={myStyle.WeatherOrte.Header}>
               {this.state.LocationsWithChosed.name}
             </Text>
 
             {this.state.useableDays.map((d, i) => {
               return (
                 <View key={i}>
-                  {/* TagesButtonList ##################################################################################################################################################################################################################################################################################################################################*/}
+                  {/**
+                  |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
+                  | TagesButtonList
+                  |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
+                  */}
                   <TouchableOpacity
-                    style={myStyle.OrteBar}
+                    style={myStyle.WeatherOrte.TouchableOpacity}
                     onPress={() => {
                       this.setState({ pressedDay: i });
                       let Datehere = new Date(
@@ -105,19 +113,14 @@ class WeatherOrte extends Component {
                       );
                     }}
                   >
-                    <Text style={myStyle.OrteDayText}>
+                    <Text style={myStyle.WeatherOrte.DayText}>
                       {t(
                         new Date().getDay() + i > 6
                           ? new Date().getDay() - 7 + i
                           : new Date().getDay() + i
                       )}
                     </Text>
-                    <Text
-                      style={[
-                        myStyle.OrteDayText,
-                        { color: "#2196F3", marginLeft: 10 },
-                      ]}
-                    >
+                    <Text style={myStyle.WeatherOrte.DateText}>
                       {i < 3
                         ? i == 0
                           ? t("today")
@@ -145,15 +148,24 @@ class WeatherOrte extends Component {
                         .slice(11, 15)}
                     </Text>
                   </TouchableOpacity>
-
-                  {/* Weather Component ##################################################################################################################################################################################################################################################################################################################################*/}
-
+                  {/**
+                  |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
+                  | Weather Component
+                  |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
+                  */}
                   {this.state.pressedDay == i ? (
-                    <View key={i} style={myStyle.OrteWeatherContentView}>
-                      {/* Diagramm ################################################################################################################################################################# */}
+                    <View
+                      key={i}
+                      style={myStyle.WeatherOrte.WeatherComponentView}
+                    >
+                      {/**
+                      |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
+                      | Diagramm
+                      |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
+                      */}
                       <Animated.View
                         style={[
-                          myStyle.WeatherAnimatedView,
+                          myStyle.WeatherOrte.DiagrammAnimatedView,
                           {
                             opacity: this.state.WeatherIconAnimation,
                           },
@@ -191,35 +203,41 @@ class WeatherOrte extends Component {
                             color: (opacity = 1) => `rgba(0, 0, 0,0.4)`,
                             labelColor: (opacity = 1) => `black`,
                           }}
-                          style={myStyle.WeatherLineChart}
+                          style={myStyle.WeatherOrte.LineChart}
                         />
-                        <View style={myStyle.LineChartXAxis}>
-                          <View style={myStyle.LineChartXAxisNumbers}>
-                            <Text style={myStyle.LineChartXAxisEachNumber}>
+                        <View style={myStyle.WeatherOrte.DiagrammTimesView}>
+                          <View
+                            style={myStyle.WeatherOrte.DiagrammTimesSecondView}
+                          >
+                            <Text style={myStyle.WeatherOrte.DiagrammTime}>
                               06:00
                             </Text>
-                            <Text style={myStyle.LineChartXAxisEachNumber}>
+                            <Text style={myStyle.WeatherOrte.DiagrammTime}>
                               12:00
                             </Text>
-                            <Text style={myStyle.LineChartXAxisEachNumber}>
+                            <Text style={myStyle.WeatherOrte.DiagrammTime}>
                               18:00
                             </Text>
-                            <Text style={myStyle.LineChartXAxisEachNumber}>
+                            <Text style={myStyle.WeatherOrte.DiagrammTime}>
                               24:00
                             </Text>
                           </View>
                         </View>
                       </Animated.View>
-                      {/* Uhr/Icon/Grad ################################################################################################################################################################################################################################################################################################################################## */}
+                      {/**
+                      |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
+                      | Uhr/Icon/Grad
+                      |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
+                      */}
                       <Animated.View
                         style={[
-                          myStyle.TimeIconTemperaturComponent,
+                          myStyle.WeatherOrte.TimeIconTemperaturComponent,
                           {
                             opacity: this.state.WeatherIconAnimation,
                           },
                         ]}
                       >
-                        <Text style={myStyle.WeatherTimerText}>
+                        <Text style={myStyle.WeatherOrte.WeatherTimerText}>
                           {this.state.WeatherNowDescription
                             ? this.state.WeatherNowDescription.temperature
                               ? this.state.WeatherNowDescription.time.slice(
@@ -230,11 +248,11 @@ class WeatherOrte extends Component {
                             : null}
                         </Text>
                         <Image
-                          style={myStyle.WeatherIcon}
+                          style={myStyle.WeatherOrte.WeatherIcon}
                           source={this.state.WeatherIcon}
                         />
-                        <View style={myStyle.WeatherTemperatureView}>
-                          <Text style={myStyle.WeatherTemperatureText}>
+                        <View style={myStyle.WeatherOrte.WeatherTemperatureView}>
+                          <Text style={myStyle.WeatherOrte.WeatherTemperatureText}>
                             {this.state.WeatherNowDescription
                               ? (this.state.WeatherNowDescription.temperature
                                   ? this.state.WeatherNowDescription.temperature
@@ -245,29 +263,33 @@ class WeatherOrte extends Component {
                                   .slice(0, 2) + " °C"
                               : null}
                           </Text>
-                          <Text style={myStyle.WeatherDiscriptionText}>
+                          <Text style={myStyle.WeatherOrte.WeatherDiscriptionText}>
                             {this.state.WeatherNowDescription
                               ? t(this.state.WeatherNowDescription.icon)
                               : null}
                           </Text>
                         </View>
                       </Animated.View>
-                      {/* Regenwahrscheinlichkeit/Menge/Windstärke ################################################################################################################################################################################################################################################################################################################################## */}
+                      {/**
+                      |--------------------------------------------------
+                      | Regenwahrscheinlichkeit/Menge/Windstärke
+                      |--------------------------------------------------
+                      */}
                       <Animated.View
                         style={[
-                          myStyle.AnimatedViewRainWind,
+                          myStyle.WeatherOrte.AnimatedViewRainWind,
                           {
                             opacity: this.state.WeatherIconAnimation,
                           },
                         ]}
                       >
-                        <View style={{ flexDirection: "row" }}>
+                        <View style={myStyle.WeatherOrte.ViewRainWind}>
                           <IconFontAwesome
                             name="umbrella"
                             size={20}
                             color="#3f444d"
                           />
-                          <Text style={myStyle.WeatherRainWindText}>
+                          <Text style={myStyle.WeatherOrte.WeatherRainWindText}>
                             {this.state.WeatherNowDescription
                               ? " " +
                                 this.state.WeatherNowDescription
@@ -277,9 +299,9 @@ class WeatherOrte extends Component {
                               : null}
                           </Text>
                         </View>
-                        <View style={myStyle.WeatherRainWindView}>
+                        <View style={myStyle.WeatherOrte.WeatherRainWindView}>
                           <IconEntypo name="water" size={20} color="#3f444d" />
-                          <Text style={myStyle.WeatherRainWindText}>
+                          <Text style={myStyle.WeatherOrte.WeatherRainWindText}>
                             {this.state.WeatherNowDescription
                               ? " " +
                                 this.state.WeatherNowDescription
@@ -288,13 +310,13 @@ class WeatherOrte extends Component {
                               : null}
                           </Text>
                         </View>
-                        <View style={{ flexDirection: "row" }}>
+                        <View style={myStyle.WeatherOrte.ViewRainWind}>
                           <IconMaterialCommunityIcons
                             name="wind-turbine"
                             size={20}
                             color="#3f444d"
                           />
-                          <Text style={myStyle.WeatherRainWindText}>
+                          <Text style={myStyle.WeatherOrte.WeatherRainWindText}>
                             {this.state.WeatherNowDescription
                               ? " " +
                                 this.state.WeatherNowDescription.windSpeed +

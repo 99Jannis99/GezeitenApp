@@ -120,9 +120,7 @@ class Favorites extends Component {
           <ImageBackground
             source={require("../assets/pictures/default_background-dashboard.jpg")}
             resizeMode="cover"
-            style={{
-              flex: 1,
-            }}
+            style={myStyle.Favorites.ImageBackground}
           >
             <Locations />
             <StatusBar style="auto" />
@@ -133,16 +131,14 @@ class Favorites extends Component {
       case false:
         return (
           <ImageBackground
-            source={require("../assets/pictures/securityhint_background.jpg")}
+            source={require("../assets/pictures/default_background-dashboard.jpg")}
             resizeMode="cover"
-            style={{
-              flex: 1,
-            }}
+            style={myStyle.Favorites.ImageBackground}
           >
             <Input
               onChangeText={(text) => this.sortOutLocations(text)}
-              containerStyle={myStyle.LocationsInputContainer}
-              inputContainerStyle={myStyle.LocationsInputInputContainer}
+              containerStyle={myStyle.Favorites.InputContainer}
+              inputContainerStyle={myStyle.Favorites.InputInputContainer}
               leftIcon={
                 <IconFontAwesome
                   name="search"
@@ -164,16 +160,11 @@ class Favorites extends Component {
             ></Input>
             {filtertLocations.length < 1 ? (
               <Image
-                style={{
-                  width: 292,
-                  height: 116,
-                  alignSelf: "flex-end",
-                  marginRight: 20,
-                }}
+                style={myStyle.Favorites.Image}
                 source={require("../assets/pictures/addFavorites_de.png")}
               />
             ) : null}
-            <ScrollView style={myStyle.LocationsScrollView}>
+            <ScrollView scrollEnabled={true} style={myStyle.Favorites.ScrollView}>
               {filtertLocations.map((d, i) => {
                 return (
                   <ListItem
@@ -188,18 +179,13 @@ class Favorites extends Component {
                     }}
                   >
                     <ListItem.Content>
-                      <View style={{ flexDirection: "row" }}>
+                      <View style={myStyle.Favorites.ListView}>
                         {d.country === "Deutschland" ? <DeIcon /> : <NlIcon />}
                         <View
-                          style={{
-                            width: Dimensions.get("screen").width - 80,
-                          }}
+                          style={myStyle.Favorites.SecondListView}
                         >
                           <ListItem.Title
-                            style={{
-                              alignSelf: "center",
-                              color: "white",
-                            }}
+                            style={myStyle.Favorites.ListItemTitel}
                           >
                             {d.displayName}
                           </ListItem.Title>

@@ -1,56 +1,46 @@
 import { StatusBar } from "expo-status-bar";
-import {  Text, View, TouchableOpacity, Image } from "react-native";
-import React, { useState } from "react";
+import { Text, ImageBackground, TouchableOpacity, Image } from "react-native";
+import React from "react";
 import myStyle from "../assets/styles";
 import { useTranslation } from "react-i18next";
 
-
 const Tutorial = (props) => {
-  // constante für übersetzung / wird so benutzt: {t("Keyword")}
-
-  const { t, i18n } = useTranslation();
+  /**
+  |--------------------------------------------------
+  | Konstante für übersetzung / wird so benutzt: {t("Keyword")}
+  |--------------------------------------------------
+  */
+  const { t } = useTranslation();
   return (
-    <View style={myStyle.HinweisView}>
+    <ImageBackground
+      source={require("../assets/pictures/default_background-dashboard.jpg")}
+      resizeMode="cover"
+      style={myStyle.Tutorial.View}
+    >
       <StatusBar style="auto" />
-      <Text style={[{ fontSize: 35, marginTop: 40 }, myStyle.HinweisText]}>
-        {t("headlineTurorial")}
-      </Text>
-      <Text style={[{ marginTop: 40, fontSize: 15 }, myStyle.HinweisText]}>
-        {t("description")}
-      </Text>
+      <Text style={myStyle.Tutorial.Headline}>{t("headlineTurorial")}</Text>
+      <Text style={myStyle.Tutorial.Description}>{t("description")}</Text>
       <Image
         source={require("../assets/pictures/downGif.gif")}
-        style={myStyle.TutorialIcon}
+        style={myStyle.Tutorial.Icon}
       />
-      <Text
-        style={[
-          { marginLeft: 20, marginRight: 20, fontSize: 15, marginTop: 30 },
-          myStyle.HinweisText,
-        ]}
-      >
+      <Text style={myStyle.Tutorial.DescriptionDown}>
         {t("descriptionDown")}
       </Text>
       <Image
         source={require("../assets/pictures/upGif.gif")}
-        style={myStyle.TutorialIcon}
+        style={myStyle.Tutorial.Icon}
       />
-      <Text
-        style={[
-          { marginLeft: 20, marginRight: 20, fontSize: 15, marginTop: 30 },
-          myStyle.HinweisText,
-        ]}
-      >
-        {t("descriptionUp")}
-      </Text>
+      <Text style={myStyle.Tutorial.DescriptionDown}>{t("descriptionUp")}</Text>
       <TouchableOpacity
         onPress={props.goAhead}
-        style={myStyle.TutorialAgreeButton}
+        style={myStyle.Tutorial.AgreeButton}
       >
-        <Text style={[{ fontSize: 17 }, myStyle.HinweisText]}>
+        <Text style={myStyle.Tutorial.AgreeButtonText}>
           {t("TutorialAgreeButton")}
         </Text>
       </TouchableOpacity>
-    </View>
+    </ImageBackground>
   );
 };
 

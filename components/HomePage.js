@@ -62,14 +62,14 @@ class HomePage extends Component {
       chosed: true,
     });
     return (
-      <View style={{ flex: 1 }}>
+      <View style={myStyle.HomePage.View}>
         <Animated.Image
-          style={myStyle.AnimatedBackgroundImage}
+          style={myStyle.HomePage.AnimatedBackgroundImage}
           source={require("../assets/pictures/default_background-dashboard.jpg")}
         />
         <Animated.Image
           style={[
-            myStyle.AnimatedBackgroundImage,
+            myStyle.HomePage.AnimatedBackgroundImage,
             {
               opacity: _.isEmpty(filtertLocations) ? 0 : this.state.animation,
             },
@@ -78,18 +78,16 @@ class HomePage extends Component {
         />
         {filtertLocations.length < 1 ? (
           <Image
-            style={myStyle.HomePageTutorial}
+            style={myStyle.HomePage.Tutorial}
             source={require("../assets/pictures/Homepage_de_Shadow.png")}
           />
         ) : null}
         {filtertLocations.length != 0 ? (
           <Tab.Navigator
-            sceneContainerStyle={{ backgroundColor: "rgb(187, 222, 251,0)" }}
-            screenOptions={{
-              tabBarShowLabel: false,
-              tabBarItemStyle: { color: "Red" },
-              tabBarStyle: { backgroundColor: "#90CAF9" },
-            }}
+            sceneContainerStyle={myStyle.HomePage.SceneContainerStyle}
+            screenOptions={
+              myStyle.HomePage.ScreenOptions
+            }
           >
             {filtertLocations.map((d, i) => {
               return (
@@ -100,6 +98,10 @@ class HomePage extends Component {
                       filtertLocations.length - 1 == i ? true : false,
                     changeBackground: this.changeBackground.bind(this),
                   }}
+                  options={{
+                    tabBarLabel:
+                      filtertLocations.length > 6 ? "" : d.name.slice(0, 3),
+                  }}
                   key={i}
                   name={d.name}
                   component={Orte}
@@ -108,7 +110,7 @@ class HomePage extends Component {
             })}
           </Tab.Navigator>
         ) : null}
-        <StatusBar style="auto" backgroundColor="" />
+        <StatusBar style="auto" />
       </View>
     );
   }

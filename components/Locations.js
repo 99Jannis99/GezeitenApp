@@ -1,13 +1,8 @@
 import { StatusBar } from "expo-status-bar";
-import {
-  View,
-  ImageBackground,
-  Dimensions,
-  ScrollView,
-} from "react-native";
+import { View, ImageBackground, Dimensions, ScrollView } from "react-native";
 import React, { Component } from "react";
 import myStyle from "../assets/styles";
-import {  withTranslation } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import fetchData from "../functions/fetchData";
 import _ from "lodash";
@@ -34,44 +29,91 @@ class Locations extends Component {
   }
 
   componentDidMount() {
-    // die OrtsDaten wern geholt
+    /**
+  |--------------------------------------------------
+  | die OrtsDaten wern geholt
+  |--------------------------------------------------
+  */
     this.getData();
   }
 
-  // diese Funktion sortiert die OrtsDaten nach dem eingegebenen Text in der Suchzeile:
+  /**
+  |--------------------------------------------------
+  | diese Funktion sortiert die OrtsDaten nach dem eingegebenen Text in der Suchzeile:
+  |--------------------------------------------------
+  */
   sortOutLocations(text) {
-    // wenn text mitgegeben wird, werden beim ändern des Suchzeileninputs...
+    /**
+    |--------------------------------------------------
+    | wenn text mitgegeben wird, werden beim ändern des Suchzeileninputs...
+    |--------------------------------------------------
+    */
     if (text) {
-      // ... die OrtsDaten gefiltert,...
+      /**
+      |--------------------------------------------------
+      | ... die OrtsDaten gefiltert,...
+      |--------------------------------------------------
+      */
       let newLocationData = _.filter(
         this.state.rightIcon === "location"
-          ? // hier wird entweder die sortierte Liste nach Distanz zum nutzer oder nach Alphabet benutzt
+          ? /**
+          |--------------------------------------------------
+          | hier wird entweder die sortierte Liste nach Distanz zum nutzer oder nach Alphabet benutzt
+          |--------------------------------------------------
+          */
             this.state.originalLocationData
           : this.state.byLocationSortData,
         (o) => {
-          // ...jenachdem ob mit IndexOf etwas über -1 ausgegeben wird (also ob mindestens 1 Buchstabe des eingebenen Textes in dem Ortsnamen vorhanden ist)
+          /**
+          |--------------------------------------------------
+          | ...jenachdem ob mit IndexOf etwas über -1 ausgegeben wird (also ob mindestens 1 Buchstabe des eingebenen Textes in dem Ortsnamen vorhanden ist)
+          |--------------------------------------------------
+          */
           return o.name.toLowerCase().indexOf(text.toLowerCase()) > -1;
         }
       );
       this.setState({ locationData: newLocationData });
     } else {
-      // wenn beim ändern kein Text mitgegeben wird (also der Text wieder rausgelöscht wird aus der Suchzeile)
+      /**
+      |--------------------------------------------------
+      | wenn beim ändern kein Text mitgegeben wird (also der Text wieder rausgelöscht wird aus der Suchzeile)
+      |--------------------------------------------------
+      */
       this.state.rightIcon === "location"
-        ? // wird die Liste wieder auf die sortierten OrtsDaten nach Alphabet...
+        ? /**
+        |--------------------------------------------------
+        | wird die Liste wieder auf die sortierten OrtsDaten nach Alphabet...
+        |--------------------------------------------------
+        */
           this.setState({ locationData: this.state.originalLocationData })
-        : // oder nach Entfernung zum Nutzer gesetzt
+        : /**
+        |--------------------------------------------------
+        | oder nach Entfernung zum Nutzer gesetzt
+        |--------------------------------------------------
+        */
           this.setState({ locationData: this.state.byLocationSortData });
     }
   }
 
-  // diese Funktion sortiert die OrtsDaten nach Entfernung zum Nutzer
+  /**
+  |--------------------------------------------------
+  | diese Funktion sortiert die OrtsDaten nach Entfernung zum Nutzer
+  |--------------------------------------------------
+  */
 
   sortOutLocationsByLocation() {
-    // this.clearAsyncStorage()
-    // wenn der Nutzer das "location" Icon drückt...
+    /**
+    |--------------------------------------------------
+    | wenn der Nutzer das "location" Icon drückt...
+    |--------------------------------------------------
+    */
     if (this.state.rightIcon === "location") {
       const { t } = this.props;
-      // fügt den Toast (Mitteilung unten) ein mit der Benachichtigung das die Loction geladen werden
+      /**
+      |--------------------------------------------------
+      | fügt den Toast (Mitteilung unten) ein mit der Benachichtigung das die Loction geladen werden
+      |--------------------------------------------------
+      */
       Toast.show({
         type: "info",
         text1: t("ToastHeader"),
@@ -79,26 +121,46 @@ class Locations extends Component {
         visibilityTime: 1500,
       });
       (async () => {
-        // wird nach Berechtigung zum Zugriff auf den Standort gefragt
+        /**
+        |--------------------------------------------------
+        | wird nach Berechtigung zum Zugriff auf den Standort gefragt
+        |--------------------------------------------------
+        */
         let { status } = await Location.requestForegroundPermissionsAsync();
         if (status !== "granted") {
           console.log("Permission to access location was denied");
           return;
         }
-        // wir die Berechtigung gegeben wird die aktuelle Position des Nutzers gelesen
+        /**
+        |--------------------------------------------------
+        | wir die Berechtigung gegeben wird die aktuelle Position des Nutzers gelesen
+        |--------------------------------------------------
+        */
         let location = await Location.getCurrentPositionAsync({});
-        // dann werden die OrtsDaten nach Entfernung zum Nutzer sortiert
+        /**
+        |--------------------------------------------------
+        | dann werden die OrtsDaten nach Entfernung zum Nutzer sortiert
+        |--------------------------------------------------
+        */
         let locationSortItems = _.sortBy(this.state.originalLocationData, [
           (o) => {
             return getDistance(location.coords, o.coords);
           },
         ]);
-        // füge den sortierten OrtsDaten noch die Distanz zum Nutzer hinzu
+        /**
+        |--------------------------------------------------
+        | füge den sortierten OrtsDaten noch die Distanz zum Nutzer hinzu
+        |--------------------------------------------------
+        */
         locationSortItems = locationSortItems.map((d, i) => {
           d.distance = getDistance(location.coords, d.coords);
           return d;
         });
-        // Im state locationData für die Ausgabe auf dem Display, und im state byLocationSortData für spätere Verwendung in anderen Funktionen gespeichert
+        /**
+        |--------------------------------------------------
+        | Im state locationData für die Ausgabe auf dem Display, und im state byLocationSortData für spätere Verwendung in anderen Funktionen gespeichert
+        |--------------------------------------------------
+        */
         this.setState({
           locationData: locationSortItems,
           rightIcon: "language",
@@ -106,23 +168,39 @@ class Locations extends Component {
         });
       })();
     } else {
-      // wenn der Nutzer aber das Aplhabet Icon drückt werden die OrtsDaten wieder nach Alphabet sortiert
+      /**
+      |--------------------------------------------------
+      | wenn der Nutzer aber das Aplhabet Icon drückt werden die OrtsDaten wieder nach Alphabet sortiert
+      |--------------------------------------------------
+      */
       let alphabetSortItems = _.sortBy(this.state.originalLocationData, [
         (o) => {
           return o.name;
         },
       ]);
       this.setState({
-        // Im state locationData gespeichert für die Ausgabe auf dem Display
+        /**
+        |--------------------------------------------------
+        | Im state locationData gespeichert für die Ausgabe auf dem Display
+        |--------------------------------------------------
+        */
         locationData: alphabetSortItems,
         rightIcon: "location",
       });
     }
   }
-  // wird ausgeführt wenn auf das Plus oder die Mülltonne gedrückt wird
+  /**
+|--------------------------------------------------
+| wird ausgeführt wenn auf das Plus oder die Mülltonne gedrückt wird
+|--------------------------------------------------
+*/
   createFavorites(d) {
     const { t } = this.props;
-    // ein Toast wir bei drücken getriggert
+    /**
+    |--------------------------------------------------
+    | ein Toast wir bei drücken getriggert
+    |--------------------------------------------------
+    */
     Toast.show({
       type: d.chosed ? "success" : "error",
       text1: d.chosed
@@ -131,9 +209,17 @@ class Locations extends Component {
       visibilityTime: 1500,
       position: "bottom",
     });
-    // jenachdem ob wir die Liste nach Location oder Alphabet sortiert haben wir aus originalLocationData oder byLocationSortData ausgewählt
+    /**
+    |--------------------------------------------------
+    | jenachdem ob wir die Liste nach Location oder Alphabet sortiert haben wir aus originalLocationData oder byLocationSortData ausgewählt
+    |--------------------------------------------------
+    */
     this.state.rightIcon === "location"
-      ? // die OrtsDaten werden im AsyncStorage gespeichert
+      ? /**
+      |--------------------------------------------------
+      | die OrtsDaten werden im AsyncStorage gespeichert
+      |--------------------------------------------------
+      */
         this.saveData(this.state.originalLocationData)
       : this.saveData(this.state.byLocationSortData);
   }
@@ -153,36 +239,59 @@ class Locations extends Component {
       let asyncLocationsWithChosed = await AsyncStorage.getItem(
         "LocationsWithChosed"
       );
-      // wenn die OrtsDaten gespeichert wurden im Asyncstorage werden diese zur Ausgabe auf dem Display genutzt
+      /**
+      |--------------------------------------------------
+      | wenn die OrtsDaten gespeichert wurden im Asyncstorage werden diese zur Ausgabe auf dem Display genutzt
+      |--------------------------------------------------
+      */
       if (asyncLocationsWithChosed !== null) {
         asyncLocationsWithChosed = JSON.parse(asyncLocationsWithChosed);
         this.setState({
           locationData: asyncLocationsWithChosed,
           originalLocationData: asyncLocationsWithChosed,
         });
-      }
-      // wenn nicht werden die OrtsDaten con der Api neu geladen
-      else {
+      } else {
+        /**
+      |--------------------------------------------------
+      | wenn nicht werden die OrtsDaten con der Api neu geladen
+      |--------------------------------------------------
+      */
         fetchData("locations", {})
           .then((data) => {
-            // die OrtsDaten der Api werden nach Alphabet sortiert
+            /**
+            |--------------------------------------------------
+            | die OrtsDaten der Api werden nach Alphabet sortiert
+            |--------------------------------------------------
+            */
             let alphabetSortItems = _.sortBy(data.success.items, [
               (o) => {
                 return o.name;
               },
             ]);
-            // den OrtsDaten der Api wird jedem object "chosed : false" hinzugefügt
+            /**
+            |--------------------------------------------------
+            | den OrtsDaten der Api wird jedem object "chosed : false" hinzugefügt
+            |--------------------------------------------------
+            */
             alphabetSortItems = alphabetSortItems.map((d, i) => {
               d.chosed = false;
               return d;
             });
-            // die OrtsDaten die auf dem Display ausgegeben werden werden gesetzt
+            /**
+            |--------------------------------------------------
+            | die OrtsDaten die auf dem Display ausgegeben werden werden gesetzt
+            |--------------------------------------------------
+            */
             this.setState({
               locationData: alphabetSortItems,
               originalLocationData: alphabetSortItems,
             });
           })
-          // wenn die OrtsDaten nicht von der Api geladen werden können wir ein Error ausgegeben als Toast
+          /**
+          |--------------------------------------------------
+          | wenn die OrtsDaten nicht von der Api geladen werden können wir ein Error ausgegeben als Toast
+          |--------------------------------------------------
+          */
           .catch((err) => {
             const { t } = this.props;
             Toast.show({
@@ -198,9 +307,17 @@ class Locations extends Component {
       console.log("Error get Data :" + err);
     }
   };
-  // OrtsDaten werden gespeichert
+  /**
+  |--------------------------------------------------
+  | OrtsDaten werden gespeichert
+  |--------------------------------------------------
+  */
   saveData = async (value) => {
-    // OrtsDaten werden zum String convertiert
+    /**
+    |--------------------------------------------------
+    | OrtsDaten werden zum String convertiert
+    |--------------------------------------------------
+    */
     let object = JSON.stringify(value);
     try {
       await AsyncStorage.setItem("LocationsWithChosed", object);
@@ -212,16 +329,14 @@ class Locations extends Component {
     const { t } = this.props;
     return (
       <ImageBackground
-        source={require("../assets/pictures/securityhint_background.jpg")}
+        source={require("../assets/pictures/default_background-dashboard.jpg")}
         resizeMode="cover"
-        style={{
-          flex: 1,
-        }}
+        style={myStyle.Locations.View}
       >
         <Input
           onChangeText={(text) => this.sortOutLocations(text)}
-          containerStyle={myStyle.LocationsInputContainer}
-          inputContainerStyle={myStyle.LocationsInputInputContainer}
+          containerStyle={myStyle.Locations.InputContainer}
+          inputContainerStyle={myStyle.Locations.InputInputContainer}
           leftIcon={
             <IconFontAwesome
               name="search"
@@ -242,7 +357,7 @@ class Locations extends Component {
           placeholderTextColor="#3f444d"
         ></Input>
 
-        <ScrollView scrollEnabled={true} style={myStyle.LocationsScrollView}>
+        <ScrollView scrollEnabled={true} style={myStyle.Locations.ScrollView}>
           {this.state.locationData.map((d, i) => {
             return (
               <ListItem
@@ -259,18 +374,13 @@ class Locations extends Component {
                 }}
               >
                 <ListItem.Content>
-                  <View style={{ flexDirection: "row" }}>
+                  <View style={myStyle.Locations.ListView}>
                     {d.country === "Deutschland" ? <DeIcon /> : <NlIcon />}
                     <View
-                      style={{
-                        width: Dimensions.get("screen").width - 80,
-                      }}
+                      style={myStyle.Locations.ChildView}
                     >
                       <ListItem.Title
-                        style={{
-                          alignSelf: "center",
-                          color: "white",
-                        }}
+                        style={myStyle.Locations.ListItemTitel}
                       >
                         {this.state.rightIcon === "location"
                           ? d.displayName

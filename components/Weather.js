@@ -1,21 +1,12 @@
 import { StatusBar } from "expo-status-bar";
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  Image,
-  ImageBackground,
-  Animated,
-} from "react-native";
-import React, { Component, useEffect } from "react";
+import { View, Image, Animated } from "react-native";
+import React, { Component } from "react";
 import myStyle from "../assets/styles";
 import { withTranslation } from "react-i18next";
-import _, { get, isEmpty, find, filter, has, debounce, sortBy } from "lodash";
+import _ from "lodash";
 import WeatherOrte from "./WeatherOrte";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import { NavigationContainer } from "@react-navigation/native";
 
 class Weather extends Component {
   state = {
@@ -48,7 +39,11 @@ class Weather extends Component {
     }
   };
   saveData = async (value) => {
-    // OrtsDaten werden zum String convertiert
+    /**
+    |--------------------------------------------------
+    | OrtsDaten werden zum String convertiert
+    |--------------------------------------------------
+    */
     try {
       await AsyncStorage.setItem("Background", value);
     } catch (err) {
@@ -56,50 +51,26 @@ class Weather extends Component {
     }
   };
   render() {
-    const { t } = this.props;
     const Tab = createMaterialTopTabNavigator();
     const filtertLocations = _.filter(this.state.LocationsWithChosed, {
       chosed: true,
     });
     return (
-      <View style={{ height: "100%", width: "100%" }}>
-        {/* <ImageBackground
-          source={require("../assets/pictures/default_background-dashboard.jpg")}
-          resizeMode="cover"
-          style={{
-            flex: 1,
-            // opacity: this.state.animation,
-          }}
-        > */}
-       
+      <View style={myStyle.Weather.View}>
         <Animated.Image
-          style={{
-            flex: 1,
-            position: "absolute",
-          }}
+          style={myStyle.Weather.BackgroundImage}
           source={require("../assets/pictures/default_background-dashboard.jpg")}
         />
         {filtertLocations.length < 1 ? (
           <Image
-            style={{
-              width: 292,
-              height: 116,
-              position: "absolute",
-              bottom: 50,
-              alignSelf: "flex-end",
-              marginRight: 20,
-            }}
+            style={myStyle.Weather.Tutorial}
             source={require("../assets/pictures/Homepage_de_Shadow.png")}
           />
         ) : null}
         {filtertLocations.length != 0 ? (
           <Tab.Navigator
-            sceneContainerStyle={{ backgroundColor: "rgb(187, 222, 251,0)" }}
-            screenOptions={{
-              tabBarShowLabel: false,
-              tabBarItemStyle: { color: "Red" },
-              tabBarStyle: { backgroundColor: "#90CAF9" },
-            }}
+            sceneContainerStyle={myStyle.Weather.SceneContainerStyle}
+            screenOptions={myStyle.Weather.ScreenOptions}
           >
             {filtertLocations.map((d, i) => {
               return (
@@ -108,6 +79,10 @@ class Weather extends Component {
                     LocationsWithChosed: d,
                     completeArrayLocationsWithChosed:
                       filtertLocations.length - 1 == i ? true : false,
+                  }}
+                  options={{
+                    tabBarLabel:
+                      filtertLocations.length > 6 ? "" : d.name.slice(0, 3),
                   }}
                   key={i}
                   name={d.name}

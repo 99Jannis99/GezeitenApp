@@ -89,16 +89,24 @@ class Orte extends Component {
       <Translation>
         {(t) => (
           <View>
-            {/* OrtsÜberschrift ################################################################################################################################################################################################################################################################################################################################## */}
-            <Text style={myStyle.OrteHeader}>
+            {/**
+            |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
+            | OrtsÜberschrift
+            |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
+            */}
+            <Text style={myStyle.Orte.Header}>
               {this.state.LocationsWithChosed.name}
             </Text>
             {this.state.useableDays.map((d, i) => {
               return (
                 <View key={i}>
-                  {/* TagesButtonList ################################################################################################################################################################################################################################################################################################################################## */}
+                  {/**
+                  |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
+                  | TagesButtonList
+                  |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
+                  */}
                   <TouchableOpacity
-                    style={myStyle.OrteBar}
+                    style={myStyle.Orte.TouchableOpacity}
                     onPress={() => {
                       this.state.tidesIconAnimation.setValue(
                         Dimensions.get("screen").width
@@ -124,19 +132,14 @@ class Orte extends Component {
                       );
                     }}
                   >
-                    <Text style={myStyle.OrteDayText}>
+                    <Text style={myStyle.Orte.DayText}>
                       {t(
                         new Date().getDay() + i > 6
                           ? new Date().getDay() - 7 + i
                           : new Date().getDay() + i
                       )}
                     </Text>
-                    <Text
-                      style={[
-                        myStyle.OrteDayText,
-                        { color: "#2196F3", marginLeft: 10 },
-                      ]}
-                    >
+                    <Text style={myStyle.Orte.DateText}>
                       {i < 3
                         ? i == 0
                           ? t("today")
@@ -164,16 +167,19 @@ class Orte extends Component {
                         .slice(11, 15)}
                     </Text>
                   </TouchableOpacity>
-                  {/* Tides Component ################################################################################################################################################################################################################################################################################################################################## */}
+                  {/**
+                  |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
+                  | Tides Component
+                  |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
+                  */}
                   {this.state.pressedDay == i ? (
-                    <View key={i} style={myStyle.OrteWeatherContentView}>
-                      {/* TidesIcons/TideTime ################################################################################################################################################################################################################################################################################################################################## */}
-                      <View
-                        style={{
-                          flexDirection: "row",
-                          justifyContent: "space-around",
-                        }}
-                      >
+                    <View key={i} style={myStyle.Orte.TidesComponentView}>
+                      {/**
+                      |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
+                      | TidesIcons/TideTime
+                      |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
+                      */}
+                      <View style={myStyle.Orte.TidesIconView}>
                         {!this.state.tidesObject.hasOwnProperty("success")
                           ? null
                           : this.state.tidesObject.success.tides.map((o, a) => {
@@ -204,39 +210,28 @@ class Orte extends Component {
                                         ? require("../assets/pictures/downGif.gif")
                                         : require("../assets/pictures/upGif.gif")
                                     }
-                                    style={[
-                                      myStyle.TutorialIcon,
-                                      { marginTop: 20 },
-                                    ]}
+                                    style={myStyle.Orte.IndividuallyTidesIcon}
                                   />
-                                  <Text
-                                    style={{
-                                      marginBottom: 10,
-                                      alignSelf: "center",
-                                      color: "rgba(0, 0, 0,0.5)",
-                                    }}
-                                  >
+                                  <Text style={myStyle.Orte.TidesTimeText}>
                                     {o.time}
                                   </Text>
                                 </Animated.View>
                               );
                             })}
                       </View>
-                      {/* Diagramm ################################################################################################################################################################################################################################################################################################################################## */}
+                      {/**
+                      |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
+                      | Diagramm
+                      |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
+                      */}
                       <Animated.View
-                        style={{
-                          bottom: 0,
-                          opacity: this.state.WeatherIconAnimation,
-                          position: "absolute",
-                        }}
+                        style={[
+                          myStyle.Orte.DiagrammAnimatedView,
+                          {
+                            opacity: this.state.WeatherIconAnimation,
+                          },
+                        ]}
                       >
-                        <View
-                          style={{
-                            backgroundColor: "rgba(0, 0, 0,0.3)",
-                            height: 2,
-                            width: Dimensions.get("screen").width,
-                          }}
-                        ></View>
                         <LineChart
                           data={{
                             labels: [
@@ -268,85 +263,38 @@ class Orte extends Component {
                             color: (opacity = 1) => `rgba(0, 0, 0,0.4)`,
                             labelColor: (opacity = 1) => `black`,
                           }}
-                          style={{
-                            bottom: -9,
-                            paddingRight: 0,
-                          }}
+                          style={myStyle.Orte.LineChart}
                         />
-                        <View
-                          style={{
-                            width: Dimensions.get("screen").width,
-                            backgroundColor: "rgba(0, 0, 0,0.1)",
-                          }}
-                        >
-                          <View
-                            style={{
-                              marginLeft: 90,
-                              marginRight: 5,
-                              height: 50,
-                              flexDirection: "row",
-                              justifyContent: "space-between",
-                            }}
-                          >
-                            <Text
-                              style={{
-                                alignSelf: "center",
-                                color: "rgba(0, 0, 0,1)",
-                              }}
-                            >
-                              06:00
-                            </Text>
-                            <Text
-                              style={{
-                                alignSelf: "center",
-                                color: "rgba(0, 0, 0,1)",
-                              }}
-                            >
-                              12:00
-                            </Text>
-                            <Text
-                              style={{
-                                alignSelf: "center",
-                                color: "rgba(0, 0, 0,1)",
-                              }}
-                            >
-                              18:00
-                            </Text>
-                            <Text
-                              style={{
-                                alignSelf: "center",
-                                color: "rgba(0, 0, 0,1)",
-                              }}
-                            >
-                              24:00
-                            </Text>
+                        <View style={myStyle.Orte.DiagrammTimesView}>
+                          <View style={myStyle.Orte.DiagrammTimesSecondView}>
+                            <Text style={myStyle.Orte.DiagrammTime}>06:00</Text>
+                            <Text style={myStyle.Orte.DiagrammTime}>12:00</Text>
+                            <Text style={myStyle.Orte.DiagrammTime}>18:00</Text>
+                            <Text style={myStyle.Orte.DiagrammTime}>24:00</Text>
                           </View>
                         </View>
                       </Animated.View>
-                      {/* WeatherIcon/MaxMinTemprature ################################################################################################################################################################################################################################################################################################################################## */}
+                      {/**
+                      |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
+                      | WeatherIcon/MaxMinTemprature  
+                      |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
+                      */}
                       <Animated.Image
-                        style={{
-                          opacity: this.state.WeatherIconAnimation,
-                          width: 70,
-                          height: 70,
-                          top: 130,
-                          position: "absolute",
-                          alignSelf: "flex-end",
-                        }}
+                        style={[
+                          myStyle.Orte.WeatherIcon,
+                          {
+                            opacity: this.state.WeatherIconAnimation,
+                          },
+                        ]}
                         source={this.state.WeatherIcon}
                       />
                       <Animated.Text
-                        style={{
-                          marginLeft: 5,
-                          opacity: this.state.WeatherIconAnimation,
-                          fontSize: 15,
-                          color: "rgba(0, 0, 0,1)",
-                          width: 70,
-                          height: 70,
-                          top: 140,
-                          position: "absolute",
-                          alignSelf: "flex-start",
-                        }}
+                        style={[
+                          myStyle.Orte.DiagrammMaxTemp,
+                          {
+                            opacity: this.state.WeatherIconAnimation,
+                          },
+                        ]}
                       >
                         {this.state.TemperatureArrayGanzzahl
                           ? Math.max(...this.state.TemperatureArrayGanzzahl)
@@ -354,17 +302,12 @@ class Orte extends Component {
                         °C
                       </Animated.Text>
                       <Animated.Text
-                        style={{
-                          marginLeft: 5,
-                          opacity: this.state.WeatherIconAnimation,
-                          fontSize: 15,
-                          color: "rgba(0, 0, 0,1)",
-                          width: 70,
-                          height: 70,
-                          top: 215,
-                          position: "absolute",
-                          alignSelf: "flex-start",
-                        }}
+                        style={[
+                          myStyle.Orte.DiagrammMinTemp,
+                          {
+                            opacity: this.state.WeatherIconAnimation,
+                          },
+                        ]}
                       >
                         {this.state.TemperatureArrayGanzzahl
                           ? Math.min(...this.state.TemperatureArrayGanzzahl)
