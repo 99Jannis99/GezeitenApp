@@ -31,8 +31,9 @@ class Weather extends Component {
         "LocationsWithChosed"
       );
       if (asyncLocationsWithChosed !== null) {
-        asyncLocationsWithChosed = JSON.parse(asyncLocationsWithChosed);
-        this.setState({ LocationsWithChosed: asyncLocationsWithChosed });
+        this.setState({
+          LocationsWithChosed: JSON.parse(asyncLocationsWithChosed),
+        });
       }
     } catch (err) {
       console.log("Error get Data :" + err);
@@ -77,8 +78,6 @@ class Weather extends Component {
                 <Tab.Screen
                   initialParams={{
                     LocationsWithChosed: d,
-                    completeArrayLocationsWithChosed:
-                      filtertLocations.length - 1 == i ? true : false,
                   }}
                   options={{
                     tabBarLabel:

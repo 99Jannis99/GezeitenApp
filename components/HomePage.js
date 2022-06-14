@@ -36,8 +36,9 @@ class HomePage extends Component {
         "LocationsWithChosed"
       );
       if (asyncLocationsWithChosed !== null) {
-        asyncLocationsWithChosed = JSON.parse(asyncLocationsWithChosed);
-        this.setState({ LocationsWithChosed: asyncLocationsWithChosed });
+        this.setState({
+          LocationsWithChosed: JSON.parse(asyncLocationsWithChosed),
+        });
       }
     } catch (err) {
       console.log("Error get Data :" + err);
@@ -85,17 +86,13 @@ class HomePage extends Component {
         {filtertLocations.length != 0 ? (
           <Tab.Navigator
             sceneContainerStyle={myStyle.HomePage.SceneContainerStyle}
-            screenOptions={
-              myStyle.HomePage.ScreenOptions
-            }
+            screenOptions={myStyle.HomePage.ScreenOptions}
           >
             {filtertLocations.map((d, i) => {
               return (
                 <Tab.Screen
                   initialParams={{
                     LocationsWithChosed: d,
-                    completeArrayLocationsWithChosed:
-                      filtertLocations.length - 1 == i ? true : false,
                     changeBackground: this.changeBackground.bind(this),
                   }}
                   options={{
