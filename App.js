@@ -1,20 +1,15 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Text, TouchableOpacity, LogBox } from "react-native";
+import { View, Text, TouchableOpacity, LogBox } from "react-native";
 import Hinweis from "./components/Hinweis";
 import Tutorial from "./components/Tutorial";
 import HomePage from "./components/HomePage";
-import Locations from "./components/Locations";
 import Favorites from "./components/Favorites";
 import Weather from "./components/Weather";
 import Settings from "./components/Settings";
 import i18n from "./languages/i18n";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { NavigationContainer, useFocusEffect } from "@react-navigation/native";
-import {
-  createBottomTabNavigator,
-  BottomTabBar,
-} from "@react-navigation/bottom-tabs";
-import IconEntypo from "react-native-vector-icons/Entypo";
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import TidesIcon from "./assets/svg/Tides";
 import TidesBlueIcon from "./assets/svg/TidesBlue";
 import FavoritesIcon from "./assets/svg/Favorites";
@@ -38,20 +33,8 @@ class App extends Component {
       "Non-serializable values were found in the navigation state",
       "Can't perform a React state update on an unmounted component.",
     ]);
-    // const [user, setUser] = React.useState(null);
-    //   useFocusEffect(
-    //     React.useCallback(() => {
-    //       const unsubscribe = API.subscribe(userId, (user) =>
-    //         this.setState({ user: data })
-    //       );
-    //       return () => unsubscribe();
-    //     })
-    //   );
   }
-  // ubdate() {
-  //   console.log("Update2");
-  //   this.getData();
-  // }
+
   saveData = async (value) => {
     this.setState({ pageCount: value });
     try {
@@ -60,6 +43,7 @@ class App extends Component {
       console.log("Error onSubmit :" + err);
     }
   };
+
   getData = async () => {
     try {
       const asyncPageCount = await AsyncStorage.getItem("pageCount");
@@ -69,15 +53,6 @@ class App extends Component {
     } catch (err) {
       console.log("Error get Data :" + err);
     }
-  };
-  clearAsyncStorage = async () => {
-    try {
-      await AsyncStorage.clear();
-    } catch (err) {
-      console.log("ClearAsyncError: ", err);
-    }
-
-    console.log("Done.");
   };
 
   render() {
@@ -109,7 +84,6 @@ class App extends Component {
         );
       case "HomePage":
         return (
-          // <View ></View>
           <NavigationContainer>
             <Tab.Navigator
               screenOptions={{
@@ -193,12 +167,4 @@ class App extends Component {
   }
 }
 
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: "#fff",
-//     alignItems: "center",
-//     justifyContent: "center",
-//   },
-// });
 export default App;
