@@ -6,18 +6,24 @@ import _ from "lodash";
 import Orte from "./Orte";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import { AdMobRewarded } from "expo-ads-admob";
 
 class HomePage extends Component {
   state = {
     LocationsWithChosed: [],
     ChoosedBackground: null,
     animation: new Animated.Value(0),
+    AdMobCounter: 0,
   };
   constructor(props) {
     super(props);
   }
 
   componentDidMount() {
+    let adUnitId = Platform.select({
+      ios: "ca-app-pub-3940256099942544~1458002511",
+      android: "ca-app-pub-3940256099942544/5224354917",
+    });
     Animated.timing(this.state.animation, {
       toValue: 1,
       duration: 500,
@@ -27,7 +33,21 @@ class HomePage extends Component {
     navigation.addListener("focus", () => {
       this.getData();
     });
+    AdMobRewarded.addEventListener("rewardedVideoDidDismiss", () => {
+      this.loadAd(adUnitId);
+    });
     this.getData();
+
+    this.loadAd(adUnitId);
+  }
+
+  async loadAd(UnitId) {
+    try {
+      await AdMobRewarded.setAdUnitID(UnitId);
+      await AdMobRewarded.requestAdAsync();
+    } catch (e) {
+      console.log("Error in LoadAd: ", e);
+    }
   }
 
   getData = async () => {
@@ -54,6 +74,16 @@ class HomePage extends Component {
         useNativeDriver: true,
       }).start();
       this.setState({ ChoosedBackground: event });
+    }
+  }
+
+  AdMobCounterPush() {
+    this.setState({
+      AdMobCounter: this.state.AdMobCounter + 1,
+    });
+    if (this.state.AdMobCounter == 4) {
+      AdMobRewarded.showAdAsync();
+      this.setState({ AdMobCounter: 0 });
     }
   }
 
@@ -94,6 +124,7 @@ class HomePage extends Component {
                   initialParams={{
                     LocationsWithChosed: d,
                     changeBackground: this.changeBackground.bind(this),
+                    AdMobCounter: this.AdMobCounterPush.bind(this),
                   }}
                   options={{
                     tabBarLabel:

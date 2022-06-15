@@ -7,11 +7,13 @@ import _ from "lodash";
 import WeatherOrte from "./WeatherOrte";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import { AdMobRewarded } from "expo-ads-admob";
 
 class Weather extends Component {
   state = {
     LocationsWithChosed: [],
     ChoosedBackground: "high",
+    AdMobCounter: 0,
   };
   constructor(props) {
     super(props);
@@ -19,10 +21,27 @@ class Weather extends Component {
 
   componentDidMount() {
     let { navigation } = this.props;
+    let adUnitId = Platform.select({
+      ios: "ca-app-pub-3940256099942544~1458002511",
+      android: "ca-app-pub-3940256099942544/5224354917",
+    });
     navigation.addListener("focus", () => {
       this.getData();
     });
+    AdMobRewarded.addEventListener("rewardedVideoDidDismiss", () => {
+      this.loadAd(adUnitId);
+    });
+    this.loadAd(adUnitId);
     this.getData();
+  }
+
+  async loadAd(UnitId) {
+    try {
+      await AdMobRewarded.setAdUnitID(UnitId);
+      await AdMobRewarded.requestAdAsync();
+    } catch (e) {
+      console.log("Error in LoadAd: ", e);
+    }
   }
 
   getData = async () => {
@@ -51,6 +70,17 @@ class Weather extends Component {
       console.log("Error onSubmit :" + err);
     }
   };
+
+  AdMobCounterPush() {
+    this.setState({
+      AdMobCounter: this.state.AdMobCounter + 1,
+    });
+    if (this.state.AdMobCounter == 4) {
+      AdMobRewarded.showAdAsync();
+      this.setState({ AdMobCounter: 0 });
+    }
+  }
+
   render() {
     const Tab = createMaterialTopTabNavigator();
     const filtertLocations = _.filter(this.state.LocationsWithChosed, {
@@ -78,6 +108,7 @@ class Weather extends Component {
                 <Tab.Screen
                   initialParams={{
                     LocationsWithChosed: d,
+                    AdMobCounter: this.AdMobCounterPush.bind(this),
                   }}
                   options={{
                     tabBarLabel:

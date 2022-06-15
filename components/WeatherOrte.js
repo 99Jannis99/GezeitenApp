@@ -37,6 +37,7 @@ class WeatherOrte extends Component {
     let date = moment().format("DDMMYYYY");
     const { navigation, route, isFocused } = this.props;
     navigation.addListener("focus", () => {
+      route.params.AdMobCounter();
       if (this.state.firstFocus) {
         this.updateApiData(route.params.LocationsWithChosed, date, true);
         this.setState({ firstFocus: false });

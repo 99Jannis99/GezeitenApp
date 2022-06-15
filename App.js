@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, TouchableOpacity, LogBox } from "react-native";
+import { View, Text, TouchableOpacity, LogBox, Platform } from "react-native";
 import Hinweis from "./components/Hinweis";
 import Tutorial from "./components/Tutorial";
 import HomePage from "./components/HomePage";
@@ -18,6 +18,13 @@ import SettingsIcon from "./assets/svg/Settings";
 import SettingsBlueIcon from "./assets/svg/SettingsBlue";
 import WeatherBlueIcon from "./assets/svg/WeatherBlueIcon";
 import WeatherWhiteIcon from "./assets/svg/WeatherWhiteIcon";
+import {
+  AdMobBanner,
+  AdMobInterstitial,
+  PublisherBanner,
+  AdMobRewarded,
+  setTestDeviceIDAsync,
+} from "expo-ads-admob";
 
 class App extends Component {
   state = {
@@ -33,6 +40,29 @@ class App extends Component {
       "Non-serializable values were found in the navigation state",
       "Can't perform a React state update on an unmounted component.",
     ]);
+  }
+  componentDidMount() {
+    let adUnitId = Platform.select({
+      ios: "ca-app-pub-3940256099942544~1458002511",
+      android: "ca-app-pub-3940256099942544/1033173712",
+    });
+    this.loadAd(adUnitId);
+    AdMobRewarded.addEventListener("rewardedVideoDidDismiss", (reward) => {
+      try {
+        this.loadAd(adUnitId);
+      } catch (e) {
+        console.log("Error in EventListener: ", e);
+      }
+    });
+  }
+
+  async loadAd(adUnitId) {
+    try {
+      await AdMobRewarded.setAdUnitID(adUnitId);
+      await AdMobRewarded.requestAdAsync();
+    } catch (e) {
+      console.log("Error in LoadAd: ", e);
+    }
   }
 
   saveData = async (value) => {
@@ -57,14 +87,6 @@ class App extends Component {
 
   render() {
     const Tab = createBottomTabNavigator();
-    const MyTheme = {
-      dark: true,
-      elevation: 0, // <-- this is the solution
-
-      colors: {
-        background: "transparent",
-      },
-    };
     switch (this.state.pageCount) {
       case "HinweisPage":
         return (
@@ -131,6 +153,10 @@ class App extends Component {
                 component={Settings}
               />
             </Tab.Navigator>
+            <AdMobBanner
+              bannerSize='fullBanner'
+              adUnitID="ca-app-pub-3940256099942544/6300978111"
+            />
           </NavigationContainer>
         );
       default:

@@ -37,6 +37,7 @@ class Orte extends Component {
     let date = moment().format("DDMMYYYY");
     const { navigation, route, isFocused } = this.props;
     navigation.addListener("focus", () => {
+      route.params.AdMobCounter();
       this.state.firstFocus
         ? this.updateApiData(route.params.LocationsWithChosed, date)
         : route.params.changeBackground(this.state.BackgroundEventIdentifier);
