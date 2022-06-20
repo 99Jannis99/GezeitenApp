@@ -6,6 +6,7 @@ import {
   Image,
   Dimensions,
   Animated,
+  ScrollView
 } from "react-native";
 import React, { Component } from "react";
 import moment from "moment";
@@ -114,6 +115,7 @@ class Orte extends Component {
             <Text style={myStyle.Orte.Header}>
               {this.state.LocationsWithChosed.name}
             </Text>
+            <ScrollView style={myStyle.Orte.ScrollView}>
             {this.state.useableDays.map((d, i) => {
               return (
                 <View key={i}>
@@ -337,6 +339,7 @@ class Orte extends Component {
               );
             })}
             <StatusBar style="auto" />
+            </ScrollView>
           </View>
         )}
       </Translation>

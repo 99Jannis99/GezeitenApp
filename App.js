@@ -18,13 +18,8 @@ import SettingsIcon from "./assets/svg/Settings";
 import SettingsBlueIcon from "./assets/svg/SettingsBlue";
 import WeatherBlueIcon from "./assets/svg/WeatherBlueIcon";
 import WeatherWhiteIcon from "./assets/svg/WeatherWhiteIcon";
-import {
-  AdMobBanner,
-  AdMobInterstitial,
-  PublisherBanner,
-  AdMobRewarded,
-  setTestDeviceIDAsync,
-} from "expo-ads-admob";
+import { AdMobBanner, AdMobRewarded } from "expo-ads-admob";
+import myStyle from './assets/styles.js'
 
 class App extends Component {
   state = {
