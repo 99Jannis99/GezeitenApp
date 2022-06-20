@@ -6,7 +6,7 @@ import {
   Image,
   Dimensions,
   Animated,
-  ScrollView
+  ScrollView,
 } from "react-native";
 import React, { Component } from "react";
 import moment from "moment";
@@ -38,7 +38,7 @@ class Orte extends Component {
     let date = moment().format("DDMMYYYY");
     const { navigation, route, isFocused } = this.props;
     navigation.addListener("focus", () => {
-      route.params.AdMobCounter();
+      route.params.AdMobTrigger();
       this.state.firstFocus
         ? this.updateApiData(route.params.LocationsWithChosed, date)
         : route.params.changeBackground(this.state.BackgroundEventIdentifier);
@@ -103,6 +103,7 @@ class Orte extends Component {
   }
 
   render() {
+    const { route } = this.props;
     return (
       <Translation>
         {(t) => (
@@ -116,229 +117,242 @@ class Orte extends Component {
               {this.state.LocationsWithChosed.name}
             </Text>
             <ScrollView style={myStyle.Orte.ScrollView}>
-            {this.state.useableDays.map((d, i) => {
-              return (
-                <View key={i}>
-                  {/**
+              {this.state.useableDays.map((d, i) => {
+                return (
+                  <View key={i}>
+                    {/**
                   |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
                   | TagesButtonList
                   |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
                   */}
-                  <TouchableOpacity
-                    style={myStyle.Orte.TouchableOpacity}
-                    onPress={() => {
-                      this.state.tidesIconAnimation.setValue(
-                        Dimensions.get("screen").width
-                      );
-                      this.setState({ pressedDay: i });
-                      let Datehere = new Date(
-                        new Date().getTime() + (1000 * 60 * 60 * 24 * i + 1)
-                      );
-                      let nextDate =
-                        Datehere.getDate() < 10
-                          ? "0" + Datehere.getDate().toString()
-                          : Datehere.getDate().toString();
-                      nextDate =
-                        nextDate +
-                        (Datehere.getMonth() + 1 < 10
-                          ? "0" + (Datehere.getMonth() + 1).toString()
-                          : (Datehere.getMonth() + 1).toString());
-                      nextDate = nextDate + Datehere.getFullYear().toString();
+                    <TouchableOpacity
+                      style={myStyle.Orte.TouchableOpacity}
+                      onPress={() => {
+                        route.params.AdMobTrigger();
+                        this.state.tidesIconAnimation.setValue(
+                          Dimensions.get("screen").width
+                        );
+                        this.setState({ pressedDay: i });
+                        let Datehere = new Date(
+                          new Date().getTime() + (1000 * 60 * 60 * 24 * i + 1)
+                        );
+                        let nextDate =
+                          Datehere.getDate() < 10
+                            ? "0" + Datehere.getDate().toString()
+                            : Datehere.getDate().toString();
+                        nextDate =
+                          nextDate +
+                          (Datehere.getMonth() + 1 < 10
+                            ? "0" + (Datehere.getMonth() + 1).toString()
+                            : (Datehere.getMonth() + 1).toString());
+                        nextDate = nextDate + Datehere.getFullYear().toString();
 
-                      this.updateApiData(
-                        this.state.LocationsWithChosed,
-                        nextDate
-                      );
-                    }}
-                  >
-                    <Text style={myStyle.Orte.DayText}>
-                      {t(
-                        new Date().getDay() + i > 6
-                          ? new Date().getDay() - 7 + i
-                          : new Date().getDay() + i
-                      )}
-                    </Text>
-                    <Text style={myStyle.Orte.DateText}>
-                      {i < 3
-                        ? i == 0
-                          ? t("today")
-                          : i == 1
-                          ? t("tomorrow")
-                          : t("afterTomorrow")
-                        : ""}{" "}
-                      {t(
-                        new Date(
+                        this.updateApiData(
+                          this.state.LocationsWithChosed,
+                          nextDate
+                        );
+                      }}
+                    >
+                      <Text style={myStyle.Orte.DayText}>
+                        {t(
+                          new Date().getDay() + i > 6
+                            ? new Date().getDay() - 7 + i
+                            : new Date().getDay() + i
+                        )}
+                      </Text>
+                      <Text style={myStyle.Orte.DateText}>
+                        {i < 3
+                          ? i == 0
+                            ? t("today")
+                            : i == 1
+                            ? t("tomorrow")
+                            : t("afterTomorrow")
+                          : ""}{" "}
+                        {t(
+                          new Date(
+                            new Date().getTime() + (1000 * 60 * 60 * 24 * i + 1)
+                          )
+                            .toString()
+                            .slice(4, 7)
+                        )}{" "}
+                        {new Date(
                           new Date().getTime() + (1000 * 60 * 60 * 24 * i + 1)
                         )
                           .toString()
-                          .slice(4, 7)
-                      )}{" "}
-                      {new Date(
-                        new Date().getTime() + (1000 * 60 * 60 * 24 * i + 1)
-                      )
-                        .toString()
-                        .slice(8, 10)}
-                      ,{" "}
-                      {new Date(
-                        new Date().getTime() + (1000 * 60 * 60 * 24 * 1 + i)
-                      )
-                        .toString()
-                        .slice(11, 15)}
-                    </Text>
-                  </TouchableOpacity>
-                  {/**
+                          .slice(8, 10)}
+                        ,{" "}
+                        {new Date(
+                          new Date().getTime() + (1000 * 60 * 60 * 24 * 1 + i)
+                        )
+                          .toString()
+                          .slice(11, 15)}
+                      </Text>
+                    </TouchableOpacity>
+                    {/**
                   |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
                   | Tides Component
                   |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
                   */}
-                  {this.state.pressedDay == i ? (
-                    <View key={i} style={myStyle.Orte.TidesComponentView}>
-                      {/**
+                    {this.state.pressedDay == i ? (
+                      <View key={i} style={myStyle.Orte.TidesComponentView}>
+                        {/**
                       |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
                       | TidesIcons/TideTime
                       |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
                       */}
-                      <View style={myStyle.Orte.TidesIconView}>
-                        {!this.state.tidesObject.hasOwnProperty("success")
-                          ? null
-                          : this.state.tidesObject.success.tides.map((o, a) => {
-                              return (
-                                <Animated.View
-                                  key={a}
-                                  style={{
-                                    transform: [
-                                      {
-                                        translateX: this.state
-                                          .tidesIconAnimation,
-                                      },
-                                    ],
-                                  }}
-                                >
-                                  <Image
-                                    key={a}
-                                    source={
-                                      i == 0
-                                        ? this.state.currentTide == a
-                                          ? o.event.identifier == "low"
-                                            ? require("../assets/pictures/downGifGlitch.gif")
-                                            : require("../assets/pictures/upGifGlitch.gif")
-                                          : o.event.identifier == "low"
-                                          ? require("../assets/pictures/downGif.gif")
-                                          : require("../assets/pictures/upGif.gif")
-                                        : o.event.identifier == "low"
-                                        ? require("../assets/pictures/downGif.gif")
-                                        : require("../assets/pictures/upGif.gif")
-                                    }
-                                    style={myStyle.Orte.IndividuallyTidesIcon}
-                                  />
-                                  <Text style={myStyle.Orte.TidesTimeText}>
-                                    {o.time}
-                                  </Text>
-                                </Animated.View>
-                              );
-                            })}
-                      </View>
-                      {/**
+                        <View style={myStyle.Orte.TidesIconView}>
+                          {!this.state.tidesObject.hasOwnProperty("success")
+                            ? null
+                            : this.state.tidesObject.success.tides.map(
+                                (o, a) => {
+                                  return (
+                                    <Animated.View
+                                      key={a}
+                                      style={{
+                                        transform: [
+                                          {
+                                            translateX: this.state
+                                              .tidesIconAnimation,
+                                          },
+                                        ],
+                                      }}
+                                    >
+                                      <Image
+                                        key={a}
+                                        source={
+                                          i == 0
+                                            ? this.state.currentTide == a
+                                              ? o.event.identifier == "low"
+                                                ? require("../assets/pictures/downGifGlitch.gif")
+                                                : require("../assets/pictures/upGifGlitch.gif")
+                                              : o.event.identifier == "low"
+                                              ? require("../assets/pictures/downGif.gif")
+                                              : require("../assets/pictures/upGif.gif")
+                                            : o.event.identifier == "low"
+                                            ? require("../assets/pictures/downGif.gif")
+                                            : require("../assets/pictures/upGif.gif")
+                                        }
+                                        style={
+                                          myStyle.Orte.IndividuallyTidesIcon
+                                        }
+                                      />
+                                      <Text style={myStyle.Orte.TidesTimeText}>
+                                        {o.time}
+                                      </Text>
+                                    </Animated.View>
+                                  );
+                                }
+                              )}
+                        </View>
+                        {/**
                       |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
                       | Diagramm
                       |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
                       */}
-                      <Animated.View
-                        style={[
-                          myStyle.Orte.DiagrammAnimatedView,
-                          {
-                            opacity: this.state.WeatherIconAnimation,
-                          },
-                        ]}
-                      >
-                        <LineChart
-                          data={{
-                            labels: [
-                              "00:00",
-                              "06:00",
-                              "12:00",
-                              "18:00",
-                              "24:00",
-                            ],
-                            datasets: [
-                              {
-                                data: this.state.TemperatureArray
-                                  ? this.state.TemperatureArray
-                                  : [1, 2],
-                              },
-                            ],
-                          }}
-                          width={Dimensions.get("window").width + 45}
-                          height={100}
-                          hideLegend={false}
-                          withInnerLines={false}
-                          withOuterLines={false}
-                          withVerticalLabels={true}
-                          withHorizontalLabels={true}
-                          withDots={false}
-                          chartConfig={{
-                            backgroundGradientFromOpacity: 0,
-                            backgroundGradientToOpacity: 0,
-                            color: (opacity = 1) => `rgba(0, 0, 0,0.4)`,
-                            labelColor: (opacity = 1) => `black`,
-                          }}
-                          style={myStyle.Orte.LineChart}
-                        />
-                        <View style={myStyle.Orte.DiagrammTimesView}>
-                          <View style={myStyle.Orte.DiagrammTimesSecondView}>
-                            <Text style={myStyle.Orte.DiagrammTime}>06:00</Text>
-                            <Text style={myStyle.Orte.DiagrammTime}>12:00</Text>
-                            <Text style={myStyle.Orte.DiagrammTime}>18:00</Text>
-                            <Text style={myStyle.Orte.DiagrammTime}>24:00</Text>
+                        <Animated.View
+                          style={[
+                            myStyle.Orte.DiagrammAnimatedView,
+                            {
+                              opacity: this.state.WeatherIconAnimation,
+                            },
+                          ]}
+                        >
+                          <LineChart
+                            data={{
+                              labels: [
+                                "00:00",
+                                "06:00",
+                                "12:00",
+                                "18:00",
+                                "24:00",
+                              ],
+                              datasets: [
+                                {
+                                  data: this.state.TemperatureArray
+                                    ? this.state.TemperatureArray
+                                    : [1, 2],
+                                },
+                              ],
+                            }}
+                            width={Dimensions.get("window").width + 45}
+                            height={100}
+                            hideLegend={false}
+                            withInnerLines={false}
+                            withOuterLines={false}
+                            withVerticalLabels={true}
+                            withHorizontalLabels={true}
+                            withDots={false}
+                            chartConfig={{
+                              backgroundGradientFromOpacity: 0,
+                              backgroundGradientToOpacity: 0,
+                              color: (opacity = 1) => `rgba(0, 0, 0,0.4)`,
+                              labelColor: (opacity = 1) => `black`,
+                            }}
+                            style={myStyle.Orte.LineChart}
+                          />
+                          <View style={myStyle.Orte.DiagrammTimesView}>
+                            <View style={myStyle.Orte.DiagrammTimesSecondView}>
+                              <Text style={myStyle.Orte.DiagrammTime}>
+                                06:00
+                              </Text>
+                              <Text style={myStyle.Orte.DiagrammTime}>
+                                12:00
+                              </Text>
+                              <Text style={myStyle.Orte.DiagrammTime}>
+                                18:00
+                              </Text>
+                              <Text style={myStyle.Orte.DiagrammTime}>
+                                24:00
+                              </Text>
+                            </View>
                           </View>
-                        </View>
-                      </Animated.View>
-                      {/**
+                        </Animated.View>
+                        {/**
                       |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
                       | WeatherIcon/MaxMinTemprature  
                       |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
                       */}
-                      <Animated.Image
-                        style={[
-                          myStyle.Orte.WeatherIcon,
-                          {
-                            opacity: this.state.WeatherIconAnimation,
-                          },
-                        ]}
-                        source={this.state.WeatherIcon}
-                      />
-                      <Animated.Text
-                        style={[
-                          myStyle.Orte.DiagrammMaxTemp,
-                          {
-                            opacity: this.state.WeatherIconAnimation,
-                          },
-                        ]}
-                      >
-                        {this.state.TemperatureArrayGanzzahl
-                          ? Math.max(...this.state.TemperatureArrayGanzzahl)
-                          : ""}
-                        °C
-                      </Animated.Text>
-                      <Animated.Text
-                        style={[
-                          myStyle.Orte.DiagrammMinTemp,
-                          {
-                            opacity: this.state.WeatherIconAnimation,
-                          },
-                        ]}
-                      >
-                        {this.state.TemperatureArrayGanzzahl
-                          ? Math.min(...this.state.TemperatureArrayGanzzahl)
-                          : ""}
-                        °C
-                      </Animated.Text>
-                    </View>
-                  ) : null}
-                </View>
-              );
-            })}
-            <StatusBar style="auto" />
+                        <Animated.Image
+                          style={[
+                            myStyle.Orte.WeatherIcon,
+                            {
+                              opacity: this.state.WeatherIconAnimation,
+                            },
+                          ]}
+                          source={this.state.WeatherIcon}
+                        />
+                        <Animated.Text
+                          style={[
+                            myStyle.Orte.DiagrammMaxTemp,
+                            {
+                              opacity: this.state.WeatherIconAnimation,
+                            },
+                          ]}
+                        >
+                          {this.state.TemperatureArrayGanzzahl
+                            ? Math.max(...this.state.TemperatureArrayGanzzahl)
+                            : ""}
+                          °C
+                        </Animated.Text>
+                        <Animated.Text
+                          style={[
+                            myStyle.Orte.DiagrammMinTemp,
+                            {
+                              opacity: this.state.WeatherIconAnimation,
+                            },
+                          ]}
+                        >
+                          {this.state.TemperatureArrayGanzzahl
+                            ? Math.min(...this.state.TemperatureArrayGanzzahl)
+                            : ""}
+                          °C
+                        </Animated.Text>
+                      </View>
+                    ) : null}
+                  </View>
+                );
+              })}
+              <StatusBar style="auto" />
             </ScrollView>
           </View>
         )}

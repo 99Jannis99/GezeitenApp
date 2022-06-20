@@ -13,7 +13,7 @@ class HomePage extends Component {
     LocationsWithChosed: [],
     ChoosedBackground: null,
     animation: new Animated.Value(0),
-    AdMobCounter: 0,
+    AdMobTriggerd: true,
   };
   constructor(props) {
     super(props);
@@ -33,20 +33,20 @@ class HomePage extends Component {
     navigation.addListener("focus", () => {
       this.getData();
     });
-    AdMobRewarded.addEventListener("rewardedVideoDidDismiss", () => {
-      this.loadAd(adUnitId);
-    });
     this.getData();
+    console.log("CDM (HomePage)");
 
     this.loadAd(adUnitId);
   }
 
   async loadAd(UnitId) {
+    await AdMobRewarded.setAdUnitID(UnitId);
     try {
-      await AdMobRewarded.setAdUnitID(UnitId);
       await AdMobRewarded.requestAdAsync();
     } catch (e) {
-      console.log("Error in LoadAd: ", e);
+      console.log("Error loadAd (HomePage): ", e);
+    } finally {
+      this.setState({ AdMobTriggerd: false });
     }
   }
 
@@ -77,14 +77,14 @@ class HomePage extends Component {
     }
   }
 
-  AdMobCounterPush() {
-    this.setState({
-      AdMobCounter: this.state.AdMobCounter + 1,
-    });
-    if (this.state.AdMobCounter == 4) {
+  AdMobTrigger() {
+    if (!this.state.AdMobTriggerd) {
+      console.log("ADMOB");
       AdMobRewarded.showAdAsync();
-      this.setState({ AdMobCounter: 0 });
     }
+    this.setState({
+      AdMobTriggerd: true,
+    });
   }
 
   render() {
@@ -124,7 +124,7 @@ class HomePage extends Component {
                   initialParams={{
                     LocationsWithChosed: d,
                     changeBackground: this.changeBackground.bind(this),
-                    AdMobCounter: this.AdMobCounterPush.bind(this),
+                    AdMobTrigger: this.AdMobTrigger.bind(this),
                   }}
                   options={{
                     tabBarLabel:

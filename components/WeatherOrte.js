@@ -6,7 +6,7 @@ import {
   Image,
   Dimensions,
   Animated,
-  ScrollView
+  ScrollView,
 } from "react-native";
 import IconFontAwesome from "react-native-vector-icons/FontAwesome";
 import moment from "moment";
@@ -38,7 +38,7 @@ class WeatherOrte extends Component {
     let date = moment().format("DDMMYYYY");
     const { navigation, route, isFocused } = this.props;
     navigation.addListener("focus", () => {
-      route.params.AdMobCounter();
+      route.params.AdMobTrigger();
       if (this.state.firstFocus) {
         this.updateApiData(route.params.LocationsWithChosed, date, true);
         this.setState({ firstFocus: false });
@@ -87,6 +87,7 @@ class WeatherOrte extends Component {
     return ApiData;
   }
   render() {
+    const { route } = this.props;
     return (
       <Translation>
         {(t) => (
@@ -111,6 +112,7 @@ class WeatherOrte extends Component {
                     <TouchableOpacity
                       style={myStyle.WeatherOrte.TouchableOpacity}
                       onPress={() => {
+                        route.params.AdMobTrigger();
                         this.setState({ pressedDay: i });
                         let Datehere = new Date(
                           new Date().getTime() + (1000 * 60 * 60 * 24 * i + 1)

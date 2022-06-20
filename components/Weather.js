@@ -13,7 +13,7 @@ class Weather extends Component {
   state = {
     LocationsWithChosed: [],
     ChoosedBackground: "high",
-    AdMobCounter: 0,
+    AdMobTriggerd: true,
   };
   constructor(props) {
     super(props);
@@ -28,19 +28,19 @@ class Weather extends Component {
     navigation.addListener("focus", () => {
       this.getData();
     });
-    AdMobRewarded.addEventListener("rewardedVideoDidDismiss", () => {
-      this.loadAd(adUnitId);
-    });
     this.loadAd(adUnitId);
+    console.log("CDM (Weahter)");
     this.getData();
   }
 
   async loadAd(UnitId) {
+    await AdMobRewarded.setAdUnitID(UnitId);
     try {
-      await AdMobRewarded.setAdUnitID(UnitId);
       await AdMobRewarded.requestAdAsync();
     } catch (e) {
-      console.log("Error in LoadAd: ", e);
+      console.log("Error loadAd (Weather): ", e);
+    } finally {
+      this.setState({ AdMobTriggerd: false });
     }
   }
 
@@ -71,14 +71,14 @@ class Weather extends Component {
     }
   };
 
-  AdMobCounterPush() {
-    this.setState({
-      AdMobCounter: this.state.AdMobCounter + 1,
-    });
-    if (this.state.AdMobCounter == 4) {
+  AdMobTrigger() {
+    if (!this.state.AdMobTriggerd) {
+      console.log();
       AdMobRewarded.showAdAsync();
-      this.setState({ AdMobCounter: 0 });
     }
+    this.setState({
+      AdMobTriggerd: true,
+    });
   }
 
   render() {
@@ -108,7 +108,7 @@ class Weather extends Component {
                 <Tab.Screen
                   initialParams={{
                     LocationsWithChosed: d,
-                    AdMobCounter: this.AdMobCounterPush.bind(this),
+                    AdMobTrigger: this.AdMobTrigger.bind(this),
                   }}
                   options={{
                     tabBarLabel:
