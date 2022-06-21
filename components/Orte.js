@@ -29,6 +29,7 @@ class Orte extends Component {
     tidesIconAnimation: new Animated.Value(Dimensions.get("screen").width),
     WeatherIconAnimation: new Animated.Value(0),
     WeatherIcon: require("../assets/pictures/Weather/clear-day.png"),
+    choosedDayButton: [false, false, false, false, false, false, false],
   };
   constructor(props) {
     super(props);
@@ -126,13 +127,35 @@ class Orte extends Component {
                   |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
                   */}
                     <TouchableOpacity
-                      style={myStyle.Orte.TouchableOpacity}
+                      style={[
+                        myStyle.Orte.TouchableOpacity,
+                        {
+                          backgroundColor: this.state.choosedDayButton[i]
+                            ? "#273f59"
+                            : i == 0
+                            ? "#5497a7"
+                            : "white",
+                        },
+                      ]}
                       onPress={() => {
                         route.params.AdMobTrigger();
                         this.state.tidesIconAnimation.setValue(
                           Dimensions.get("screen").width
                         );
-                        this.setState({ pressedDay: i });
+                        let newChoosedDayButton = [
+                          false,
+                          false,
+                          false,
+                          false,
+                          false,
+                          false,
+                          false,
+                        ];
+                        i !== 0 ? (newChoosedDayButton[i] = true) : null;
+                        this.setState({
+                          pressedDay: i,
+                          choosedDayButton: newChoosedDayButton,
+                        });
                         let Datehere = new Date(
                           new Date().getTime() + (1000 * 60 * 60 * 24 * i + 1)
                         );
@@ -153,14 +176,36 @@ class Orte extends Component {
                         );
                       }}
                     >
-                      <Text style={myStyle.Orte.DayText}>
+                      <Text
+                        style={[
+                          myStyle.Orte.DayText,
+                          {
+                            color: this.state.choosedDayButton[i]
+                              ? "white"
+                              : i == 0
+                              ? "white"
+                              : "#273f59",
+                          },
+                        ]}
+                      >
                         {t(
                           new Date().getDay() + i > 6
                             ? new Date().getDay() - 7 + i
                             : new Date().getDay() + i
                         )}
                       </Text>
-                      <Text style={myStyle.Orte.DateText}>
+                      <Text
+                        style={[
+                          myStyle.Orte.DateText,
+                          {
+                            color: this.state.choosedDayButton[i]
+                              ? "#5497a7"
+                              : i == 0
+                              ? "#273f59"
+                              : "#5497a7",
+                          },
+                        ]}
+                      >
                         {i < 3
                           ? i == 0
                             ? t("today")

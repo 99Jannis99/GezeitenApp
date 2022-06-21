@@ -2,6 +2,24 @@ import { StyleSheet, StatusBar, Dimensions } from "react-native";
 
 const styles = {
   /**
+  |--------------------------------------------------
+  | App Component
+  |--------------------------------------------------
+  */
+  App: {
+    NavigatorScreenOptions: {
+      tabBarShowLabel: false,
+      headerShown: false,
+      tabBarActiveBackgroundColor: "white",
+      tabBarStyle: {
+        backgroundColor: "#5497a7",
+        elevation: 0,
+        position: "absolute",
+        borderTopWidth: 0,
+      },
+    },
+  },
+  /**
   |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
   | Hinweis Component
   |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
@@ -147,13 +165,13 @@ const styles = {
     },
     SceneContainerStyle: { backgroundColor: "rgb(187, 222, 251,0)" },
     ScreenOptions: {
-      tabBarActiveTintColor: "#2196F3",
-      tabBarInactiveTintColor: "#BBDEFB",
+      tabBarActiveTintColor: "#273f59",
+      tabBarInactiveTintColor: "white",
       tabBarLabelStyle: {
         marginTop: 30,
         fontWeight: "bold",
       },
-      tabBarStyle: { backgroundColor: "#64B5F6" },
+      tabBarStyle: { backgroundColor: "#5497a7" },
     },
   },
   /**
@@ -174,13 +192,13 @@ const styles = {
     },
     SceneContainerStyle: { backgroundColor: "rgb(187, 222, 251,0)" },
     ScreenOptions: {
-      tabBarActiveTintColor: "#2196F3",
-      tabBarInactiveTintColor: "#BBDEFB",
+      tabBarActiveTintColor: "#273f59",
+      tabBarInactiveTintColor: "white",
       tabBarLabelStyle: {
         marginTop: 30,
         fontWeight: "bold",
       },
-      tabBarStyle: { backgroundColor: "#64B5F6" },
+      tabBarStyle: { backgroundColor: "#5497a7" },
     },
   },
   /**
@@ -208,7 +226,7 @@ const styles = {
     },
     ListItemTitel: {
       alignSelf: "center",
-      color: "#3f444d",
+      color: "#273f59",
     },
     InputContainer: {
       marginHorizontal: 20,
@@ -216,7 +234,7 @@ const styles = {
       marginTop: StatusBar.currentHeight,
     },
     InputInputContainer: {
-      borderColor: "#3f444d",
+      borderColor: "#273f59",
     },
   },
   /**
@@ -235,7 +253,7 @@ const styles = {
     ListView: { flexDirection: "row" },
     ListItemTitel: {
       alignSelf: "center",
-      color: "#3f444d",
+      color: "#273f59",
     },
     ChildView: { width: Dimensions.get("screen").width - 80 },
     InputContainer: {
@@ -244,7 +262,7 @@ const styles = {
       marginTop: StatusBar.currentHeight,
     },
     InputInputContainer: {
-      borderColor: "#3f444d",
+      borderColor: "#273f59",
     },
   },
   /**
@@ -256,30 +274,25 @@ const styles = {
     Header: {
       fontSize: 35,
       alignSelf: "center",
-      color: "#BBDEFB",
+      color: "white",
       padding: 20,
     },
     TouchableOpacity: {
-      backgroundColor: "#64B5F6",
       width: Dimensions.get("screen").width,
       height: 50,
       alignItems: "center",
       flexDirection: "row",
     },
     DayText: {
-      color: "#BBDEFB",
       marginLeft: 20,
       fontSize: 15,
     },
     DateText: {
-      color: "#BBDEFB",
-      marginLeft: 20,
       fontSize: 15,
-      color: "#2196F3",
       marginLeft: 10,
     },
     TidesComponentView: {
-      height: 300,
+      height: 350,
     },
     TidesIconView: {
       flexDirection: "row",
@@ -292,6 +305,7 @@ const styles = {
       alignSelf: "center",
     },
     TidesTimeText: {
+      marginTop:10,
       marginBottom: 10,
       alignSelf: "center",
       color: "rgba(0, 0, 0,0.5)",
@@ -322,7 +336,7 @@ const styles = {
     WeatherIcon: {
       width: 70,
       height: 70,
-      top: 130,
+      top: 180,
       position: "absolute",
       alignSelf: "flex-end",
     },
@@ -332,7 +346,7 @@ const styles = {
       color: "rgba(0, 0, 0,1)",
       width: 70,
       height: 70,
-      top: 140,
+      top: 220,
       position: "absolute",
       alignSelf: "flex-start",
     },
@@ -343,7 +357,7 @@ const styles = {
       color: "rgba(0, 0, 0,1)",
       width: 70,
       height: 70,
-      top: 215,
+      top: 295,
       position: "absolute",
       alignSelf: "flex-start",
     },
@@ -359,29 +373,24 @@ const styles = {
       fontSize: 35,
       padding: 20,
       alignSelf: "center",
-      color: "#BBDEFB",
+      color: "white",
     },
     TouchableOpacity: {
-      backgroundColor: "#64B5F6",
       width: Dimensions.get("screen").width,
       height: 50,
       alignItems: "center",
       flexDirection: "row",
     },
     DayText: {
-      color: "#BBDEFB",
       marginLeft: 20,
       fontSize: 15,
     },
     DateText: {
-      color: "#BBDEFB",
-      marginLeft: 20,
       fontSize: 15,
-      color: "#2196F3",
       marginLeft: 10,
     },
     WeatherComponentView: {
-      height: 300,
+      height: 350,
     },
     DiagrammAnimatedView: {
       bottom: 0,
@@ -439,7 +448,7 @@ const styles = {
       flexDirection: "row",
       justifyContent: "space-around",
       width: Dimensions.get("screen").width,
-      top: 107,
+      top: 127,
       position: "absolute",
       alignSelf: "center",
     },
@@ -458,20 +467,30 @@ const styles = {
   |--------------------------------------------------
   */
   Settings: {
-    ButtonGroupContainer: { marginTop: StatusBar.currentHeight, height: 50 },
-    ButtonGroupButton: { backgroundColor: "#BBDEFB" },
+    ButtonGroupContainer: {
+      marginTop: StatusBar.currentHeight,
+      height: 50,
+      borderWidth: 0,
+    },
+    ButtonGroupContainerLocationView: {
+      flexDirection: "column",
+      marginTop: StatusBar.currentHeight,
+      height: 150,
+      borderWidth: 0,
+    },
+    ButtonGroupButton: { backgroundColor: "#5497a7" },
     ButtonGroupButtonView: {
-      flexDirection: "row",
+      flexDirection: "column",
       justifyContent: "space-evenly",
       width: "100%",
       alignItems: "center",
     },
-    ButtonGroupButtonText: { color: "#3f444d", fontSize: 15 },
-    ButtonGroupButtonSelected: { backgroundColor: "#42A5F5" },
+    ButtonGroupButtonText: { color: "#273f59", fontSize: 15 },
+    ButtonGroupButtonSelected: { backgroundColor: "white" },
     Header: {
       top: StatusBar.currentHeight,
       fontWeight: "bold",
-      color: "#3f444d",
+      color: "#273f59",
       fontSize: 20,
       padding: 20,
       alignSelf: "center",

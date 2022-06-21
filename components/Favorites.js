@@ -3,7 +3,6 @@ import {
   View,
   Image,
   ImageBackground,
-  Dimensions,
   ScrollView,
 } from "react-native";
 import React, { Component } from "react";
@@ -143,7 +142,7 @@ class Favorites extends Component {
                 <IconFontAwesome
                   name="search"
                   size={25}
-                  color="#3f444d"
+                    color="#273f59"
                   onLongPress={this.clearAsyncStorage.bind(this)}
                 />
               }
@@ -151,7 +150,7 @@ class Favorites extends Component {
                 <IconEntypo
                   name={"plus"}
                   size={25}
-                  color="#3f444d"
+                    color="#273f59"
                   onPress={() => this.setState({ addFavorites: true })}
                 />
               }
@@ -164,7 +163,10 @@ class Favorites extends Component {
                 source={require("../assets/pictures/addFavorites_de.png")}
               />
             ) : null}
-            <ScrollView scrollEnabled={true} style={myStyle.Favorites.ScrollView}>
+              <ScrollView
+                scrollEnabled={true}
+                style={myStyle.Favorites.ScrollView}
+              >
               {filtertLocations.map((d, i) => {
                 return (
                   <ListItem
@@ -180,10 +182,12 @@ class Favorites extends Component {
                   >
                     <ListItem.Content>
                       <View style={myStyle.Favorites.ListView}>
-                        {d.country === "Deutschland" ? <DeIcon /> : <NlIcon />}
-                        <View
-                          style={myStyle.Favorites.SecondListView}
-                        >
+                          {d.country === "Deutschland" ? (
+                            <DeIcon />
+                          ) : (
+                            <NlIcon />
+                          )}
+                          <View style={myStyle.Favorites.SecondListView}>
                           <ListItem.Title
                             style={myStyle.Favorites.ListItemTitel}
                           >

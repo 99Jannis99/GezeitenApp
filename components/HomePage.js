@@ -80,7 +80,7 @@ class HomePage extends Component {
   AdMobTrigger() {
     if (!this.state.AdMobTriggerd) {
       console.log("ADMOB");
-      AdMobRewarded.showAdAsync();
+      // AdMobRewarded.showAdAsync();
     }
     this.setState({
       AdMobTriggerd: true,
@@ -95,7 +95,7 @@ class HomePage extends Component {
     return (
       <View style={myStyle.HomePage.View}>
         <Animated.Image
-          style={myStyle.HomePage.AnimatedBackgroundImage}
+          style={[myStyle.HomePage.AnimatedBackgroundImage,{opacity:0.7}]}
           source={require("../assets/pictures/default_background-dashboard.jpg")}
         />
         <Animated.Image

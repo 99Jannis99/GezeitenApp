@@ -19,7 +19,7 @@ import SettingsBlueIcon from "./assets/svg/SettingsBlue";
 import WeatherBlueIcon from "./assets/svg/WeatherBlueIcon";
 import WeatherWhiteIcon from "./assets/svg/WeatherWhiteIcon";
 import { AdMobBanner, AdMobRewarded } from "expo-ads-admob";
-import myStyle from './assets/styles.js'
+import myStyle from "./assets/styles.js";
 
 class App extends Component {
   state = {
@@ -89,7 +89,7 @@ class App extends Component {
             startTutorial={() => {
               this.saveData("TutorialPage");
             }}
-          ></Hinweis>
+          />
         );
       case "TutorialPage":
         return (
@@ -97,24 +97,12 @@ class App extends Component {
             goAhead={() => {
               this.saveData("HomePage");
             }}
-          ></Tutorial>
+          />
         );
       case "HomePage":
         return (
           <NavigationContainer>
-            <Tab.Navigator
-              screenOptions={{
-                tabBarShowLabel: false,
-                headerShown: false,
-                tabBarStyle: {
-                  backgroundColor: "rgb(100, 181, 246)",
-                  opacity: 0.5,
-                  elevation: 0,
-                  position: "absolute",
-                  borderTopWidth: 0,
-                },
-              }}
-            >
+            <Tab.Navigator screenOptions={myStyle.App.NavigatorScreenOptions}>
               <Tab.Screen
                 name="HomePage"
                 options={{
@@ -149,7 +137,7 @@ class App extends Component {
               />
             </Tab.Navigator>
             <AdMobBanner
-              bannerSize='fullBanner'
+              bannerSize="fullBanner"
               adUnitID="ca-app-pub-3940256099942544/6300978111"
             />
           </NavigationContainer>

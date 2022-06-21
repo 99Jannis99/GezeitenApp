@@ -74,7 +74,7 @@ class Weather extends Component {
   AdMobTrigger() {
     if (!this.state.AdMobTriggerd) {
       console.log();
-      AdMobRewarded.showAdAsync();
+      // AdMobRewarded.showAdAsync();
     }
     this.setState({
       AdMobTriggerd: true,

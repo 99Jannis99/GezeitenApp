@@ -341,7 +341,7 @@ class Locations extends Component {
             <IconFontAwesome
               name="search"
               size={25}
-              color="#3f444d"
+              color="#273f59"
               onLongPress={this.clearAsyncStorage.bind(this)}
             />
           }
@@ -349,7 +349,7 @@ class Locations extends Component {
             <IconEntypo
               name={this.state.rightIcon}
               size={25}
-              color="#3f444d"
+              color="#273f59"
               onPress={this.sortOutLocationsByLocation.bind(this)}
             />
           }
@@ -366,8 +366,8 @@ class Locations extends Component {
                 leftStyle={{ width: 50 }}
                 containerStyle={{
                   backgroundColor: d.chosed
-                    ? "rgba(143, 247, 168," + "0.15)"
-                    : "rgba(143, 247, 168," + "0)",
+                    ? "rgba(84, 151, 167,0.9)"
+                    : "rgba(143, 247, 168,0)",
                 }}
                 titleStyle={{
                   textAlign: "center",
@@ -376,12 +376,8 @@ class Locations extends Component {
                 <ListItem.Content>
                   <View style={myStyle.Locations.ListView}>
                     {d.country === "Deutschland" ? <DeIcon /> : <NlIcon />}
-                    <View
-                      style={myStyle.Locations.ChildView}
-                    >
-                      <ListItem.Title
-                        style={myStyle.Locations.ListItemTitel}
-                      >
+                    <View style={myStyle.Locations.ChildView}>
+                      <ListItem.Title style={myStyle.Locations.ListItemTitel}>
                         {this.state.rightIcon === "location"
                           ? d.displayName
                           : d.displayName +

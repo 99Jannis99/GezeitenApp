@@ -120,7 +120,7 @@ export class Settings extends Component {
               }
               selectedIndex={this.state.LocationViewIndex}
               buttons={[t("3Days"), t("5Days"), t("7Days")]}
-              containerStyle={myStyle.Settings.ButtonGroupContainer}
+              containerStyle={myStyle.Settings.ButtonGroupContainerLocationView}
               buttonStyle={myStyle.Settings.ButtonGroupButton}
               buttonContainerStyle={myStyle.Settings.ButtonGroupButtonContainer}
               selectedButtonStyle={myStyle.Settings.ButtonGroupButtonSelected}
