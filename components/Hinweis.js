@@ -4,7 +4,8 @@ import {
   View,
   TouchableOpacity,
   Alert,
-  ImageBackground,
+  Image,
+  SafeAreaView,
 } from "react-native";
 import React, { Component } from "react";
 import myStyle from "../assets/styles";
@@ -32,11 +33,13 @@ class Hinweis extends Component {
   render() {
     const { t } = this.props;
     return (
-      <ImageBackground
-        source={require("../assets/pictures/default_background-dashboard.jpg")}
-        resizeMode="cover"
-        style={myStyle.Hinweis.View}
-      >
+      <SafeAreaView>
+        <Image
+          source={require("../assets/pictures/default_background-dashboard.jpg")}
+          resizeMode="cover"
+          style={myStyle.Hinweis.View}
+        />
+
         <StatusBar style="auto" />
 
         {/*
@@ -110,9 +113,9 @@ class Hinweis extends Component {
           }}
           style={myStyle.Hinweis.ButtonBottomRight}
         >
-          <Text style={myStyle.Hinweis.SpracheText}>{t("buttonDecline")}</Text>
+          <Text style={myStyle.Hinweis.DeclineText}>{t("buttonDecline")}</Text>
         </TouchableOpacity>
-      </ImageBackground>
+      </SafeAreaView>
     );
   }
 }

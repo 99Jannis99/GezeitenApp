@@ -4,6 +4,7 @@ import {
   Image,
   ImageBackground,
   ScrollView,
+  SafeAreaView,
 } from "react-native";
 import React, { Component } from "react";
 import myStyle from "../assets/styles";
@@ -116,101 +117,104 @@ class Favorites extends Component {
     switch (this.state.addFavorites) {
       case true:
         return (
-          <ImageBackground
-            source={require("../assets/pictures/default_background-dashboard.jpg")}
-            resizeMode="cover"
-            style={myStyle.Favorites.ImageBackground}
-          >
+          <SafeAreaView>
+            <Image
+              source={require("../assets/pictures/default_background-dashboard.jpg")}
+              resizeMode="cover"
+              style={myStyle.Favorites.ImageBackground}
+            />
             <Locations />
             <StatusBar style="auto" />
             <Toast position="bottom" />
-          </ImageBackground>
+          </SafeAreaView>
         );
         break;
       case false:
         return (
-          <ImageBackground
+          <SafeAreaView>
+          <Image
             source={require("../assets/pictures/default_background-dashboard.jpg")}
             resizeMode="cover"
             style={myStyle.Favorites.ImageBackground}
-          >
-            <Input
-              onChangeText={(text) => this.sortOutLocations(text)}
-              containerStyle={myStyle.Favorites.InputContainer}
-              inputContainerStyle={myStyle.Favorites.InputInputContainer}
-              leftIcon={
-                <IconFontAwesome
-                  name="search"
-                  size={25}
+          />
+            
+              <Input
+                onChangeText={(text) => this.sortOutLocations(text)}
+                containerStyle={myStyle.Favorites.InputContainer}
+                inputContainerStyle={myStyle.Favorites.InputInputContainer}
+                leftIcon={
+                  <IconFontAwesome
+                    name="search"
+                    size={25}
                     color="#273f59"
-                  onLongPress={this.clearAsyncStorage.bind(this)}
-                />
-              }
-              rightIcon={
-                <IconEntypo
-                  name={"plus"}
-                  size={25}
+                    onLongPress={this.clearAsyncStorage.bind(this)}
+                  />
+                }
+                rightIcon={
+                  <IconEntypo
+                    name={"plus"}
+                    size={25}
                     color="#273f59"
-                  onPress={() => this.setState({ addFavorites: true })}
+                    onPress={() => this.setState({ addFavorites: true })}
+                  />
+                }
+                placeholder={t("LocationsPlaceholder")}
+                placeholderTextColor="#3f444d"
+              ></Input>
+              {filtertLocations.length < 1 ? (
+                <Image
+                  style={myStyle.Favorites.Image}
+                  source={require("../assets/pictures/addFavorites_de.png")}
                 />
-              }
-              placeholder={t("LocationsPlaceholder")}
-              placeholderTextColor="#3f444d"
-            ></Input>
-            {filtertLocations.length < 1 ? (
-              <Image
-                style={myStyle.Favorites.Image}
-                source={require("../assets/pictures/addFavorites_de.png")}
-              />
-            ) : null}
+              ) : null}
               <ScrollView
                 scrollEnabled={true}
                 style={myStyle.Favorites.ScrollView}
               >
-              {filtertLocations.map((d, i) => {
-                return (
-                  <ListItem
-                    leftWidth={30}
-                    key={i}
-                    leftStyle={{ width: 50 }}
-                    containerStyle={{
-                      backgroundColor: "rgba(143, 247, 168," + "0)",
-                    }}
-                    titleStyle={{
-                      textAlign: "center",
-                    }}
-                  >
-                    <ListItem.Content>
-                      <View style={myStyle.Favorites.ListView}>
+                {filtertLocations.map((d, i) => {
+                  return (
+                    <ListItem
+                      leftWidth={30}
+                      key={i}
+                      leftStyle={{ width: 50 }}
+                      containerStyle={{
+                        backgroundColor: "rgba(143, 247, 168," + "0)",
+                      }}
+                      titleStyle={{
+                        textAlign: "center",
+                      }}
+                    >
+                      <ListItem.Content>
+                        <View style={myStyle.Favorites.ListView}>
                           {d.country === "Deutschland" ? (
                             <DeIcon />
                           ) : (
                             <NlIcon />
                           )}
                           <View style={myStyle.Favorites.SecondListView}>
-                          <ListItem.Title
-                            style={myStyle.Favorites.ListItemTitel}
-                          >
-                            {d.displayName}
-                          </ListItem.Title>
+                            <ListItem.Title
+                              style={myStyle.Favorites.ListItemTitel}
+                            >
+                              {d.displayName}
+                            </ListItem.Title>
+                          </View>
+                          <IconEntypo
+                            name={"trash"}
+                            size={25}
+                            color={"#f5767a"}
+                            onPress={() => {
+                              d.chosed = !d.chosed;
+                              this.createFavorites(d);
+                              this.forceUpdate();
+                            }}
+                          />
                         </View>
-                        <IconEntypo
-                          name={"trash"}
-                          size={25}
-                          color={"#f5767a"}
-                          onPress={() => {
-                            d.chosed = !d.chosed;
-                            this.createFavorites(d);
-                            this.forceUpdate();
-                          }}
-                        />
-                      </View>
-                    </ListItem.Content>
-                  </ListItem>
-                );
-              })}
-            </ScrollView>
-          </ImageBackground>
+                      </ListItem.Content>
+                    </ListItem>
+                  );
+                })}
+              </ScrollView>
+            </SafeAreaView>
         );
 
         break;

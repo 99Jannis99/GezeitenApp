@@ -25,18 +25,18 @@ const styles = {
   |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
   */
   Hinweis: {
-    View: { flex: 1 },
+    View: { flex: 1,position:'absolute',opacity:0.7 },
     HeadlineText: {
       fontSize: 35,
       top: StatusBar.currentHeight,
       alignSelf: "center",
-      color: "#BBDEFB",
+      color: "#273f59",
     },
     SecondHeadlineText: {
       fontSize: 25,
       marginTop: 60,
       alignSelf: "center",
-      color: "#BBDEFB",
+      color: "#273f59",
     },
     InfoView: { height: 180 },
     InfoText: {
@@ -45,14 +45,14 @@ const styles = {
       fontSize: 15,
       marginTop: 30,
       alignSelf: "center",
-      color: "#BBDEFB",
+      color: "#273f59",
     },
     LanguageChoice: {
       fontSize: 21,
       marginTop: 55,
       marginBottom: 10,
       alignSelf: "center",
-      color: "#BBDEFB",
+      color: "#273f59",
     },
     TouchableOpacity: {
       shadowColor: "#000",
@@ -67,10 +67,11 @@ const styles = {
       width: 150,
       height: 34,
       left: Dimensions.get("screen").width / 2 - 75,
-      backgroundColor: "#64B5F6",
+      backgroundColor: "#5497a7",
     },
     IconSpaceView: { left: 50, width: 15, height: 24 },
-    SpracheText: { color: "white", fontSize: 17 },
+    SpracheText: { color: "#273f59", fontSize: 17 },
+    DeclineText:{color: "#5497a7", fontSize: 17},
     ButtonBottomLeft: {
       width: Dimensions.get("screen").width / 2,
       height: 50,
@@ -82,7 +83,7 @@ const styles = {
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "center",
-      backgroundColor: "#BBDEFB",
+      backgroundColor: "#5497a7",
     },
     ButtonBottomRight: {
       width: Dimensions.get("screen").width / 2,
@@ -96,7 +97,7 @@ const styles = {
       alignItems: "center",
       justifyContent: "center",
       right: 0,
-      backgroundColor: "#1976D2",
+      backgroundColor: "#273f59",
     },
   },
   /**
@@ -105,18 +106,18 @@ const styles = {
   |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
   */
   Tutorial: {
-    View: { flex: 1 },
+    View: { flex: 1, opacity: 0.7, position: "absolute" },
     Headline: {
       fontSize: 35,
       alignSelf: "center",
-      color: "#BBDEFB",
+      color: "#273f59",
       top: StatusBar.currentHeight + 20,
     },
     Description: {
       marginTop: StatusBar.currentHeight + 40,
       fontSize: 15,
       alignSelf: "center",
-      color: "#BBDEFB",
+      color: "#273f59",
     },
     Icon: {
       height: 70,
@@ -130,7 +131,7 @@ const styles = {
       fontSize: 15,
       marginTop: 30,
       alignSelf: "center",
-      color: "#BBDEFB",
+      color: "#273f59",
     },
     AgreeButton: {
       height: 50,
@@ -139,12 +140,12 @@ const styles = {
       top: Dimensions.get("window").height - 50 + StatusBar.currentHeight,
       alignItems: "center",
       justifyContent: "center",
-      backgroundColor: "#BBDEFB",
+      backgroundColor: "#5497a7",
     },
     AgreeButtonText: {
       fontSize: 17,
       alignSelf: "center",
-      color: "#64B5F6",
+      color: "#273f59",
     },
   },
   /**
@@ -207,7 +208,7 @@ const styles = {
   |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
   */
   Favorites: {
-    ImageBackground: { flex: 1 },
+    ImageBackground: { flex: 1,position:'absolute',opacity:0.7 },
     Image: {
       width: 292,
       height: 116,
@@ -245,6 +246,7 @@ const styles = {
   Locations: {
     View: {
       flex: 1,
+      opacity:0.7
     },
     ScrollView: {
       marginTop: -26,
@@ -305,7 +307,7 @@ const styles = {
       alignSelf: "center",
     },
     TidesTimeText: {
-      marginTop:10,
+      marginTop: 10,
       marginBottom: 10,
       alignSelf: "center",
       color: "rgba(0, 0, 0,0.5)",

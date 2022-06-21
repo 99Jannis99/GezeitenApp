@@ -1,5 +1,10 @@
 import { StatusBar } from "expo-status-bar";
-import { Text, ImageBackground, TouchableOpacity, Image } from "react-native";
+import {
+  Text,
+  TouchableOpacity,
+  Image,
+  SafeAreaView,
+} from "react-native";
 import React from "react";
 import myStyle from "../assets/styles";
 import { useTranslation } from "react-i18next";
@@ -12,11 +17,13 @@ const Tutorial = (props) => {
   */
   const { t } = useTranslation();
   return (
-    <ImageBackground
-      source={require("../assets/pictures/default_background-dashboard.jpg")}
-      resizeMode="cover"
-      style={myStyle.Tutorial.View}
-    >
+    <SafeAreaView>
+      <Image
+        source={require("../assets/pictures/default_background-dashboard.jpg")}
+        resizeMode="cover"
+        style={myStyle.Tutorial.View}
+      />
+
       <StatusBar style="auto" />
       <Text style={myStyle.Tutorial.Headline}>{t("headlineTurorial")}</Text>
       <Text style={myStyle.Tutorial.Description}>{t("description")}</Text>
@@ -40,7 +47,7 @@ const Tutorial = (props) => {
           {t("TutorialAgreeButton")}
         </Text>
       </TouchableOpacity>
-    </ImageBackground>
+    </SafeAreaView>
   );
 };
 

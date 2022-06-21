@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { View, ImageBackground, Dimensions, ScrollView } from "react-native";
+import { View, SafeAreaView, Image, ScrollView } from "react-native";
 import React, { Component } from "react";
 import myStyle from "../assets/styles";
 import { withTranslation } from "react-i18next";
@@ -328,11 +328,12 @@ class Locations extends Component {
   render() {
     const { t } = this.props;
     return (
-      <ImageBackground
-        source={require("../assets/pictures/default_background-dashboard.jpg")}
-        resizeMode="cover"
-        style={myStyle.Locations.View}
-      >
+      <SafeAreaView>
+        <Image
+          source={require("../assets/pictures/default_background-dashboard.jpg")}
+          resizeMode="cover"
+          style={myStyle.Locations.View}
+        />
         <Input
           onChangeText={(text) => this.sortOutLocations(text)}
           containerStyle={myStyle.Locations.InputContainer}
@@ -405,7 +406,7 @@ class Locations extends Component {
         </ScrollView>
         <StatusBar style="auto" />
         <Toast position="bottom" />
-      </ImageBackground>
+      </SafeAreaView>
     );
   }
 }
