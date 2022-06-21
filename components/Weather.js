@@ -29,7 +29,6 @@ class Weather extends Component {
       this.getData();
     });
     this.loadAd(adUnitId);
-    console.log("CDM (Weahter)");
     this.getData();
   }
 
@@ -73,7 +72,6 @@ class Weather extends Component {
 
   AdMobTrigger() {
     if (!this.state.AdMobTriggerd) {
-      console.log("ADMOB Weather");
       AdMobInterstitial.showAdAsync();
     }
     this.setState({

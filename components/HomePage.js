@@ -34,7 +34,6 @@ class HomePage extends Component {
       this.getData();
     });
     this.getData();
-    console.log("CDM (HomePage)");
 
     this.loadAd(adUnitId);
   }
@@ -79,7 +78,6 @@ class HomePage extends Component {
 
   AdMobTrigger() {
     if (!this.state.AdMobTriggerd) {
-      console.log("ADMOB HomePage");
       AdMobInterstitial.showAdAsync();
     }
     this.setState({

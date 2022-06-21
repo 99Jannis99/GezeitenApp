@@ -43,7 +43,7 @@ class App extends Component {
       android: "ca-app-pub-3940256099942544/6300978111",
     });
     this.setState({ BannerId: BannerID });
-    console.log("BannerID: ",BannerID)
+    
   }
 
   saveData = async (value) => {
