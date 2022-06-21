@@ -18,13 +18,14 @@ import SettingsIcon from "./assets/svg/Settings";
 import SettingsBlueIcon from "./assets/svg/SettingsBlue";
 import WeatherBlueIcon from "./assets/svg/WeatherBlueIcon";
 import WeatherWhiteIcon from "./assets/svg/WeatherWhiteIcon";
-import { AdMobBanner, AdMobRewarded } from "expo-ads-admob";
+import { AdMobBanner } from "expo-ads-admob";
 import myStyle from "./assets/styles.js";
 
 class App extends Component {
   state = {
     pageCount: "HinweisPage",
     user: null,
+    BannerId: "",
   };
   constructor(props) {
     super(props);
@@ -37,27 +38,12 @@ class App extends Component {
     ]);
   }
   componentDidMount() {
-    let adUnitId = Platform.select({
-      ios: "ca-app-pub-3940256099942544~1458002511",
-      android: "ca-app-pub-3940256099942544/1033173712",
+    let BannerID = Platform.select({
+      ios: "ca-app-pub-3940256099942544/6300978111",
+      android: "ca-app-pub-3940256099942544/6300978111",
     });
-    this.loadAd(adUnitId);
-    AdMobRewarded.addEventListener("rewardedVideoDidDismiss", (reward) => {
-      try {
-        this.loadAd(adUnitId);
-      } catch (e) {
-        console.log("Error in EventListener: ", e);
-      }
-    });
-  }
-
-  async loadAd(adUnitId) {
-    try {
-      await AdMobRewarded.setAdUnitID(adUnitId);
-      await AdMobRewarded.requestAdAsync();
-    } catch (e) {
-      console.log("Error in LoadAd: ", e);
-    }
+    this.setState({ BannerId: BannerID });
+    console.log("BannerID: ",BannerID)
   }
 
   saveData = async (value) => {
@@ -138,7 +124,7 @@ class App extends Component {
             </Tab.Navigator>
             <AdMobBanner
               bannerSize="fullBanner"
-              adUnitID="ca-app-pub-3940256099942544/6300978111"
+              adUnitID={this.state.BannerId}
             />
           </NavigationContainer>
         );

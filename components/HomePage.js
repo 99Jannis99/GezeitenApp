@@ -6,7 +6,7 @@ import _ from "lodash";
 import Orte from "./Orte";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import { AdMobRewarded } from "expo-ads-admob";
+import { AdMobInterstitial } from "expo-ads-admob";
 
 class HomePage extends Component {
   state = {
@@ -21,8 +21,8 @@ class HomePage extends Component {
 
   componentDidMount() {
     let adUnitId = Platform.select({
-      ios: "ca-app-pub-3940256099942544~1458002511",
-      android: "ca-app-pub-3940256099942544/5224354917",
+      ios: "ca-app-pub-3940256099942544/1033173712",
+      android: "ca-app-pub-3940256099942544/1033173712",
     });
     Animated.timing(this.state.animation, {
       toValue: 1,
@@ -40,9 +40,9 @@ class HomePage extends Component {
   }
 
   async loadAd(UnitId) {
-    await AdMobRewarded.setAdUnitID(UnitId);
+    await AdMobInterstitial.setAdUnitID(UnitId);
     try {
-      await AdMobRewarded.requestAdAsync();
+      await AdMobInterstitial.requestAdAsync();
     } catch (e) {
       console.log("Error loadAd (HomePage): ", e);
     } finally {
@@ -79,8 +79,8 @@ class HomePage extends Component {
 
   AdMobTrigger() {
     if (!this.state.AdMobTriggerd) {
-      console.log("ADMOB");
-      // AdMobRewarded.showAdAsync();
+      console.log("ADMOB HomePage");
+      AdMobInterstitial.showAdAsync();
     }
     this.setState({
       AdMobTriggerd: true,

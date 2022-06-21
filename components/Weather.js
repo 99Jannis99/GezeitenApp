@@ -7,7 +7,7 @@ import _ from "lodash";
 import WeatherOrte from "./WeatherOrte";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import { AdMobRewarded } from "expo-ads-admob";
+import { AdMobInterstitial } from "expo-ads-admob";
 
 class Weather extends Component {
   state = {
@@ -22,8 +22,8 @@ class Weather extends Component {
   componentDidMount() {
     let { navigation } = this.props;
     let adUnitId = Platform.select({
-      ios: "ca-app-pub-3940256099942544~1458002511",
-      android: "ca-app-pub-3940256099942544/5224354917",
+      ios: "ca-app-pub-3940256099942544/1033173712",
+      android: "ca-app-pub-3940256099942544/1033173712",
     });
     navigation.addListener("focus", () => {
       this.getData();
@@ -34,9 +34,9 @@ class Weather extends Component {
   }
 
   async loadAd(UnitId) {
-    await AdMobRewarded.setAdUnitID(UnitId);
+    await AdMobInterstitial.setAdUnitID(UnitId);
     try {
-      await AdMobRewarded.requestAdAsync();
+      await AdMobInterstitial.requestAdAsync();
     } catch (e) {
       console.log("Error loadAd (Weather): ", e);
     } finally {
@@ -73,8 +73,8 @@ class Weather extends Component {
 
   AdMobTrigger() {
     if (!this.state.AdMobTriggerd) {
-      console.log();
-      // AdMobRewarded.showAdAsync();
+      console.log("ADMOB Weather");
+      AdMobInterstitial.showAdAsync();
     }
     this.setState({
       AdMobTriggerd: true,
