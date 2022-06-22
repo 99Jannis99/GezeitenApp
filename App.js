@@ -38,12 +38,20 @@ class App extends Component {
     ]);
   }
   componentDidMount() {
-    let BannerID = Platform.select({
-      ios: "ca-app-pub-3940256099942544/6300978111",
-      android: "ca-app-pub-3940256099942544/6300978111",
-    });
+    let AdSate = "test";
+    let BannerID;
+    if (AdSate == "test") {
+      BannerID = Platform.select({
+        ios: "ca-app-pub-3940256099942544/6300978111",
+        android: "ca-app-pub-3940256099942544/6300978111",
+      });
+    } else {
+      BannerID = Platform.select({
+        ios: "ca-app-pub-8782102800192574/9060015043",
+        android: "ca-app-pub-8782102800192574/6106548642",
+      });
+    }
     this.setState({ BannerId: BannerID });
-    
   }
 
   saveData = async (value) => {

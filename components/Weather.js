@@ -21,10 +21,19 @@ class Weather extends Component {
 
   componentDidMount() {
     let { navigation } = this.props;
-    let adUnitId = Platform.select({
-      ios: "ca-app-pub-3940256099942544/1033173712",
-      android: "ca-app-pub-3940256099942544/1033173712",
-    });
+    let adUnitId;
+    let AdState = "test";
+    if (AdState == "test") {
+      adUnitId = Platform.select({
+        ios: "ca-app-pub-3940256099942544/8691691433",
+        android: "ca-app-pub-3940256099942544/8691691433",
+      });
+    } else {
+      adUnitId = Platform.select({
+        ios: "ca-app-pub-8782102800192574/7215388245",
+        android: "ca-app-pub-8782102800192574/7233041440",
+      });
+    }
     navigation.addListener("focus", () => {
       this.getData();
     });

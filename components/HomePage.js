@@ -20,10 +20,19 @@ class HomePage extends Component {
   }
 
   componentDidMount() {
-    let adUnitId = Platform.select({
-      ios: "ca-app-pub-3940256099942544/1033173712",
-      android: "ca-app-pub-3940256099942544/1033173712",
-    });
+    let adUnitId;
+    let AdState = "test";
+    if ((AdState == "test")) {
+      adUnitId = Platform.select({
+        ios: "ca-app-pub-3940256099942544/8691691433",
+        android: "ca-app-pub-3940256099942544/8691691433",
+      });
+    } else {
+      adUnitId = Platform.select({
+        ios: "ca-app-pub-8782102800192574/7215388245",
+        android: "ca-app-pub-8782102800192574/7233041440",
+      });
+    }
     Animated.timing(this.state.animation, {
       toValue: 1,
       duration: 500,
@@ -93,7 +102,7 @@ class HomePage extends Component {
     return (
       <View style={myStyle.HomePage.View}>
         <Animated.Image
-          style={[myStyle.HomePage.AnimatedBackgroundImage,{opacity:0.7}]}
+          style={[myStyle.HomePage.AnimatedBackgroundImage, { opacity: 0.7 }]}
           source={require("../assets/pictures/default_background-dashboard.jpg")}
         />
         <Animated.Image
