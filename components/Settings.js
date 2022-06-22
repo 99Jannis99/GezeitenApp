@@ -65,15 +65,22 @@ export class Settings extends Component {
       }
       this.setState({ LocationViewIndex: pressedindex });
     }
-    try {
-      await AsyncStorage.multiSet([
-        Item == "language"
-          ? ["language", _language]
-          : ["locationView", _locationView],
-        ["locationViewIndex", pressedindex.toString()],
-      ]);
-    } catch (err) {
-      console.log("Error onSubmit :" + err);
+
+    if (Item == "language") {
+      try {
+        await AsyncStorage.setItem("language", _language);
+      } catch (err) {
+        console.log("Error onSubmit :" + err);
+      }
+    } else {
+      try {
+        await AsyncStorage.multiSet([
+          ["locationView", _locationView],
+          ["locationViewIndex", pressedindex.toString()],
+        ]);
+      } catch (err) {
+        console.log("Error onSubmit :" + err);
+      }
     }
   };
 
