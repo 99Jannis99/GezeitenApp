@@ -58,6 +58,8 @@
     "partly-cloudy-night": "partly cloudy",
     "wholeDay":"whole Day",
 
+    "internetConnection":"You need an internet connection",
+
     "language":"Language",
     "locationView":"Location View",
     "3Days":"3-days per Location",

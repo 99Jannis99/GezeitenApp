@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { View, Image, Animated } from "react-native";
+import { View, Image, Animated,Text } from "react-native";
 import React, { Component } from "react";
 import myStyle from "../assets/styles";
 import _ from "lodash";
@@ -7,6 +7,8 @@ import Orte from "./Orte";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { AdMobInterstitial } from "expo-ads-admob";
+import * as Network from "expo-network";
+import { t } from "i18next";
 
 class HomePage extends Component {
   state = {
@@ -14,6 +16,8 @@ class HomePage extends Component {
     ChoosedBackground: null,
     animation: new Animated.Value(0),
     AdMobTriggerd: true,
+    InternetConnection: true,
+    showInternetError: { pointerEvents: "none", opacity: 0 },
   };
   constructor(props) {
     super(props);
@@ -22,7 +26,7 @@ class HomePage extends Component {
   componentDidMount() {
     let adUnitId;
     let AdState = "test";
-    if ((AdState == "test")) {
+    if (AdState == "test") {
       adUnitId = Platform.select({
         ios: "ca-app-pub-3940256099942544/8691691433",
         android: "ca-app-pub-3940256099942544/8691691433",
@@ -59,6 +63,7 @@ class HomePage extends Component {
   }
 
   getData = async () => {
+    let NetworkState;
     try {
       let asyncLocationsWithChosed = await AsyncStorage.getItem(
         "LocationsWithChosed"
@@ -70,6 +75,22 @@ class HomePage extends Component {
       }
     } catch (err) {
       console.log("Error get Data :" + err);
+    }
+    try {
+      NetworkState = await Network.getNetworkStateAsync();
+      if (NetworkState.isInternetReachable) {
+        this.setState({
+          showInternetError: { pointerEvents: "none", opacity: 0 },
+        });
+      } else {
+        this.setState({
+          showInternetError: { pointerEvents: "auto", opacity: 1 },
+        });
+      }
+
+      console.log("NetworkState: ", NetworkState.isInternetReachable);
+    } catch (error) {
+      console.log("NetworkStateError: ", error);
     }
   };
 
@@ -145,6 +166,15 @@ class HomePage extends Component {
             })}
           </Tab.Navigator>
         ) : null}
+        <View
+          pointerEvents={this.state.showInternetError.pointerEvents}
+          style={[
+            myStyle.HomePage.InternetError,
+            { opacity: this.state.showInternetError.opacity },
+          ]}
+        >
+          <Text style={myStyle.HomePage.InternetErrorText}>{t("internetConnection")}</Text>
+        </View>
         <StatusBar style="auto" />
       </View>
     );

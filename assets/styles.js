@@ -181,6 +181,21 @@ const styles = {
       },
       tabBarStyle: { backgroundColor: "#5497a7" },
     },
+    InternetError: {
+      marginTop: Dimensions.get("screen").height / 2 - 35,
+      height: 70,
+      backgroundColor: "red",
+      width: Dimensions.get("screen").width,
+      position: "absolute",
+      flexDirection: "row",
+      justifyContent: "center",
+    },
+    InternetErrorText: {
+      alignSelf: "center",
+      fontWeight: "bold",
+      fontSize: 20,
+      color: "white",
+    },
   },
   /**
   |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
