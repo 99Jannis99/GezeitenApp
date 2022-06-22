@@ -486,6 +486,7 @@ const styles = {
       marginTop: StatusBar.currentHeight,
       height: 150,
       borderWidth: 0,
+      backgroundColor: "rgba(39, 63, 89,0)",
     },
     ButtonGroupButton: { backgroundColor: "#5497a7" },
     ButtonGroupButtonView: {
@@ -536,20 +537,20 @@ const styles = {
       flex: 1,
       position: "absolute",
     },
-    Text:{
+    Text: {
       top: StatusBar.currentHeight,
       color: "white",
       fontSize: 15,
       padding: 20,
-      paddingTop:0
+      paddingTop: 0,
     },
-    Button:{
-      height:40,
-      width:130,
-      alignSelf:"center",
-      borderColor:'#273f59'
+    Button: {
+      height: 40,
+      width: 130,
+      alignSelf: "center",
+      borderColor: "#273f59",
     },
-    ButtonContainer:{padding:40}
+    ButtonContainer: { padding: 40 },
   },
 };
 export default styles;

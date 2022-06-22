@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { Text, View, Image, SafeAreaView } from "react-native";
+import { Text, View, Image, SafeAreaView, Alert, Linking } from "react-native";
 import { ButtonGroup } from "@rneui/themed";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import myStyle from "../assets/styles";
 import i18n from "i18next";
 import DeIcon from "../assets/svg/deIcon";
 import EnIcon from "../assets/svg/enIcon";
-import { Translation } from "react-i18next";
+import { Translation, withTranslation } from "react-i18next";
 import Info from "react-native-vector-icons/Feather";
 
 export class Settings extends Component {
@@ -16,6 +16,7 @@ export class Settings extends Component {
   state = {
     languageIndex: null,
     locationViewIndex: null,
+    freeApp: true,
   };
   componentDidMount() {
     let { navigation } = this.props;
@@ -44,6 +45,7 @@ export class Settings extends Component {
   };
 
   saveData = async (Item, pressedindex) => {
+    const { t } = this.props;
     let _language;
     let _locationView = [];
     if (Item == "language") {
@@ -51,20 +53,48 @@ export class Settings extends Component {
       i18n.changeLanguage(_language);
       this.setState({ languageIndex: pressedindex });
     } else {
-      switch (pressedindex) {
-        case 0:
-          _locationView = "1,2,3";
-          break;
-        case 1:
-          _locationView = "1,2,3,4,5";
-          break;
-        case 2:
-          _locationView = "1,2,3,4,5,6,7";
-          break;
-        default:
-          break;
+      if (this.state.freeApp) {
+        _locationView = "1,2,3";
+        Alert.alert(
+          t("upgradeHeader"),
+          t("proText"),
+          [
+            {
+              text: t("buttonPro"),
+              onPress: async () =>
+                await Linking.openURL("https://play.google.com/store/apps/details?id=com.dimento.nordsee.gezeiten&gl=DE"),
+              style: "default",
+            },
+            {
+              text: "",
+              style: "cancel",
+            },
+            {
+              text: t("buttonProLater"),
+              style: "cancel",
+            },
+          ],
+          {
+            cancelable: false,
+          }
+        );
+        this.setState({ LocationViewIndex: 0 });
+      } else {
+        switch (pressedindex) {
+          case 0:
+            _locationView = "1,2,3";
+            break;
+          case 1:
+            _locationView = "1,2,3,4,5";
+            break;
+          case 2:
+            _locationView = "1,2,3,4,5,6,7";
+            break;
+          default:
+            break;
+        }
+        this.setState({ LocationViewIndex: pressedindex });
       }
-      this.setState({ LocationViewIndex: pressedindex });
     }
 
     if (Item == "language") {
@@ -77,7 +107,9 @@ export class Settings extends Component {
       try {
         await AsyncStorage.multiSet([
           ["locationView", _locationView],
-          ["locationViewIndex", pressedindex.toString()],
+          this.state.freeApp
+            ? ["locationViewIndex", "0"]
+            : ["locationViewIndex", pressedindex.toString()],
         ]);
       } catch (err) {
         console.log("Error onSubmit :" + err);
@@ -116,7 +148,7 @@ export class Settings extends Component {
               name="info"
               size={25}
               color="#273f59"
-              onPress={()=>route.params.showImpressum()}
+              onPress={() => route.params.showImpressum()}
             />
             <ButtonGroup
               onPress={(pressedindex) =>
@@ -150,4 +182,4 @@ export class Settings extends Component {
   }
 }
 
-export default Settings;
+export default withTranslation()(Settings);
