@@ -16,13 +16,13 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "dimento.norseegezeiten",
+      "bundleIdentifier": "com.dimento.nordsee.gezeiten.free",
       "config": {
         "googleMobileAdsAppId": "ca-app-pub-8782102800192574~7583281842"
       }
     },
     "android": {
-      "package": "dimento.norseegezeiten",
+      "package": "com.dimento.nordsee.gezeiten.demo",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
