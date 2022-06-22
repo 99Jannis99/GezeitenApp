@@ -62,6 +62,12 @@
     "locationView":"Location View",
     "3Days":"3-days per Location",
     "5Days":"5-days per Location",
-    "7Days":"7-days per Location"
+    "7Days":"7-days per Location",
+
+    "about":"About",
+    "programming":"Programming",
+    "design":"Design",
+    "managingDirector":"Managing Director:",
+    "impressumBackButton":"Back"
   }
 }

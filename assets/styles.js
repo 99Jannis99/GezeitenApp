@@ -18,6 +18,13 @@ const styles = {
         borderTopWidth: 0,
       },
     },
+    Impressum: {
+      height: Dimensions.get("screen").height,
+      width: Dimensions.get("screen").width,
+      backgroundColor: "white",
+      opacity: 1,
+      position: "absolute",
+    },
   },
   /**
   |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
@@ -25,7 +32,7 @@ const styles = {
   |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
   */
   Hinweis: {
-    View: { flex: 1,position:'absolute',opacity:0.7 },
+    View: { flex: 1, position: "absolute", opacity: 0.7 },
     HeadlineText: {
       fontSize: 35,
       top: StatusBar.currentHeight,
@@ -71,7 +78,7 @@ const styles = {
     },
     IconSpaceView: { left: 50, width: 15, height: 24 },
     SpracheText: { color: "#273f59", fontSize: 17 },
-    DeclineText:{color: "#5497a7", fontSize: 17},
+    DeclineText: { color: "#5497a7", fontSize: 17 },
     ButtonBottomLeft: {
       width: Dimensions.get("screen").width / 2,
       height: 50,
@@ -208,7 +215,7 @@ const styles = {
   |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
   */
   Favorites: {
-    ImageBackground: { flex: 1,position:'absolute',opacity:0.7 },
+    ImageBackground: { flex: 1, position: "absolute", opacity: 0.7 },
     Image: {
       width: 292,
       height: 116,
@@ -246,7 +253,7 @@ const styles = {
   Locations: {
     View: {
       flex: 1,
-      opacity:0.7
+      opacity: 0.7,
     },
     ScrollView: {
       marginTop: -26,
@@ -497,6 +504,52 @@ const styles = {
       padding: 20,
       alignSelf: "center",
     },
+    InfoIcon: {
+      position: "absolute",
+      marginTop: StatusBar.currentHeight,
+      padding: 22,
+      alignSelf: "flex-end",
+    },
+  },
+  /**
+  |--------------------------------------------------
+  | Impressum Component
+  |--------------------------------------------------
+  */
+  Impressum: {
+    Header: {
+      top: StatusBar.currentHeight,
+      fontWeight: "bold",
+      color: "white",
+      fontSize: 20,
+      padding: 20,
+      alignSelf: "center",
+    },
+    Header2: {
+      top: StatusBar.currentHeight,
+      fontWeight: "bold",
+      color: "white",
+      fontSize: 17,
+      padding: 20,
+    },
+    Background: {
+      flex: 1,
+      position: "absolute",
+    },
+    Text:{
+      top: StatusBar.currentHeight,
+      color: "white",
+      fontSize: 15,
+      padding: 20,
+      paddingTop:0
+    },
+    Button:{
+      height:40,
+      width:130,
+      alignSelf:"center",
+      borderColor:'#273f59'
+    },
+    ButtonContainer:{padding:40}
   },
 };
 export default styles;

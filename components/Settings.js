@@ -7,6 +7,7 @@ import i18n from "i18next";
 import DeIcon from "../assets/svg/deIcon";
 import EnIcon from "../assets/svg/enIcon";
 import { Translation } from "react-i18next";
+import Info from "react-native-vector-icons/Feather";
 
 export class Settings extends Component {
   constructor(props) {
@@ -85,6 +86,7 @@ export class Settings extends Component {
   };
 
   render() {
+    const { route } = this.props;
     const Button1 = () => (
       <View style={myStyle.Settings.ButtonGroupButtonView}>
         <EnIcon />
@@ -109,6 +111,13 @@ export class Settings extends Component {
               source={require("../assets/pictures/default_background-dashboard.jpg")}
             />
             <Text style={myStyle.Settings.Header}>{t("language")}</Text>
+            <Info
+              style={myStyle.Settings.InfoIcon}
+              name="info"
+              size={25}
+              color="#273f59"
+              onPress={()=>route.params.showImpressum()}
+            />
             <ButtonGroup
               onPress={(pressedindex) =>
                 this.saveData("language", pressedindex)

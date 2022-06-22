@@ -20,12 +20,14 @@ import WeatherBlueIcon from "./assets/svg/WeatherBlueIcon";
 import WeatherWhiteIcon from "./assets/svg/WeatherWhiteIcon";
 import { AdMobBanner } from "expo-ads-admob";
 import myStyle from "./assets/styles.js";
+import Impressum from "./components/Impressum";
 
 class App extends Component {
   state = {
     pageCount: "HinweisPage",
     user: null,
     BannerId: "",
+    showImpressum: { pointerEvents: "none", opacity: 0 },
   };
   constructor(props) {
     super(props);
@@ -73,6 +75,22 @@ class App extends Component {
       console.log("Error get Data :" + err);
     }
   };
+
+  changeImpressum(value) {
+    if (value == "hide") {
+      let newShowImpressum = {
+        pointerEvents: "none",
+        opacity: 0,
+      };
+      this.setState({ showImpressum: newShowImpressum });
+    } else {
+      let newShowImpressum = {
+        pointerEvents: "auto",
+        opacity: 1,
+      };
+      this.setState({ showImpressum: newShowImpressum });
+    }
+  }
 
   render() {
     const Tab = createBottomTabNavigator();
@@ -123,6 +141,9 @@ class App extends Component {
               />
               <Tab.Screen
                 name="Settings"
+                initialParams={{
+                  showImpressum: this.changeImpressum.bind(this),
+                }}
                 options={{
                   tabBarIcon: ({ focused }) =>
                     focused ? <SettingsBlueIcon /> : <SettingsIcon />,
@@ -130,6 +151,15 @@ class App extends Component {
                 component={Settings}
               />
             </Tab.Navigator>
+            <View
+              pointerEvents={this.state.showImpressum.pointerEvents}
+              style={[
+                myStyle.App.Impressum,
+                { opacity: this.state.showImpressum.opacity },
+              ]}
+            >
+              <Impressum hideImpressum={this.changeImpressum.bind(this)} />
+            </View>
             <AdMobBanner
               bannerSize="fullBanner"
               adUnitID={this.state.BannerId}

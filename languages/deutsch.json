@@ -62,6 +62,12 @@
     "locationView":"Ansichtseinstellungen",
     "3Days":"3-Tage Ansicht",
     "5Days":"5-Tage Ansicht",
-    "7Days":"7-Tage Ansicht"
+    "7Days":"7-Tage Ansicht",
+
+    "about":"Impressum",
+    "programming":"Programmierung und Realisierung",
+    "design":"Gestaltung und Screendesign",
+    "managingDirector":"Geschäftsführer:",
+    "impressumBackButton":"Zurück"
   }
 }
