@@ -115,7 +115,11 @@ class Orte extends Component {
             |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
             */}
             <Text style={myStyle.Orte.Header}>
-              {this.state.LocationsWithChosed.name}
+              {this.state.LocationsWithChosed.name
+                ? this.state.LocationsWithChosed.name.length > 15
+                  ? this.state.LocationsWithChosed.name.slice(0, 10) + "..."
+                  : this.state.LocationsWithChosed.name
+                : null}
             </Text>
             <ScrollView style={myStyle.Orte.ScrollView}>
               {this.state.useableDays.map((d, i) => {
