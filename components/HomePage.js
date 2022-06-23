@@ -87,8 +87,6 @@ class HomePage extends Component {
           showInternetError: { pointerEvents: "auto", opacity: 1 },
         });
       }
-
-      console.log("NetworkState: ", NetworkState.isInternetReachable);
     } catch (error) {
       console.log("NetworkStateError: ", error);
     }

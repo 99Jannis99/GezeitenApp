@@ -142,6 +142,7 @@ export class Settings extends Component {
               }}
               source={require("../assets/pictures/default_background-dashboard.jpg")}
             />
+            <View style={myStyle.Settings.HeaderView}>
             <Text style={myStyle.Settings.Header}>{t("language")}</Text>
             <Info
               style={myStyle.Settings.InfoIcon}
@@ -150,6 +151,7 @@ export class Settings extends Component {
               color="#273f59"
               onPress={() => route.params.showImpressum()}
             />
+            </View>
             <ButtonGroup
               onPress={(pressedindex) =>
                 this.saveData("language", pressedindex)
@@ -161,7 +163,7 @@ export class Settings extends Component {
               buttonContainerStyle={myStyle.Settings.ButtonGroupButtonContainer}
               selectedButtonStyle={myStyle.Settings.ButtonGroupButtonSelected}
             />
-            <Text style={myStyle.Settings.Header}>{t("locationView")}</Text>
+            <Text style={myStyle.Settings.Header2}>{t("locationView")}</Text>
             <ButtonGroup
               onPress={(pressedindex) =>
                 this.saveData("locationView", pressedindex)

@@ -238,8 +238,14 @@ const styles = {
       marginRight: 20,
     },
     ScrollView: {
-      marginTop: -26,
-      marginBottom: 50,
+      marginTop: Platform.select({
+        ios: -24,
+        android: -26,
+      }),
+      marginBottom: Platform.select({
+        ios: 120,
+        android: 50,
+      }),
     },
     ListView: {
       flexDirection: "row",
@@ -271,8 +277,16 @@ const styles = {
       opacity: 0.7,
     },
     ScrollView: {
-      marginTop: -26,
-      marginBottom: 50,
+      marginTop: Platform.select({
+        ios: -24,
+        android: -26,
+      }),
+      marginBottom:
+        260 -
+        Platform.select({
+          ios: 70,
+          android: 0,
+        }),
     },
     ListView: { flexDirection: "row" },
     ListItemTitel: {
@@ -518,13 +532,26 @@ const styles = {
       color: "#273f59",
       fontSize: 20,
       padding: 20,
+      width: Dimensions.get("screen").width / 2,
+      alignSelf: "center",
+    },
+    Header2: {
+      top: StatusBar.currentHeight,
+      fontWeight: "bold",
+      color: "#273f59",
+      fontSize: 20,
+      padding: 20,
       alignSelf: "center",
     },
     InfoIcon: {
-      position: "absolute",
+      position: "relative",
       marginTop: StatusBar.currentHeight,
       padding: 22,
       alignSelf: "flex-end",
+    },
+    HeaderView: {
+      flexDirection: "row",
+      justifyContent: "flex-end",
     },
   },
   /**
@@ -565,7 +592,12 @@ const styles = {
       alignSelf: "center",
       borderColor: "#273f59",
     },
-    ButtonContainer: { padding: 40 },
+    ButtonContainer: {
+      padding: Platform.select({
+        ios: 10,
+        android: 40,
+      }),
+    },
   },
 };
 export default styles;

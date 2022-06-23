@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View, Image } from "react-native";
+import { Text, View,SafeAreaView, Image } from "react-native";
 import { Button } from "@rneui/base";
 import { Translation } from "react-i18next";
 import myStyle from "../assets/styles";
@@ -10,7 +10,7 @@ export class Impressum extends Component {
     return (
       <Translation>
         {(t) => (
-          <View>
+          <SafeAreaView>
             <Image
               style={myStyle.Impressum.Background}
               source={require("../assets/pictures/default_background-dashboard.jpg")}
@@ -43,7 +43,7 @@ export class Impressum extends Component {
             >
               <Back name="back" size={25} color="#273f59"></Back>
             </Button>
-          </View>
+          </SafeAreaView>
         )}
       </Translation>
     );
