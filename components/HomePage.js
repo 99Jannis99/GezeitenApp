@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { View, Image, Animated,Text } from "react-native";
+import { View, Image, Animated, Text } from "react-native";
 import React, { Component } from "react";
 import myStyle from "../assets/styles";
 import _ from "lodash";
@@ -154,7 +154,11 @@ class HomePage extends Component {
                   }}
                   options={{
                     tabBarLabel:
-                      filtertLocations.length > 6 ? "" : d.name.slice(0, 3),
+                      filtertLocations.length > 6
+                        ? filtertLocations.length > 9
+                          ? "•"
+                          : "○"
+                        : d.name.slice(0, 3),
                   }}
                   key={i}
                   name={d.name}
@@ -171,7 +175,9 @@ class HomePage extends Component {
             { opacity: this.state.showInternetError.opacity },
           ]}
         >
-          <Text style={myStyle.HomePage.InternetErrorText}>{t("internetConnection")}</Text>
+          <Text style={myStyle.HomePage.InternetErrorText}>
+            {t("internetConnection")}
+          </Text>
         </View>
         <StatusBar style="auto" />
       </View>

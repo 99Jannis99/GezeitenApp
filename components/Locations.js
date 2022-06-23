@@ -2,7 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import { View, SafeAreaView, Image, ScrollView } from "react-native";
 import React, { Component } from "react";
 import myStyle from "../assets/styles";
-import { withTranslation } from "react-i18next";
+import { withTranslation,Translation } from "react-i18next";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import fetchData from "../functions/fetchData";
 import _ from "lodash";
@@ -14,6 +14,8 @@ import NlIcon from "../assets/svg/nlIcon";
 import * as Location from "expo-location";
 import { getDistance } from "geolib";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
+import { Button } from "@rneui/base";
+import Back from "react-native-vector-icons/AntDesign";
 
 class Locations extends Component {
   state = {
@@ -328,6 +330,8 @@ class Locations extends Component {
   render() {
     const { t } = this.props;
     return (
+      <Translation>
+        {(t) => (
       <SafeAreaView>
         <Image
           source={require("../assets/pictures/default_background-dashboard.jpg")}
@@ -357,56 +361,67 @@ class Locations extends Component {
           placeholder={t("LocationsPlaceholder")}
           placeholderTextColor="#3f444d"
         ></Input>
-
-        <ScrollView scrollEnabled={true} style={myStyle.Locations.ScrollView}>
-          {this.state.locationData.map((d, i) => {
-            return (
-              <ListItem
-                leftWidth={30}
-                key={i}
-                leftStyle={{ width: 50 }}
-                containerStyle={{
-                  backgroundColor: d.chosed
-                    ? "rgba(84, 151, 167,0.9)"
-                    : "rgba(143, 247, 168,0)",
-                }}
-                titleStyle={{
-                  textAlign: "center",
-                }}
-              >
-                <ListItem.Content>
-                  <View style={myStyle.Locations.ListView}>
-                    {d.country === "Deutschland" ? <DeIcon /> : <NlIcon />}
-                    <View style={myStyle.Locations.ChildView}>
-                      <ListItem.Title style={myStyle.Locations.ListItemTitel}>
-                        {this.state.rightIcon === "location"
-                          ? d.displayName
-                          : d.displayName +
-                            " (" +
-                            Math.round(d.distance / 1000) +
-                            " km" +
-                            ")"}
-                      </ListItem.Title>
+        <View style={myStyle.Locations.ScrollViewView}>
+          <ScrollView scrollEnabled={true} style={myStyle.Locations.ScrollView}>
+            {this.state.locationData.map((d, i) => {
+              return (
+                <ListItem
+                  leftWidth={30}
+                  key={i}
+                  leftStyle={{ width: 50 }}
+                  containerStyle={{
+                    backgroundColor: d.chosed
+                      ? "rgba(84, 151, 167,0.9)"
+                      : "rgba(143, 247, 168,0)",
+                  }}
+                  titleStyle={{
+                    textAlign: "center",
+                  }}
+                >
+                  <ListItem.Content>
+                    <View style={myStyle.Locations.ListView}>
+                      {d.country === "Deutschland" ? <DeIcon /> : <NlIcon />}
+                      <View style={myStyle.Locations.ChildView}>
+                        <ListItem.Title style={myStyle.Locations.ListItemTitel}>
+                          {this.state.rightIcon === "location"
+                            ? d.displayName
+                            : d.displayName +
+                              " (" +
+                              Math.round(d.distance / 1000) +
+                              " km" +
+                              ")"}
+                        </ListItem.Title>
+                      </View>
+                      <IconEntypo
+                        name={d.chosed ? "trash" : "plus"}
+                        size={25}
+                        color={d.chosed ? "#f5767a" : "#8ff7a8"}
+                        onPress={() => {
+                          d.chosed = !d.chosed;
+                          this.createFavorites(d);
+                          this.forceUpdate();
+                        }}
+                      />
                     </View>
-                    <IconEntypo
-                      name={d.chosed ? "trash" : "plus"}
-                      size={25}
-                      color={d.chosed ? "#f5767a" : "#8ff7a8"}
-                      onPress={() => {
-                        d.chosed = !d.chosed;
-                        this.createFavorites(d);
-                        this.forceUpdate();
-                      }}
-                    />
-                  </View>
-                </ListItem.Content>
-              </ListItem>
-            );
-          })}
-        </ScrollView>
+                  </ListItem.Content>
+                </ListItem>
+              );
+            })}
+          </ScrollView>
+        </View>
         <StatusBar style="auto" />
         <Toast position="bottom" />
-      </SafeAreaView>
+          <Button
+          containerStyle={myStyle.Locations.ButtonContainer}
+          buttonStyle={myStyle.Locations.Button}
+          title={t("impressumBackButton")}
+          type="outline"
+          onPress={() => {this.props.changeLists()}}
+        >
+          <Back name="back" size={25} color="#273f59"></Back>
+        </Button>
+      </SafeAreaView> )}
+      </Translation>
     );
   }
 }

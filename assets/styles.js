@@ -277,16 +277,25 @@ const styles = {
       opacity: 0.7,
     },
     ScrollView: {
+      // marginTop: Platform.select({
+      //   ios: -24,
+      //   android: -26,
+      // }),
+      // marginBottom: Platform.select({
+      //   ios: 190,
+      //   android: 450,
+      // }),
+    },
+    ScrollViewView: {
+      height: Dimensions.get("screen").height - 223 - StatusBar.currentHeight,
       marginTop: Platform.select({
         ios: -24,
         android: -26,
       }),
-      marginBottom:
-        260 -
-        Platform.select({
-          ios: 70,
-          android: 0,
-        }),
+      marginBottom: Platform.select({
+        ios: 190,
+        android: 0,
+      }),
     },
     ListView: { flexDirection: "row" },
     ListItemTitel: {
@@ -300,6 +309,13 @@ const styles = {
       marginTop: StatusBar.currentHeight,
     },
     InputInputContainer: {
+      borderColor: "#273f59",
+    },
+    ButtonContainer: { paddingBottom: 10, paddingRight: 10, paddingLeft: 10 },
+    Button: {
+      height: 40,
+      width: "100%",
+      alignSelf: "center",
       borderColor: "#273f59",
     },
   },
