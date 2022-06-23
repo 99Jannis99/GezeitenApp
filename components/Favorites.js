@@ -5,6 +5,7 @@ import {
   ImageBackground,
   ScrollView,
   SafeAreaView,
+  TouchableOpacity,
 } from "react-native";
 import React, { Component } from "react";
 import myStyle from "../assets/styles";
@@ -184,7 +185,14 @@ class Favorites extends Component {
                       }}
                     >
                       <ListItem.Content>
-                        <View style={myStyle.Favorites.ListView}>
+                        <TouchableOpacity
+                          onPress={() => {
+                            d.chosed = !d.chosed;
+                            this.createFavorites(d);
+                            this.forceUpdate();
+                          }}
+                          style={myStyle.Favorites.ListView}
+                        >
                           {d.country === "Deutschland" ? (
                             <DeIcon />
                           ) : (
@@ -201,13 +209,8 @@ class Favorites extends Component {
                             name={"trash"}
                             size={25}
                             color={"#f5767a"}
-                            onPress={() => {
-                              d.chosed = !d.chosed;
-                              this.createFavorites(d);
-                              this.forceUpdate();
-                            }}
                           />
-                        </View>
+                        </TouchableOpacity>
                       </ListItem.Content>
                     </ListItem>
                   );

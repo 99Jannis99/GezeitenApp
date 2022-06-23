@@ -1,5 +1,11 @@
 import { StatusBar } from "expo-status-bar";
-import { View, SafeAreaView, Image, ScrollView } from "react-native";
+import {
+  View,
+  SafeAreaView,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 import React, { Component } from "react";
 import myStyle from "../assets/styles";
 import { withTranslation } from "react-i18next";
@@ -375,7 +381,14 @@ class Locations extends Component {
                   }}
                 >
                   <ListItem.Content>
-                    <View style={myStyle.Locations.ListView}>
+                    <TouchableOpacity
+                      onPress={() => {
+                        d.chosed = !d.chosed;
+                        this.createFavorites(d);
+                        this.forceUpdate();
+                      }}
+                      style={myStyle.Locations.ListView}
+                    >
                       {d.country === "Deutschland" ? <DeIcon /> : <NlIcon />}
                       <View style={myStyle.Locations.ChildView}>
                         <ListItem.Title style={myStyle.Locations.ListItemTitel}>
@@ -392,13 +405,8 @@ class Locations extends Component {
                         name={d.chosed ? "trash" : "plus"}
                         size={25}
                         color={d.chosed ? "#f5767a" : "#8ff7a8"}
-                        onPress={() => {
-                          d.chosed = !d.chosed;
-                          this.createFavorites(d);
-                          this.forceUpdate();
-                        }}
                       />
-                    </View>
+                    </TouchableOpacity>
                   </ListItem.Content>
                 </ListItem>
               );

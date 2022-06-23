@@ -11,8 +11,8 @@
 
     "headlineTurorial": "Ebbe & Flut",
     "description": "Die Tiden werden folgendermaßen beschrieben.",
-    "descriptionDown": "Höchststand des Wassers und damit Einsetzen der Ebbe",
-    "descriptionUp": "Tiefststand des Wasser und damit Einsetzen der Flut.",
+    "descriptionDown": "Ablaufendes Wasser und Einsetzen der Ebbe",
+    "descriptionUp": "Auflaufendes Wasser und Einsetzen der Flut",
     "TutorialAgreeButton": " Verstanden, weiter",
 
     "noFavorits": "Keine Favoriten",

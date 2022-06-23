@@ -11,8 +11,8 @@
 
     "headlineTurorial": "High & low tide",
     "description": "The tides are visualized as follows",
-    "descriptionDown": "High tide - the ebb is coming",
-    "descriptionUp": "Low tide - the flow is coming",
+    "descriptionDown": "Draining water and beginning of the ebb",
+    "descriptionUp": "Rising water and onset of tide",
     "TutorialAgreeButton": " Ok, proceed",
 
     "noFavorits": "No favorites",
