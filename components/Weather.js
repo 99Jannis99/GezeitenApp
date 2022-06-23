@@ -119,7 +119,11 @@ class Weather extends Component {
                   }}
                   options={{
                     tabBarLabel:
-                      filtertLocations.length > 6 ? "" : d.name.slice(0, 3),
+                      filtertLocations.length > 6
+                        ? filtertLocations.length > 9
+                          ? "•"
+                          : "○"
+                        : d.name.slice(0, 3),
                   }}
                   key={i}
                   name={d.name}

@@ -90,12 +90,9 @@ class Favorites extends Component {
     const { t } = this.props;
     // ein Toast wir bei drücken getriggert
     Toast.show({
-      type: d.chosed ? "success" : "error",
-      text1: d.chosed
-        ? d.name + " " + t("ToastAddFavorite")
-        : d.name + " " + t("ToastRemoveFavorite"),
+      type: "error",
+      text1: d.name + " " + t("ToastRemoveFavorite"),
       visibilityTime: 1500,
-      position: "bottom",
     });
     this.saveData(this.state.LocationsWithChosed);
   }
@@ -109,6 +106,7 @@ class Favorites extends Component {
     }
   };
   changeLists() {
+    this.getData();
     this.setState({ addFavorites: !this.state.addFavorites });
   }
   render() {
@@ -128,7 +126,7 @@ class Favorites extends Component {
             />
             <Locations changeLists={this.changeLists.bind(this)} />
             <StatusBar style="auto" />
-            <Toast position="bottom" />
+            <Toast position="top" />
           </SafeAreaView>
         );
         break;
@@ -170,49 +168,53 @@ class Favorites extends Component {
                 source={require("../assets/pictures/addFavorites_de.png")}
               />
             ) : null}
-            <ScrollView
-              scrollEnabled={true}
-              style={myStyle.Favorites.ScrollView}
-            >
-              {filtertLocations.map((d, i) => {
-                return (
-                  <ListItem
-                    leftWidth={30}
-                    key={i}
-                    leftStyle={{ width: 50 }}
-                    containerStyle={{
-                      backgroundColor: "rgba(143, 247, 168," + "0)",
-                    }}
-                    titleStyle={{
-                      textAlign: "center",
-                    }}
-                  >
-                    <ListItem.Content>
-                      <View style={myStyle.Favorites.ListView}>
-                        {d.country === "Deutschland" ? <DeIcon /> : <NlIcon />}
-                        <View style={myStyle.Favorites.SecondListView}>
-                          <ListItem.Title
-                            style={myStyle.Favorites.ListItemTitel}
-                          >
-                            {d.displayName}
-                          </ListItem.Title>
+            <View style={myStyle.Favorites.ScrollViewView}>
+              <ScrollView scrollEnabled={true}>
+                {filtertLocations.map((d, i) => {
+                  return (
+                    <ListItem
+                      leftWidth={30}
+                      key={i}
+                      leftStyle={{ width: 50 }}
+                      containerStyle={{
+                        backgroundColor: "rgba(143, 247, 168," + "0)",
+                      }}
+                      titleStyle={{
+                        textAlign: "center",
+                      }}
+                    >
+                      <ListItem.Content>
+                        <View style={myStyle.Favorites.ListView}>
+                          {d.country === "Deutschland" ? (
+                            <DeIcon />
+                          ) : (
+                            <NlIcon />
+                          )}
+                          <View style={myStyle.Favorites.SecondListView}>
+                            <ListItem.Title
+                              style={myStyle.Favorites.ListItemTitel}
+                            >
+                              {d.displayName}
+                            </ListItem.Title>
+                          </View>
+                          <IconEntypo
+                            name={"trash"}
+                            size={25}
+                            color={"#f5767a"}
+                            onPress={() => {
+                              d.chosed = !d.chosed;
+                              this.createFavorites(d);
+                              this.forceUpdate();
+                            }}
+                          />
                         </View>
-                        <IconEntypo
-                          name={"trash"}
-                          size={25}
-                          color={"#f5767a"}
-                          onPress={() => {
-                            d.chosed = !d.chosed;
-                            this.createFavorites(d);
-                            this.forceUpdate();
-                          }}
-                        />
-                      </View>
-                    </ListItem.Content>
-                  </ListItem>
-                );
-              })}
-            </ScrollView>
+                      </ListItem.Content>
+                    </ListItem>
+                  );
+                })}
+              </ScrollView>
+            </View>
+            <Toast position="top" />
           </SafeAreaView>
         );
 

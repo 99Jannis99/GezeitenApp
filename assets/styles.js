@@ -237,14 +237,15 @@ const styles = {
       alignSelf: "flex-end",
       marginRight: 20,
     },
-    ScrollView: {
+    ScrollViewView: {
+      height: Dimensions.get("screen").height - 223 - StatusBar.currentHeight,
       marginTop: Platform.select({
         ios: -24,
         android: -26,
       }),
       marginBottom: Platform.select({
-        ios: 120,
-        android: 50,
+        ios: 190,
+        android: 0,
       }),
     },
     ListView: {
@@ -275,16 +276,6 @@ const styles = {
     View: {
       flex: 1,
       opacity: 0.7,
-    },
-    ScrollView: {
-      // marginTop: Platform.select({
-      //   ios: -24,
-      //   android: -26,
-      // }),
-      // marginBottom: Platform.select({
-      //   ios: 190,
-      //   android: 450,
-      // }),
     },
     ScrollViewView: {
       height: Dimensions.get("screen").height - 223 - StatusBar.currentHeight,

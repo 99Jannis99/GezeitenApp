@@ -2,7 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import { View, SafeAreaView, Image, ScrollView } from "react-native";
 import React, { Component } from "react";
 import myStyle from "../assets/styles";
-import { withTranslation,Translation } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import fetchData from "../functions/fetchData";
 import _ from "lodash";
@@ -209,7 +209,6 @@ class Locations extends Component {
         ? d.name + " " + t("ToastAddFavorite")
         : d.name + " " + t("ToastRemoveFavorite"),
       visibilityTime: 1500,
-      position: "bottom",
     });
     /**
     |--------------------------------------------------
@@ -301,7 +300,6 @@ class Locations extends Component {
               text1: t("ToastHeaderErrorFetch"),
               text2: t("ToastTextErrorFetch"),
               visibilityTime: 60000,
-              position: "top",
             });
           });
       }
@@ -330,8 +328,6 @@ class Locations extends Component {
   render() {
     const { t } = this.props;
     return (
-      <Translation>
-        {(t) => (
       <SafeAreaView>
         <Image
           source={require("../assets/pictures/default_background-dashboard.jpg")}
@@ -362,7 +358,7 @@ class Locations extends Component {
           placeholderTextColor="#3f444d"
         ></Input>
         <View style={myStyle.Locations.ScrollViewView}>
-          <ScrollView scrollEnabled={true} style={myStyle.Locations.ScrollView}>
+          <ScrollView scrollEnabled={true}>
             {this.state.locationData.map((d, i) => {
               return (
                 <ListItem
@@ -410,18 +406,19 @@ class Locations extends Component {
           </ScrollView>
         </View>
         <StatusBar style="auto" />
-        <Toast position="bottom" />
-          <Button
+        <Toast position="top" />
+        <Button
           containerStyle={myStyle.Locations.ButtonContainer}
           buttonStyle={myStyle.Locations.Button}
           title={t("impressumBackButton")}
           type="outline"
-          onPress={() => {this.props.changeLists()}}
+          onPress={() => {
+            this.props.changeLists();
+          }}
         >
           <Back name="back" size={25} color="#273f59"></Back>
         </Button>
-      </SafeAreaView> )}
-      </Translation>
+      </SafeAreaView>
     );
   }
 }
