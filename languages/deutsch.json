@@ -15,6 +15,10 @@
     "descriptionUp": "Tiefststand des Wasser und damit Einsetzen der Flut.",
     "TutorialAgreeButton": " Verstanden, weiter",
 
+    "noFavorits": "Keine Favoriten",
+    "noFavoritsAdd": "Sie haben bisher keiner Favoriten angelegt",
+    "addFavorites":"Favoriten anlegen",
+
     "today": "Heute",
     "tomorrow": "Morgen, ",
     "afterTomorrow": "Übermorgen, ",
@@ -56,24 +60,24 @@
     "cloudy": "wolkig",
     "partly-cloudy-day": "leicht bewölkt",
     "partly-cloudy-night": "leicht bewölkt",
-    "wholeDay":"ganzer Tag",
+    "wholeDay": "ganzer Tag",
 
-    "internetConnection":"Sie brauchen eine Internet-Verbindung",
+    "internetConnection": "Sie brauchen eine Internet-Verbindung",
 
-    "language":"Sprache",
-    "locationView":"Ansichtseinstellungen",
-    "3Days":"3-Tage Ansicht",
-    "5Days":"5-Tage Ansicht",
-    "7Days":"7-Tage Ansicht",
-    "upgradeHeader":"Upgrade jetzt zu Pro",
-    "proText":"Genieße jetzt alle Pro-Vorteile OHNE nervige Werbung",
-    "buttonPro":"Hier upgraden",
-    "buttonProLater":"Später",
+    "language": "Sprache",
+    "locationView": "Ansichtseinstellungen",
+    "3Days": "3-Tage Ansicht",
+    "5Days": "5-Tage Ansicht",
+    "7Days": "7-Tage Ansicht",
+    "upgradeHeader": "Upgrade jetzt zu Pro",
+    "proText": "Genieße jetzt alle Pro-Vorteile OHNE nervige Werbung",
+    "buttonPro": "Hier upgraden",
+    "buttonProLater": "Später",
 
-    "about":"Impressum",
-    "programming":"Programmierung und Realisierung",
-    "design":"Gestaltung und Screendesign",
-    "managingDirector":"Geschäftsführer:",
-    "impressumBackButton":"Zurück"
+    "about": "Impressum",
+    "programming": "Programmierung und Realisierung",
+    "design": "Gestaltung und Screendesign",
+    "managingDirector": "Geschäftsführer:",
+    "impressumBackButton": "Zurück"
   }
 }

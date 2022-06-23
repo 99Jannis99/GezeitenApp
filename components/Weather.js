@@ -1,13 +1,15 @@
 import { StatusBar } from "expo-status-bar";
-import { View, Image, Animated } from "react-native";
+import { View, Text, Animated } from "react-native";
 import React, { Component } from "react";
 import myStyle from "../assets/styles";
-import { withTranslation } from "react-i18next";
 import _ from "lodash";
 import WeatherOrte from "./WeatherOrte";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { AdMobInterstitial } from "expo-ads-admob";
+import { Button } from "@rneui/base";
+import Back from "react-native-vector-icons/AntDesign";
+import { t } from "i18next";
 
 class Weather extends Component {
   state = {
@@ -89,6 +91,7 @@ class Weather extends Component {
   }
 
   render() {
+    const { navigation } = this.props;
     const Tab = createMaterialTopTabNavigator();
     const filtertLocations = _.filter(this.state.LocationsWithChosed, {
       chosed: true,
@@ -100,10 +103,26 @@ class Weather extends Component {
           source={require("../assets/pictures/default_background-dashboard.jpg")}
         />
         {filtertLocations.length < 1 ? (
-          <Image
-            style={myStyle.Weather.Tutorial}
-            source={require("../assets/pictures/Homepage_de_Shadow.png")}
-          />
+          <View>
+            <Text style={myStyle.HomePage.AddFavoritesHeader}>
+              {t("noFavorits")}
+            </Text>
+            <Text style={myStyle.HomePage.AddFavoritesText}>
+              {t("noFavoritsAdd")}
+            </Text>
+            <Button
+              containerStyle={myStyle.HomePage.ButtonContainer}
+              buttonStyle={myStyle.HomePage.Button}
+              title={t("impressumBackButton")}
+              type="outline"
+              onPress={() => {navigation.navigate("Favorites")}}
+            >
+              <Text style={myStyle.HomePage.AddFavoritesButtonText}>
+                {t("addFavorites")}
+              </Text>
+              <Back name="right" size={25} color="#273f59"></Back>
+            </Button>
+          </View>
         ) : null}
         {filtertLocations.length != 0 ? (
           <Tab.Navigator
@@ -142,4 +161,4 @@ class Weather extends Component {
   }
 }
 
-export default withTranslation()(Weather);
+export default Weather;

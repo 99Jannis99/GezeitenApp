@@ -196,6 +196,38 @@ const styles = {
       fontSize: 20,
       color: "white",
     },
+    AddFavoritesHeader: {
+      top: StatusBar.currentHeight,
+      fontWeight: "bold",
+      color: "white",
+      fontSize: 20,
+      padding: 20,
+      alignSelf: "center",
+    },
+    AddFavoritesText: {
+      top: StatusBar.currentHeight,
+      color: "white",
+      fontSize: 15,
+      padding: 20,
+      alignSelf: "center",
+      paddingTop: 20,
+    },
+    AddFavoritesButtonText: {
+      color: "#273f59",
+      fontSize: 15,
+    },
+    Button: {
+      height: 40,
+      width: "100%",
+      alignSelf: "center",
+      borderColor: "#273f59",
+    },
+    ButtonContainer: {
+      padding: Platform.select({
+        ios: 10,
+        android: 40,
+      }),
+    },
   },
   /**
   |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------

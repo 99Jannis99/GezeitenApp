@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { View, Image, Animated, Text } from "react-native";
+import { View, Animated, Text } from "react-native";
 import React, { Component } from "react";
 import myStyle from "../assets/styles";
 import _ from "lodash";
@@ -9,6 +9,8 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 import { AdMobInterstitial } from "expo-ads-admob";
 import * as Network from "expo-network";
 import { t } from "i18next";
+import { Button } from "@rneui/base";
+import Back from "react-native-vector-icons/AntDesign";
 
 class HomePage extends Component {
   state = {
@@ -115,6 +117,7 @@ class HomePage extends Component {
 
   render() {
     const Tab = createMaterialTopTabNavigator();
+    const { navigation } = this.props;
     const filtertLocations = _.filter(this.state.LocationsWithChosed, {
       chosed: true,
     });
@@ -134,10 +137,26 @@ class HomePage extends Component {
           source={require("../assets/pictures/default_background-dashboard-ebbe.jpg")}
         />
         {filtertLocations.length < 1 ? (
-          <Image
-            style={myStyle.HomePage.Tutorial}
-            source={require("../assets/pictures/Homepage_de_Shadow.png")}
-          />
+          <View>
+            <Text style={myStyle.HomePage.AddFavoritesHeader}>
+              {t("noFavorits")}
+            </Text>
+            <Text style={myStyle.HomePage.AddFavoritesText}>
+              {t("noFavoritsAdd")}
+            </Text>
+            <Button
+              containerStyle={myStyle.HomePage.ButtonContainer}
+              buttonStyle={myStyle.HomePage.Button}
+              title={t("impressumBackButton")}
+              type="outline"
+              onPress={() => navigation.navigate('Favorites')}
+            >
+              <Text style={myStyle.HomePage.AddFavoritesButtonText}>
+                {t("addFavorites")}
+              </Text>
+              <Back name="right" size={25} color="#273f59"></Back>
+            </Button>
+          </View>
         ) : null}
         {filtertLocations.length != 0 ? (
           <Tab.Navigator

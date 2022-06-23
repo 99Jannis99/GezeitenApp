@@ -15,6 +15,10 @@
     "descriptionUp": "Low tide - the flow is coming",
     "TutorialAgreeButton": " Ok, proceed",
 
+    "noFavorits": "No favorites",
+    "noFavoritsAdd": "You currently have no favorites",
+    "addFavorites":"add favorites",
+
     "today": "Today",
     "tomorrow": "tomorrow, ",
     "afterTomorrow": "after tomorrow, ",
@@ -56,24 +60,24 @@
     "cloudy": "cloudy",
     "partly-cloudy-day": "partly cloudy",
     "partly-cloudy-night": "partly cloudy",
-    "wholeDay":"whole Day",
+    "wholeDay": "whole Day",
 
-    "internetConnection":"You need an internet connection",
+    "internetConnection": "You need an internet connection",
 
-    "language":"Language",
-    "locationView":"Location View",
-    "3Days":"3-days per Location",
-    "5Days":"5-days per Location",
-    "7Days":"7-days per Location",
-    "upgradeHeader":"Upgrade to Pro now",
-    "proText":"Enjoy all Pro benefits WITHOUT annoying ads",
-    "buttonPro":"Upgrade Now",
-    "buttonProLater":"Later",
+    "language": "Language",
+    "locationView": "Location View",
+    "3Days": "3-days per Location",
+    "5Days": "5-days per Location",
+    "7Days": "7-days per Location",
+    "upgradeHeader": "Upgrade to Pro now",
+    "proText": "Enjoy all Pro benefits WITHOUT annoying ads",
+    "buttonPro": "Upgrade Now",
+    "buttonProLater": "Later",
 
-    "about":"About",
-    "programming":"Programming",
-    "design":"Design",
-    "managingDirector":"Managing Director:",
-    "impressumBackButton":"Back"
+    "about": "About",
+    "programming": "Programming",
+    "design": "Design",
+    "managingDirector": "Managing Director:",
+    "impressumBackButton": "Back"
   }
 }
