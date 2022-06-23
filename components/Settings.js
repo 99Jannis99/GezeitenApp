@@ -62,7 +62,9 @@ export class Settings extends Component {
             {
               text: t("buttonPro"),
               onPress: async () =>
-                await Linking.openURL("https://play.google.com/store/apps/details?id=com.dimento.nordsee.gezeiten&gl=DE"),
+                await Linking.openURL(
+                  "https://play.google.com/store/apps/details?id=com.dimento.nordsee.gezeiten&gl=DE"
+                ),
               style: "default",
             },
             {
@@ -143,14 +145,14 @@ export class Settings extends Component {
               source={require("../assets/pictures/default_background-dashboard.jpg")}
             />
             <View style={myStyle.Settings.HeaderView}>
-            <Text style={myStyle.Settings.Header}>{t("language")}</Text>
-            <Info
-              style={myStyle.Settings.InfoIcon}
-              name="info"
-              size={25}
-              color="#273f59"
-              onPress={() => route.params.showImpressum()}
-            />
+              <Text style={myStyle.Settings.Header}>{t("language")}</Text>
+              <Info
+                style={myStyle.Settings.InfoIcon}
+                name="info"
+                size={25}
+                color="#273f59"
+                onPress={() => route.params.showImpressum()}
+              />
             </View>
             <ButtonGroup
               onPress={(pressedindex) =>
@@ -163,8 +165,8 @@ export class Settings extends Component {
               buttonContainerStyle={myStyle.Settings.ButtonGroupButtonContainer}
               selectedButtonStyle={myStyle.Settings.ButtonGroupButtonSelected}
             />
-            <Text style={myStyle.Settings.Header2}>{t("locationView")}</Text>
-            <ButtonGroup
+            {/* <Text style={myStyle.Settings.Header2}>{t("locationView")}</Text>
+             <ButtonGroup
               onPress={(pressedindex) =>
                 this.saveData("locationView", pressedindex)
               }
@@ -176,7 +178,7 @@ export class Settings extends Component {
               selectedButtonStyle={myStyle.Settings.ButtonGroupButtonSelected}
               textStyle={myStyle.Settings.ButtonGroupButtonText}
               selectedTextStyle={myStyle.Settings.ButtonGroupButtonText}
-            />
+            /> */}
           </SafeAreaView>
         )}
       </Translation>
