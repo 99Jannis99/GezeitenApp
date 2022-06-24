@@ -621,7 +621,7 @@ const styles = {
       width: "100%",
       alignSelf: "flex-end",
       justifyContent: "space-around",
-      borderColor:'#5497a7',
+      borderColor: "#5497a7",
       backgroundColor: "#5497a7",
     },
     ButtonContainer: {
@@ -639,19 +639,28 @@ const styles = {
   */
   Impressum: {
     Header: {
-      top: StatusBar.currentHeight,
       fontWeight: "bold",
       color: "white",
       fontSize: 20,
-      padding: 20,
-      alignSelf: "center",
+      marginLeft: Dimensions.get("screen").width / 2 - 150,
+    },
+    HeaderView: {
+      top: StatusBar.currentHeight,
+      width: Dimensions.get("screen").width - 100,
+      height: 50,
+      justifyContent: "center",
+    },
+    BackButtonView: {
+      paddingTop: 10,
+      flexDirection: "row",
+      justifyContent: "center",
     },
     Header2: {
       top: StatusBar.currentHeight,
       fontWeight: "bold",
       color: "white",
       fontSize: 17,
-      padding: 20,
+      padding: 15,
     },
     Background: {
       flex: 1,
@@ -665,16 +674,13 @@ const styles = {
       paddingTop: 0,
     },
     Button: {
-      height: 40,
-      width: 130,
-      alignSelf: "center",
+      height: 50,
+      width: 80,
       borderColor: "#273f59",
     },
     ButtonContainer: {
-      padding: Platform.select({
-        ios: 10,
-        android: 40,
-      }),
+      alignSelf: "center",
+      paddingTop: StatusBar.currentHeight,
     },
   },
 };

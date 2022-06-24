@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View,SafeAreaView, Image } from "react-native";
+import { Text, View, SafeAreaView, Image } from "react-native";
 import { Button } from "@rneui/base";
 import { Translation } from "react-i18next";
 import myStyle from "../assets/styles";
@@ -15,7 +15,20 @@ export class Impressum extends Component {
               style={myStyle.Impressum.Background}
               source={require("../assets/pictures/default_background-dashboard.jpg")}
             />
-            <Text style={myStyle.Impressum.Header}> {t("about")} </Text>
+            <View style={myStyle.Impressum.BackButtonView}>
+              <Button
+                containerStyle={myStyle.Impressum.ButtonContainer}
+                buttonStyle={myStyle.Impressum.Button}
+                title={t("impressumBackButton")}
+                type="clear"
+                onPress={() => this.props.hideImpressum("hide")}
+              >
+                <Back name="back" size={25} color="white"></Back>
+              </Button>
+              <View style={myStyle.Impressum.HeaderView}>
+                <Text style={myStyle.Impressum.Header}> {t("about")} </Text>
+              </View>
+            </View>
             <Text style={myStyle.Impressum.Header2}> {t("programming")} </Text>
             <Text style={myStyle.Impressum.Text}>
               dimento.com gmbh{"\n"}Internet Kommunikation{"\n"}
@@ -34,15 +47,6 @@ export class Impressum extends Component {
               {"\n"}Thomas Georg{"\n"}Dipl. Grafik Designer AGD{"\n"}
               {"\n"}www.georg-design.de{"\n"}mail@georg-design.de
             </Text>
-            <Button
-              containerStyle={myStyle.Impressum.ButtonContainer}
-              buttonStyle={myStyle.Impressum.Button}
-              title={t("impressumBackButton")}
-              type="outline"
-              onPress={() => this.props.hideImpressum("hide")}
-            >
-              <Back name="back" size={25} color="#273f59"></Back>
-            </Button>
           </SafeAreaView>
         )}
       </Translation>
