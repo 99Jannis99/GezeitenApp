@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { View, Text, Animated } from "react-native";
+import { View, Text, Animated, SafeAreaView } from "react-native";
 import React, { Component } from "react";
 import myStyle from "../assets/styles";
 import _ from "lodash";
@@ -114,7 +114,7 @@ class Weather extends Component {
           source={require("../assets/pictures/default_background-dashboard.jpg")}
         />
         {filtertLocations.length < 1 ? (
-          <View>
+          <SafeAreaView>
             <Text style={myStyle.HomePage.AddFavoritesHeader}>
               {t("noFavorits")}
             </Text>
@@ -135,7 +135,7 @@ class Weather extends Component {
               </Text>
               <Back name="right" size={25} color="white"></Back>
             </Button>
-          </View>
+          </SafeAreaView>
         ) : null}
         {filtertLocations.length != 0 ? (
           <Tab.Navigator
