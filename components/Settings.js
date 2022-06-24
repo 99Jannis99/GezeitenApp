@@ -8,6 +8,8 @@ import DeIcon from "../assets/svg/deIcon";
 import EnIcon from "../assets/svg/enIcon";
 import { Translation, withTranslation } from "react-i18next";
 import Info from "react-native-vector-icons/Feather";
+import { Button } from "@rneui/base";
+import Back from "react-native-vector-icons/AntDesign";
 
 export class Settings extends Component {
   constructor(props) {
@@ -179,6 +181,25 @@ export class Settings extends Component {
               textStyle={myStyle.Settings.ButtonGroupButtonText}
               selectedTextStyle={myStyle.Settings.ButtonGroupButtonText}
             /> */}
+            <Text style={myStyle.Settings.Header2}>{t("evaluate")}</Text>
+            <Button
+              containerStyle={myStyle.Settings.ButtonContainer}
+              buttonStyle={myStyle.Settings.Button}
+              title={t("impressumBackButton")}
+              type="outline"
+              onPress={async () => {
+                await Linking.openURL(
+                  "https://play.google.com/store/apps/details?id=com.dimento.nordsee.gezeiten.demo&gl=DE"
+                );
+              }}
+            >
+              <View style={myStyle.Settings.InButtonView}>
+                <Text style={myStyle.Settings.AddFavoritesButtonText}>
+                  {t("addEvaluate")}
+                </Text>
+                <Back name="smile-circle" size={22} color="#273f59" />
+              </View>
+            </Button>
           </SafeAreaView>
         )}
       </Translation>

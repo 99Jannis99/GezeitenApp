@@ -4,7 +4,7 @@
     "secondHeadline": "Lieber Nutzer!",
     "info": "Die Angaben dieser App sind nicht zu 100% passend von den Zeiten. Es kann immer zu Abweichungen kommen, bitte berücksichtigen Sie dieses. \n \nWir wünschen Ihnen eine angenheme Zeit am Strand.",
     "languageChoice": "Ihre bevorzugte Sprache",
-    "buttonAgree": "Aktzeptieren",
+    "buttonAgree": "Akzeptieren",
     "buttonDecline": "Ablehnen",
     "declineTitel": "⚠️Warnung!",
     "declineMessage": "Sie müssen diesen Hinweis einmalig bestätigen. Beim nächsten Start der App werden Sie nicht erneut aufgefordert!",
@@ -17,7 +17,7 @@
 
     "noFavorits": "Keine Favoriten",
     "noFavoritsAdd": "Sie haben bisher keiner Favoriten angelegt",
-    "addFavorites":"Favoriten anlegen",
+    "addFavorites": "Favoriten anlegen",
 
     "today": "Heute",
     "tomorrow": "Morgen, ",
@@ -66,6 +66,8 @@
 
     "language": "Sprache",
     "locationView": "Ansichtseinstellungen",
+    "evaluate": "Bewertung abgeben",
+    "addEvaluate": "Jetzt Feedback geben   ",
     "3Days": "3-Tage Ansicht",
     "5Days": "5-Tage Ansicht",
     "7Days": "7-Tage Ansicht",

@@ -17,7 +17,7 @@
 
     "noFavorits": "No favorites",
     "noFavoritsAdd": "You currently have no favorites",
-    "addFavorites":"add favorites",
+    "addFavorites": "add favorites",
 
     "today": "Today",
     "tomorrow": "tomorrow, ",
@@ -66,6 +66,8 @@
 
     "language": "Language",
     "locationView": "Location View",
+    "evaluate": "Evaluate",
+    "addEvaluate": "add Evaluate now   ",
     "3Days": "3-days per Location",
     "5Days": "5-days per Location",
     "7Days": "7-days per Location",

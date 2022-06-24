@@ -148,13 +148,13 @@ class HomePage extends Component {
               containerStyle={myStyle.HomePage.ButtonContainer}
               buttonStyle={myStyle.HomePage.Button}
               title={t("impressumBackButton")}
-              type="outline"
+              type="solid"
               onPress={() => navigation.navigate('Favorites')}
             >
               <Text style={myStyle.HomePage.AddFavoritesButtonText}>
                 {t("addFavorites")}
               </Text>
-              <Back name="right" size={25} color="#273f59"></Back>
+              <Back name="right" size={25} color="white"></Back>
             </Button>
           </View>
         ) : null}

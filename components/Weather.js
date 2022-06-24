@@ -111,16 +111,16 @@ class Weather extends Component {
               {t("noFavoritsAdd")}
             </Text>
             <Button
-              containerStyle={myStyle.HomePage.ButtonContainer}
-              buttonStyle={myStyle.HomePage.Button}
+              containerStyle={myStyle.Weather.ButtonContainer}
+              buttonStyle={myStyle.Weather.Button}
               title={t("impressumBackButton")}
               type="outline"
               onPress={() => {navigation.navigate("Favorites")}}
             >
-              <Text style={myStyle.HomePage.AddFavoritesButtonText}>
+              <Text style={myStyle.Weather.AddFavoritesButtonText}>
                 {t("addFavorites")}
               </Text>
-              <Back name="right" size={25} color="#273f59"></Back>
+              <Back name="right" size={25} color="white"></Back>
             </Button>
           </View>
         ) : null}

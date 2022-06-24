@@ -213,14 +213,14 @@ const styles = {
       paddingTop: 20,
     },
     AddFavoritesButtonText: {
-      color: "#273f59",
+      color: "white",
       fontSize: 15,
     },
     Button: {
       height: 40,
       width: "100%",
       alignSelf: "center",
-      borderColor: "#273f59",
+      backgroundColor: "#5497a7",
     },
     ButtonContainer: {
       padding: Platform.select({
@@ -254,6 +254,22 @@ const styles = {
         fontWeight: "bold",
       },
       tabBarStyle: { backgroundColor: "#5497a7" },
+    },
+    AddFavoritesButtonText: {
+      color: "white",
+      fontSize: 15,
+    },
+    Button: {
+      height: 40,
+      width: "100%",
+      alignSelf: "center",
+      backgroundColor: "#5497a7",
+    },
+    ButtonContainer: {
+      padding: Platform.select({
+        ios: 10,
+        android: 40,
+      }),
     },
   },
   /**
@@ -591,6 +607,29 @@ const styles = {
     HeaderView: {
       flexDirection: "row",
       justifyContent: "flex-end",
+    },
+    InButtonView: {
+      justifyContent: "flex-end",
+      flexDirection: "row",
+    },
+    AddFavoritesButtonText: {
+      color: "#273f59",
+      fontSize: 15,
+    },
+    Button: {
+      height: 40,
+      width: "100%",
+      alignSelf: "flex-end",
+      justifyContent: "space-around",
+      borderColor:'#5497a7',
+      backgroundColor: "#5497a7",
+    },
+    ButtonContainer: {
+      justifyContent: "space-between",
+      padding: Platform.select({
+        ios: 10,
+        android: 40,
+      }),
     },
   },
   /**
