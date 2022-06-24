@@ -10,6 +10,7 @@ import { AdMobInterstitial } from "expo-ads-admob";
 import { Button } from "@rneui/base";
 import Back from "react-native-vector-icons/AntDesign";
 import { t } from "i18next";
+import moment from "moment";
 
 class Weather extends Component {
   state = {
@@ -45,6 +46,7 @@ class Weather extends Component {
     });
     this.loadAd(adUnitId);
     this.getData();
+    this.setState({ TimeStamp: moment().format("DD") });
   }
 
   async loadAd(UnitId) {
