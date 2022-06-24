@@ -39,6 +39,10 @@ class Weather extends Component {
     navigation.addListener("focus", () => {
       this.getData();
     });
+    AdMobInterstitial.addEventListener("interstitialDidClose", () => {
+      AdMobInterstitial.removeAllListeners();
+      setTimeout(() => this.loadAd(adUnitId), 5000);
+    });
     this.loadAd(adUnitId);
     this.getData();
   }
@@ -82,12 +86,19 @@ class Weather extends Component {
   };
 
   AdMobTrigger() {
-    if (!this.state.AdMobTriggerd) {
-      AdMobInterstitial.showAdAsync();
+    if (
+      !this.state.AdMobTriggerd ||
+      this.state.TimeStamp != moment().format("DD")
+    ) {
+      try {
+        AdMobInterstitial.showAdAsync();
+      } catch (err) {
+        console.log("showAd Error (HomePage): ", err);
+      }
+      this.setState({
+        AdMobTriggerd: true,
+      });
     }
-    this.setState({
-      AdMobTriggerd: true,
-    });
   }
 
   render() {
@@ -115,7 +126,9 @@ class Weather extends Component {
               buttonStyle={myStyle.Weather.Button}
               title={t("impressumBackButton")}
               type="outline"
-              onPress={() => {navigation.navigate("Favorites")}}
+              onPress={() => {
+                navigation.navigate("Favorites");
+              }}
             >
               <Text style={myStyle.Weather.AddFavoritesButtonText}>
                 {t("addFavorites")}

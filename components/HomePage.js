@@ -11,6 +11,7 @@ import * as Network from "expo-network";
 import { t } from "i18next";
 import { Button } from "@rneui/base";
 import Back from "react-native-vector-icons/AntDesign";
+import moment from "moment";
 
 class HomePage extends Component {
   state = {
@@ -48,9 +49,14 @@ class HomePage extends Component {
     navigation.addListener("focus", () => {
       this.getData();
     });
-    this.getData();
+    AdMobInterstitial.addEventListener("interstitialDidClose", () => {
+      AdMobInterstitial.removeAllListeners();
+      setTimeout(() => this.loadAd(adUnitId), 5000);
+    });
 
+    this.getData();
     this.loadAd(adUnitId);
+    this.setState({ TimeStamp: moment().format("DD") });
   }
 
   async loadAd(UnitId) {
@@ -107,8 +113,15 @@ class HomePage extends Component {
   }
 
   AdMobTrigger() {
-    if (!this.state.AdMobTriggerd) {
+    if (
+      !this.state.AdMobTriggerd ||
+      this.state.TimeStamp != moment().format("DD")
+    ) {
+      try {
       AdMobInterstitial.showAdAsync();
+      } catch (err) {
+        console.log("showAd Error (HomePage): ", err);
+      }
     }
     this.setState({
       AdMobTriggerd: true,
@@ -149,7 +162,7 @@ class HomePage extends Component {
               buttonStyle={myStyle.HomePage.Button}
               title={t("impressumBackButton")}
               type="solid"
-              onPress={() => navigation.navigate('Favorites')}
+              onPress={() => navigation.navigate("Favorites")}
             >
               <Text style={myStyle.HomePage.AddFavoritesButtonText}>
                 {t("addFavorites")}
