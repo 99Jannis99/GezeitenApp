@@ -47,6 +47,7 @@ const styles = {
     },
     InfoView: { height: 180 },
     InfoText: {
+      textAlign:'center',
       marginLeft: 20,
       marginRight: 20,
       fontSize: 15,

@@ -2,7 +2,7 @@
   "translation": {
     "headline": "Hinweis!",
     "secondHeadline": "Lieber Nutzer!",
-    "info": "Die Angaben dieser App sind nicht zu 100% passend von den Zeiten. Es kann immer zu Abweichungen kommen, bitte berücksichtigen Sie dieses. \n \nWir wünschen Ihnen eine angenheme Zeit am Strand.",
+    "info": "Die angegebenen Zeiten für die Tiden sind keine 100% garantierten Werte. \n\nBitte beachten Sie, dass es immer zu Abweichungen kommen kann!",
     "languageChoice": "Ihre bevorzugte Sprache",
     "buttonAgree": "Akzeptieren",
     "buttonDecline": "Ablehnen",
@@ -16,7 +16,7 @@
     "TutorialAgreeButton": " Verstanden, weiter",
 
     "noFavorits": "Keine Favoriten",
-    "noFavoritsAdd": "Sie haben bisher keiner Favoriten angelegt",
+    "noFavoritsAdd": "Sie haben bisher keine Favoriten angelegt",
     "addFavorites": "Favoriten anlegen",
 
     "today": "Heute",

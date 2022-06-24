@@ -152,8 +152,12 @@ class Weather extends Component {
                     AdMobTrigger: this.AdMobTrigger.bind(this),
                   }}
                   options={{
+                    tabBarContentContainerStyle: {
+                      height: 80,
+                      paddingTop: 10,
+                    },
                     tabBarLabel:
-                      filtertLocations.length > 6
+                      filtertLocations.length > 0
                         ? filtertLocations.length > 9
                           ? "•"
                           : "○"

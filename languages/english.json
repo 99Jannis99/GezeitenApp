@@ -2,7 +2,7 @@
   "translation": {
     "headline": "Attention!",
     "secondHeadline": "Dear User!",
-    "info": "The provided tide data isnt at 100% accuracy. Please keep that in mind when using this app. \n \nHave a nice day at the beach!",
+    "info": "The provided tide data is not at 100% accuracy. Please keep that in mind while using this app. \n \nHave a nice day at the beach!",
     "languageChoice": "Youre preferred language",
     "buttonAgree": "Accept",
     "buttonDecline": "Decline",
@@ -11,7 +11,7 @@
 
     "headlineTurorial": "High & low tide",
     "description": "The tides are visualized as follows",
-    "descriptionDown": "Draining water and beginning of the ebb",
+    "descriptionDown": "Draining water and beginning of low tide",
     "descriptionUp": "Rising water and onset of tide",
     "TutorialAgreeButton": " Ok, proceed",
 
