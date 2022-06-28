@@ -28,7 +28,7 @@ class HomePage extends Component {
 
   componentDidMount() {
     let adUnitId;
-    let AdState = "test";
+    let AdState = "original";
     if (AdState == "test") {
       adUnitId = Platform.select({
         ios: "ca-app-pub-3940256099942544/8691691433",

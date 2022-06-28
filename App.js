@@ -42,7 +42,7 @@ class App extends Component {
     ]);
   }
   componentDidMount() {
-    let AdSate = "test";
+    let AdSate = "original";
     let BannerID;
     if (AdSate == "test") {
       BannerID = Platform.select({

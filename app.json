@@ -18,7 +18,7 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.dimento.nordsee.gezeiten.free",
       "config": {
-        "googleMobileAdsAppId": "ca-app-pub-3940256099942544~1458002511"
+        "googleMobileAdsAppId": "ca-app-pub-8782102800192574~7583281842"
       }
     },
     "android": {
@@ -29,7 +29,7 @@
         "backgroundColor": "#FFFFFF"
       },
       "config": {
-        "googleMobileAdsAppId": "ca-app-pub-3940256099942544~3347511713"
+        "googleMobileAdsAppId": "ca-app-pub-8782102800192574~2242719048"
       }
     },
     "web": {
