@@ -88,7 +88,10 @@ export class GoolgeMap extends Component {
     return (
       <View>
         <MapView
-          provider={PROVIDER_GOOGLE}
+          provider={Platform.select({
+            ios: "google",
+            android: PROVIDER_GOOGLE,
+          })}
           showsUserLocation={true}
           showsMyLocationButton={false}
           region={this.state.focusedLocation}
