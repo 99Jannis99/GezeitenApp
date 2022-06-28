@@ -334,13 +334,7 @@ class Locations extends Component {
   render() {
     const { t } = this.props;
     return (
-      <SafeAreaView>
-        <Image
-          source={require("../assets/pictures/default_background-dashboard.jpg")}
-          resizeMode="cover"
-          style={myStyle.Locations.View}
-        />
-        <Input
+      <SafeAreaView><Input
           onChangeText={(text) => this.sortOutLocations(text)}
           containerStyle={myStyle.Locations.InputContainer}
           inputContainerStyle={myStyle.Locations.InputInputContainer}

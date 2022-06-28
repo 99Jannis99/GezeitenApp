@@ -32,7 +32,12 @@ const styles = {
   |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
   */
   Hinweis: {
-    View: { flex: 1, position: "absolute", opacity: 0.7 },
+    View: {
+      width: Dimensions.get("screen").width,
+      height: Dimensions.get("screen").height,
+      position: "absolute",
+      opacity: 0.7,
+    },
     HeadlineText: {
       fontSize: 35,
       top: StatusBar.currentHeight,
@@ -114,7 +119,12 @@ const styles = {
   |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
   */
   Tutorial: {
-    View: { flex: 1, opacity: 0.7, position: "absolute" },
+    View: {
+      width: Dimensions.get("screen").width,
+      height: Dimensions.get("screen").height,
+      opacity: 0.7,
+      position: "absolute",
+    },
     Headline: {
       fontSize: 35,
       alignSelf: "center",
@@ -162,8 +172,15 @@ const styles = {
   |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
   */
   HomePage: {
-    View: { flex: 1 },
-    AnimatedBackgroundImage: { flex: 1, position: "absolute" },
+    View: {
+      width: Dimensions.get("screen").width,
+      height: Dimensions.get("screen").height,
+    },
+    AnimatedBackgroundImage: {
+      width: Dimensions.get("screen").width,
+      height: Dimensions.get("screen").height,
+      position: "absolute",
+    },
     Tutorial: {
       width: 292,
       height: 116,
@@ -236,8 +253,15 @@ const styles = {
   |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
   */
   Weather: {
-    View: { flex: 1 },
-    BackgroundImage: { flex: 1, position: "absolute" },
+    View: {
+      width: Dimensions.get("screen").width,
+      height: Dimensions.get("screen").height,
+    },
+    BackgroundImage: {
+      width: Dimensions.get("screen").width,
+      height: Dimensions.get("screen").height,
+      position: "absolute",
+    },
     Tutorial: {
       width: 292,
       height: 116,
@@ -279,7 +303,12 @@ const styles = {
   |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
   */
   Favorites: {
-    ImageBackground: { flex: 1, position: "absolute", opacity: 0.7 },
+    ImageBackground: {
+      width: Dimensions.get("screen").width,
+      height: Dimensions.get("screen").height,
+      position: "absolute",
+      opacity: 0.7,
+    },
     Image: {
       width: 292,
       height: 116,
@@ -322,10 +351,6 @@ const styles = {
   |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
   */
   Locations: {
-    View: {
-      flex: 1,
-      opacity: 0.7,
-    },
     ScrollViewView: {
       height: Dimensions.get("screen").height - 223 - StatusBar.currentHeight,
       marginTop: Platform.select({
@@ -561,6 +586,11 @@ const styles = {
   |--------------------------------------------------
   */
   Settings: {
+    View: {
+      width: Dimensions.get("screen").width,
+      height: Dimensions.get("screen").height,
+      position: "absolute",
+    },
     ButtonGroupContainer: {
       marginTop: StatusBar.currentHeight,
       height: 50,
@@ -664,7 +694,8 @@ const styles = {
       padding: 15,
     },
     Background: {
-      flex: 1,
+      width: Dimensions.get("screen").width,
+      height: Dimensions.get("screen").height,
       position: "absolute",
     },
     Text: {
@@ -879,12 +910,12 @@ const styles = {
       },
     ],
     MapView: {
-      width: Dimensions.get("screen").width+100,
+      width: Dimensions.get("screen").width + 100,
       height: Dimensions.get("screen").height - 120,
-      marginLeft:-100
+      marginLeft: -100,
     },
     Callout: {
-      marginLeft:100,
+      marginLeft: 100,
       width: 300,
       height: 40,
       justifyContent: "center",
