@@ -3,7 +3,7 @@ import { Dimensions, Text, View } from "react-native";
 import { t } from "i18next";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import MapView, { Marker, Callout } from "react-native-maps";
+import MapView, { PROVIDER_GOOGLE, Marker, Callout } from "react-native-maps";
 import myStyle from "../assets/styles";
 import IconEntypo from "react-native-vector-icons/FontAwesome5";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
@@ -18,7 +18,6 @@ export class GoolgeMap extends Component {
       latitudeDelta: 1,
       longitude: 8.319035083075878,
       longitudeDelta: 1,
-      mylocation: false,
     },
   };
   constructor(props) {
@@ -63,7 +62,6 @@ export class GoolgeMap extends Component {
             latitudeDelta: 0.2,
             longitude: route.params.focusedLocation.coords.longitude,
             longitudeDelta: 0.2,
-            mylocation: false,
           },
         })
       : null;
@@ -90,6 +88,9 @@ export class GoolgeMap extends Component {
     return (
       <View>
         <MapView
+          provider={PROVIDER_GOOGLE}
+          showsUserLocation={true}
+          showsMyLocationButton={false}
           region={this.state.focusedLocation}
           customMapStyle={myStyle.GoogleMap.mapLayout}
           style={myStyle.GoogleMap.MapView}
@@ -147,15 +148,6 @@ export class GoolgeMap extends Component {
                 );
               })
             : null}
-          <Marker
-            coordinate={
-              this.state.focusedLocation.mylocation
-                ? this.state.focusedLocation
-                : { latitude: 0, longitude: 0 }
-            }
-          >
-            <MaterialIcons name="my-location" size={25} color="#273f59" />
-          </Marker>
         </MapView>
         <Button
           containerStyle={myStyle.GoogleMap.ButtonContainer}
@@ -182,7 +174,6 @@ export class GoolgeMap extends Component {
                 longitude: location.coords.longitude,
                 latitudeDelta: 0.04,
                 longitudeDelta: 0.04,
-                mylocation: true,
               },
             });
           }}

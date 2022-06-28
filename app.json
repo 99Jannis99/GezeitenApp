@@ -22,7 +22,7 @@
       }
     },
     "android": {
-      "package": "com.dimento.nordsee.gezeiten.demo",
+      "package": "com.dimento.nordsee.gezeiten.free",
       "versionCode": 12,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
