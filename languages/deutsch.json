@@ -80,6 +80,11 @@
     "programming": "Programmierung und Realisierung",
     "design": "Gestaltung und Screendesign",
     "managingDirector": "Geschäftsführer:",
-    "impressumBackButton": "Zurück"
+    "impressumBackButton": "Zurück",
+
+    "addFavoriteNow":"zu Favoriten hinzufügen   ",
+    "removeFavoriteNow":"aus Favoriten entfernen   ",
+    "getOwnLocationHeader":"...Laden ↻",
+    "getOwnLocationText":"Die Entfernungen zu dir werden geladen ✔"
   }
 }

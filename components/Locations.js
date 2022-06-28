@@ -382,6 +382,7 @@ class Locations extends Component {
                 >
                   <ListItem.Content>
                     <TouchableOpacity
+                    onLongPress={()=>this.props.goToMap(d)}
                       onPress={() => {
                         d.chosed = !d.chosed;
                         this.createFavorites(d);

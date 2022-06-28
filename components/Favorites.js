@@ -77,8 +77,6 @@ class Favorites extends Component {
     AsyncStorage.multiGet(
       ["Background", "LocationsWithChosed"],
       (err, stores) => {
-        // console.log(stores[1][1]);
-
         this.setState({
           Background: stores[0][1],
           LocationsWithChosed: JSON.parse(stores[1][1]),
@@ -110,6 +108,14 @@ class Favorites extends Component {
     this.getData();
     this.setState({ addFavorites: !this.state.addFavorites });
   }
+  goToMap(d) {
+    const { navigation } = this.props;
+    navigation.navigate({
+      name: "Maps",
+      params: { focusedLocation: d },
+      merge: true,
+    });
+  }
   render() {
     const { t } = this.props;
 
@@ -125,7 +131,10 @@ class Favorites extends Component {
               resizeMode="cover"
               style={myStyle.Favorites.ImageBackground}
             />
-            <Locations changeLists={this.changeLists.bind(this)} />
+            <Locations
+              goToMap={this.goToMap.bind(this)}
+              changeLists={this.changeLists.bind(this)}
+            />
             <StatusBar style="auto" />
             <Toast position="top" />
           </SafeAreaView>
@@ -191,6 +200,7 @@ class Favorites extends Component {
                             this.createFavorites(d);
                             this.forceUpdate();
                           }}
+                          onLongPress={() => this.goToMap(d)}
                           style={myStyle.Favorites.ListView}
                         >
                           {d.country === "Deutschland" ? (
