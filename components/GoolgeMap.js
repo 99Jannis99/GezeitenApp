@@ -19,6 +19,7 @@ export class GoolgeMap extends Component {
       longitude: 8.319035083075878,
       longitudeDelta: 1,
     },
+    showOwnLoacation: false,
   };
   constructor(props) {
     super(props);
@@ -92,7 +93,7 @@ export class GoolgeMap extends Component {
             ios: "google",
             android: PROVIDER_GOOGLE,
           })}
-          showsUserLocation={true}
+          showsUserLocation={this.state.showOwnLoacation}
           showsMyLocationButton={false}
           region={this.state.focusedLocation}
           customMapStyle={myStyle.GoogleMap.mapLayout}
@@ -169,6 +170,7 @@ export class GoolgeMap extends Component {
               console.log("Permission to access location was denied");
               return;
             }
+            this.setState({ showOwnLoacation: true });
             let location = await Location.getCurrentPositionAsync({});
 
             this.setState({
