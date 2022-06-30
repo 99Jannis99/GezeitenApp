@@ -17,7 +17,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.dimento.nordsee.gezeiten.free",
-      "versionCode": 2,
+      "buildNumber": "2",
       "config": {
         "googleMobileAdsAppId": "ca-app-pub-8782102800192574~7583281842",
         "googleMapsApiKey": "AIzaSyBgMo-mtlSrK2K6nmDMljeuG1rg4sulaW0"
@@ -25,14 +25,14 @@
     },
     "android": {
       "package": "com.dimento.nordsee.gezeiten.free",
-      "versionCode": 14,
+      "versionCode": 15,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
       "config": {
         "googleMobileAdsAppId": "ca-app-pub-8782102800192574~2242719048",
-        "googleMaps": { "apiKey": "AIzaSyBgMo-mtlSrK2K6nmDMljeuG1rg4sulaW0" }  
+        "googleMaps": { "apiKey": "AIzaSyBgMo-mtlSrK2K6nmDMljeuG1rg4sulaW0" }
       }
     },
     "web": {
