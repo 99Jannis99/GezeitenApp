@@ -6,6 +6,7 @@ import HomePage from "./components/HomePage";
 import Favorites from "./components/Favorites";
 import Weather from "./components/Weather";
 import Settings from "./components/Settings";
+import GoolgeMap from "./components/GoolgeMap";
 import i18n from "./languages/i18n";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { NavigationContainer } from "@react-navigation/native";
@@ -21,6 +22,7 @@ import WeatherWhiteIcon from "./assets/svg/WeatherWhiteIcon";
 import { AdMobBanner } from "expo-ads-admob";
 import myStyle from "./assets/styles.js";
 import Impressum from "./components/Impressum";
+import IconEntypo from "react-native-vector-icons/Entypo";
 
 class App extends Component {
   state = {
@@ -40,7 +42,7 @@ class App extends Component {
     ]);
   }
   componentDidMount() {
-    let AdSate = "test";
+    let AdSate = "original";
     let BannerID;
     if (AdSate == "test") {
       BannerID = Platform.select({
@@ -149,6 +151,18 @@ class App extends Component {
                     focused ? <SettingsBlueIcon /> : <SettingsIcon />,
                 }}
                 component={Settings}
+              />
+              <Tab.Screen
+                name="Maps"
+                options={{
+                  tabBarIcon: ({ focused }) =>
+                    focused ? (
+                      <IconEntypo name="location" size={25} color="#273f59" />
+                    ) : (
+                      <IconEntypo name="location" size={25} color="white" />
+                    ),
+                }}
+                component={GoolgeMap}
               />
             </Tab.Navigator>
             <View

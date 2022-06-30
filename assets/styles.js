@@ -32,7 +32,12 @@ const styles = {
   |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
   */
   Hinweis: {
-    View: { flex: 1, position: "absolute", opacity: 0.7 },
+    View: {
+      width: Dimensions.get("screen").width,
+      height: Dimensions.get("screen").height,
+      position: "absolute",
+      opacity: 0.7,
+    },
     HeadlineText: {
       fontSize: 35,
       top: StatusBar.currentHeight,
@@ -47,7 +52,7 @@ const styles = {
     },
     InfoView: { height: 180 },
     InfoText: {
-      textAlign:'center',
+      textAlign: "center",
       marginLeft: 20,
       marginRight: 20,
       fontSize: 15,
@@ -114,7 +119,12 @@ const styles = {
   |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
   */
   Tutorial: {
-    View: { flex: 1, opacity: 0.7, position: "absolute" },
+    View: {
+      width: Dimensions.get("screen").width,
+      height: Dimensions.get("screen").height,
+      opacity: 0.7,
+      position: "absolute",
+    },
     Headline: {
       fontSize: 35,
       alignSelf: "center",
@@ -162,8 +172,15 @@ const styles = {
   |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
   */
   HomePage: {
-    View: { flex: 1 },
-    AnimatedBackgroundImage: { flex: 1, position: "absolute" },
+    View: {
+      width: Dimensions.get("screen").width,
+      height: Dimensions.get("screen").height,
+    },
+    AnimatedBackgroundImage: {
+      width: Dimensions.get("screen").width,
+      height: Dimensions.get("screen").height,
+      position: "absolute",
+    },
     Tutorial: {
       width: 292,
       height: 116,
@@ -236,8 +253,15 @@ const styles = {
   |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
   */
   Weather: {
-    View: { flex: 1 },
-    BackgroundImage: { flex: 1, position: "absolute" },
+    View: {
+      width: Dimensions.get("screen").width,
+      height: Dimensions.get("screen").height,
+    },
+    BackgroundImage: {
+      width: Dimensions.get("screen").width,
+      height: Dimensions.get("screen").height,
+      position: "absolute",
+    },
     Tutorial: {
       width: 292,
       height: 116,
@@ -279,7 +303,12 @@ const styles = {
   |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
   */
   Favorites: {
-    ImageBackground: { flex: 1, position: "absolute", opacity: 0.7 },
+    ImageBackground: {
+      width: Dimensions.get("screen").width,
+      height: Dimensions.get("screen").height,
+      position: "absolute",
+      opacity: 0.7,
+    },
     Image: {
       width: 292,
       height: 116,
@@ -322,10 +351,6 @@ const styles = {
   |--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------
   */
   Locations: {
-    View: {
-      flex: 1,
-      opacity: 0.7,
-    },
     ScrollViewView: {
       height: Dimensions.get("screen").height - 223 - StatusBar.currentHeight,
       marginTop: Platform.select({
@@ -561,6 +586,11 @@ const styles = {
   |--------------------------------------------------
   */
   Settings: {
+    View: {
+      width: Dimensions.get("screen").width,
+      height: Dimensions.get("screen").height,
+      position: "absolute",
+    },
     ButtonGroupContainer: {
       marginTop: StatusBar.currentHeight,
       height: 50,
@@ -664,7 +694,8 @@ const styles = {
       padding: 15,
     },
     Background: {
-      flex: 1,
+      width: Dimensions.get("screen").width,
+      height: Dimensions.get("screen").height,
       position: "absolute",
     },
     Text: {
@@ -682,6 +713,241 @@ const styles = {
     ButtonContainer: {
       alignSelf: "center",
       paddingTop: StatusBar.currentHeight,
+    },
+  },
+  /**
+  |--------------------------------------------------
+  | GoogleMap Component
+  |--------------------------------------------------
+  */
+  GoogleMap: {
+    mapLayout: [
+      {
+        featureType: "landscape",
+        stylers: [
+          {
+            color: "#f5f5f5",
+          },
+          {
+            visibility: "on",
+          },
+        ],
+      },
+      {
+        featureType: "landscape.man_made",
+        stylers: [
+          {
+            visibility: "on",
+          },
+        ],
+      },
+      {
+        featureType: "landscape.natural",
+        stylers: [
+          {
+            visibility: "on",
+          },
+        ],
+      },
+      {
+        featureType: "landscape.natural",
+        elementType: "geometry.fill",
+        stylers: [
+          {
+            color: "#5497a7",
+          },
+          {
+            lightness: 70,
+          },
+          {
+            weight: 0.5,
+          },
+        ],
+      },
+      {
+        featureType: "landscape.natural.landcover",
+        stylers: [
+          {
+            visibility: "on",
+          },
+        ],
+      },
+      {
+        featureType: "landscape.natural.landcover",
+        elementType: "geometry.fill",
+        stylers: [
+          {
+            visibility: "off",
+          },
+        ],
+      },
+      {
+        featureType: "landscape.natural.terrain",
+        stylers: [
+          {
+            visibility: "on",
+          },
+        ],
+      },
+      {
+        featureType: "landscape.natural.terrain",
+        elementType: "geometry.fill",
+        stylers: [
+          {
+            color: "#5497a7",
+          },
+          {
+            visibility: "off",
+          },
+        ],
+      },
+      {
+        featureType: "landscape.natural.terrain",
+        elementType: "geometry.stroke",
+        stylers: [
+          {
+            visibility: "off",
+          },
+        ],
+      },
+      {
+        featureType: "poi",
+        stylers: [
+          {
+            visibility: "off",
+          },
+        ],
+      },
+      {
+        featureType: "road.arterial",
+        elementType: "geometry.fill",
+        stylers: [
+          {
+            color: "#cfcfcf",
+          },
+        ],
+      },
+      {
+        featureType: "road.arterial",
+        elementType: "geometry.stroke",
+        stylers: [
+          {
+            color: "#5497a7",
+          },
+        ],
+      },
+      {
+        featureType: "road.highway",
+        stylers: [
+          {
+            visibility: "simplified",
+          },
+        ],
+      },
+      {
+        featureType: "road.highway",
+        elementType: "geometry.fill",
+        stylers: [
+          {
+            color: "#5497a7",
+          },
+          {
+            visibility: "simplified",
+          },
+        ],
+      },
+      {
+        featureType: "road.highway.controlled_access",
+        elementType: "geometry.fill",
+        stylers: [
+          {
+            visibility: "simplified",
+          },
+        ],
+      },
+      {
+        featureType: "road.local",
+        elementType: "geometry.fill",
+        stylers: [
+          {
+            color: "#ffffff",
+          },
+        ],
+      },
+      {
+        featureType: "transit.line",
+        stylers: [
+          {
+            visibility: "off",
+          },
+        ],
+      },
+      {
+        featureType: "transit.station.bus",
+        stylers: [
+          {
+            visibility: "on",
+          },
+        ],
+      },
+      {
+        featureType: "transit.station.rail",
+        elementType: "geometry.stroke",
+        stylers: [
+          {
+            visibility: "off",
+          },
+        ],
+      },
+      {
+        featureType: "water",
+        elementType: "geometry.fill",
+        stylers: [
+          {
+            visibility: "on",
+          },
+        ],
+      },
+    ],
+    MapView: {
+      width: Dimensions.get("screen").width + 100,
+      height: Dimensions.get("screen").height - 120,
+      marginLeft: -100,
+    },
+    Callout: {
+      marginLeft: 100,
+      width: 300,
+      height: 40,
+      justifyContent: "center",
+    },
+    InButtonView: {
+      borderRadius: 20,
+      backgroundColor: "#5497a7",
+      justifyContent: "center",
+      flexDirection: "row",
+      width: "100%",
+      height: "100%",
+    },
+    HeartIcon: {
+      alignSelf: "center",
+    },
+    AddFavoritesButtonText: {
+      alignSelf: "center",
+      color: "#273f59",
+      fontSize: 12,
+    },
+    Button: {
+      width: 38,
+      height: 38,
+      borderColor: "#5497a7",
+      backgroundColor: "#5497a7",
+    },
+    ButtonContainer: {
+      position: "absolute",
+      bottom: 8,
+      padding: 10,
+      borderRadius: 20,
+      alignSelf: "flex-start",
     },
   },
 };

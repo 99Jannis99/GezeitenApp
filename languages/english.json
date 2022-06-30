@@ -80,6 +80,11 @@
     "programming": "Programming",
     "design": "Design",
     "managingDirector": "Managing Director:",
-    "impressumBackButton": "Back"
+    "impressumBackButton": "Back",
+    "addFavoriteNow":"add to favorites   ",
+    "removeFavoriteNow":"remove from favorites   ",
+    "getOwnLocationHeader":"...loading ↻.",
+    "getOwnLocationText":"The distances to you are loading ✔"
+
   }
 }

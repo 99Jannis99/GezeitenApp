@@ -140,10 +140,7 @@ export class Settings extends Component {
         {(t) => (
           <SafeAreaView>
             <Image
-              style={{
-                flex: 1,
-                position: "absolute",
-              }}
+              style={myStyle.Settings.View}
               source={require("../assets/pictures/default_background-dashboard.jpg")}
             />
             <View style={myStyle.Settings.HeaderView}>

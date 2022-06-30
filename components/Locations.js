@@ -2,7 +2,6 @@ import { StatusBar } from "expo-status-bar";
 import {
   View,
   SafeAreaView,
-  Image,
   ScrollView,
   TouchableOpacity,
 } from "react-native";
@@ -334,13 +333,7 @@ class Locations extends Component {
   render() {
     const { t } = this.props;
     return (
-      <SafeAreaView>
-        <Image
-          source={require("../assets/pictures/default_background-dashboard.jpg")}
-          resizeMode="cover"
-          style={myStyle.Locations.View}
-        />
-        <Input
+      <SafeAreaView><Input
           onChangeText={(text) => this.sortOutLocations(text)}
           containerStyle={myStyle.Locations.InputContainer}
           inputContainerStyle={myStyle.Locations.InputInputContainer}
@@ -382,6 +375,7 @@ class Locations extends Component {
                 >
                   <ListItem.Content>
                     <TouchableOpacity
+                    onLongPress={()=>this.props.goToMap(d)}
                       onPress={() => {
                         d.chosed = !d.chosed;
                         this.createFavorites(d);
