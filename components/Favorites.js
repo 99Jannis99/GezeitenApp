@@ -2,7 +2,6 @@ import { StatusBar } from "expo-status-bar";
 import {
   View,
   Image,
-  ImageBackground,
   ScrollView,
   SafeAreaView,
   TouchableOpacity,

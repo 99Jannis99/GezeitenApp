@@ -2,7 +2,6 @@ import { StatusBar } from "expo-status-bar";
 import {
   View,
   SafeAreaView,
-  Image,
   ScrollView,
   TouchableOpacity,
 } from "react-native";
