@@ -25,7 +25,7 @@ class Weather extends Component {
   componentDidMount() {
     let { navigation } = this.props;
     let adUnitId;
-    let AdState = "original";
+    let AdState = "test";
     if (AdState == "test") {
       adUnitId = Platform.select({
         ios: "ca-app-pub-3940256099942544/8691691433",
@@ -42,21 +42,21 @@ class Weather extends Component {
     });
     AdMobInterstitial.addEventListener("interstitialDidClose", () => {
       AdMobInterstitial.removeAllListeners();
-      setTimeout(() => this.loadAd(adUnitId), 5000);
+      setTimeout(() => this.loadAd(adUnitId, "secondLoade"), 5000);
     });
     this.loadAd(adUnitId);
     this.getData();
     this.setState({ TimeStamp: moment().format("DD") });
   }
 
-  async loadAd(UnitId) {
+  async loadAd(UnitId, status) {
     await AdMobInterstitial.setAdUnitID(UnitId);
     try {
       await AdMobInterstitial.requestAdAsync();
     } catch (e) {
       console.log("Error loadAd (Weather): ", e);
     } finally {
-      this.setState({ AdMobTriggerd: false });
+      status == "secondLoade" ? null : this.setState({ AdMobTriggerd: false });
     }
   }
 

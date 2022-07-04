@@ -911,7 +911,10 @@ const styles = {
     ],
     MapView: {
       width: Dimensions.get("screen").width + 100,
-      height: Dimensions.get("screen").height - 120,
+      height: Platform.select({
+        ios: Dimensions.get("screen").height - 100,
+        android: Dimensions.get("screen").height - 120,
+      }),
       marginLeft: -100,
     },
     Callout: {

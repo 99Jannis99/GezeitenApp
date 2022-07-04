@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { View, Animated, Text,SafeAreaView } from "react-native";
+import { View, Animated, Text, SafeAreaView } from "react-native";
 import React, { Component } from "react";
 import myStyle from "../assets/styles";
 import _ from "lodash";
@@ -28,7 +28,7 @@ class HomePage extends Component {
 
   componentDidMount() {
     let adUnitId;
-    let AdState = "original";
+    let AdState = "test";
     if (AdState == "test") {
       adUnitId = Platform.select({
         ios: "ca-app-pub-3940256099942544/8691691433",
@@ -51,7 +51,7 @@ class HomePage extends Component {
     });
     AdMobInterstitial.addEventListener("interstitialDidClose", () => {
       AdMobInterstitial.removeAllListeners();
-      setTimeout(() => this.loadAd(adUnitId), 5000);
+      setTimeout(() => this.loadAd(adUnitId, "secondLoade"), 5000);
     });
 
     this.getData();
@@ -59,14 +59,14 @@ class HomePage extends Component {
     this.setState({ TimeStamp: moment().format("DD") });
   }
 
-  async loadAd(UnitId) {
+  async loadAd(UnitId, status) {
     await AdMobInterstitial.setAdUnitID(UnitId);
     try {
       await AdMobInterstitial.requestAdAsync();
     } catch (e) {
       console.log("Error loadAd (HomePage): ", e);
     } finally {
-      this.setState({ AdMobTriggerd: false });
+      status == "secondLoade" ? null : this.setState({ AdMobTriggerd: false });
     }
   }
 
@@ -118,7 +118,7 @@ class HomePage extends Component {
       this.state.TimeStamp != moment().format("DD")
     ) {
       try {
-      AdMobInterstitial.showAdAsync();
+        AdMobInterstitial.showAdAsync();
       } catch (err) {
         console.log("showAd Error (HomePage): ", err);
       }
@@ -185,8 +185,10 @@ class HomePage extends Component {
                     AdMobTrigger: this.AdMobTrigger.bind(this),
                   }}
                   options={{
-                    tabBarContentContainerStyle:{
-                    height:80,paddingTop:10},
+                    tabBarContentContainerStyle: {
+                      height: 80,
+                      paddingTop: 10,
+                    },
                     tabBarLabel:
                       filtertLocations.length > 0
                         ? filtertLocations.length > 9
