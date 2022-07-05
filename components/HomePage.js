@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { View, Animated, Text, SafeAreaView } from "react-native";
+import { View, Animated, Text, SafeAreaView, AppState } from "react-native";
 import React, { Component } from "react";
 import myStyle from "../assets/styles";
 import _ from "lodash";
@@ -28,7 +28,7 @@ class HomePage extends Component {
 
   componentDidMount() {
     let adUnitId;
-    let AdState = "test";
+    let AdState = "original";
     if (AdState == "test") {
       adUnitId = Platform.select({
         ios: "ca-app-pub-3940256099942544/8691691433",
@@ -52,6 +52,12 @@ class HomePage extends Component {
     AdMobInterstitial.addEventListener("interstitialDidClose", () => {
       AdMobInterstitial.removeAllListeners();
       setTimeout(() => this.loadAd(adUnitId, "secondLoade"), 5000);
+    });
+
+    AppState.addEventListener("change", (nextAppState) => {
+      if (nextAppState == "active") {
+        this.forceUpdate();
+      }
     });
 
     this.getData();

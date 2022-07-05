@@ -25,7 +25,7 @@ class Weather extends Component {
   componentDidMount() {
     let { navigation } = this.props;
     let adUnitId;
-    let AdState = "test";
+    let AdState = "original";
     if (AdState == "test") {
       adUnitId = Platform.select({
         ios: "ca-app-pub-3940256099942544/8691691433",
@@ -44,6 +44,13 @@ class Weather extends Component {
       AdMobInterstitial.removeAllListeners();
       setTimeout(() => this.loadAd(adUnitId, "secondLoade"), 5000);
     });
+
+    AppState.addEventListener("change", (nextAppState) => {
+      if (nextAppState == "active") {
+        this.forceUpdate();
+      }
+    });
+
     this.loadAd(adUnitId);
     this.getData();
     this.setState({ TimeStamp: moment().format("DD") });

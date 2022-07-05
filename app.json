@@ -17,7 +17,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.dimento.nordsee.gezeiten.free",
-      "buildNumber": "3",
+      "buildNumber": "4",
       "config": {
         "googleMobileAdsAppId": "ca-app-pub-8782102800192574~7583281842",
         "googleMapsApiKey": "AIzaSyBgMo-mtlSrK2K6nmDMljeuG1rg4sulaW0"
@@ -25,7 +25,7 @@
     },
     "android": {
       "package": "com.dimento.nordsee.gezeiten.free",
-      "versionCode": 16,
+      "versionCode": 17,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
